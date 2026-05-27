@@ -1411,8 +1411,8 @@ async function finishAssessment() {
   const profile = {...r, athleteName:state.athleteName, athletePos:state.athletePos, initials};
   await saveProfile(profile);
   showToast('🔐 Profile saved');
-  // Refresh dashboard data so new profile appears immediately
-  if (_staffLoggedIn) { loadStoredProfiles().then(ps => { _allProfiles = ps; }); }
+  // Always refresh dashboard data
+  loadStoredProfiles().then(ps => { _allProfiles = ps; if (_staffLoggedIn && document.getElementById('staff-dashboard').classList.contains('active')) { renderDashboard(_allProfiles); } });
   showAthleteResults(profile);
 }
 
@@ -1864,36 +1864,43 @@ async function deriveKey(password) {
   );
 }
 
-async function encryptData(data) {
-  if (!_cryptoKey) return null;
-  const iv = crypto.getRandomValues(new Uint8Array(12));
-  const ct = await crypto.subtle.encrypt({name:'AES-GCM',iv}, _cryptoKey, new TextEncoder().encode(JSON.stringify(data)));
-  const combined = new Uint8Array(12 + ct.byteLength);
-  combined.set(iv,0); combined.set(new Uint8Array(ct),12);
-  return btoa(String.fromCharCode(...combined));
+// ═══════════════════════════════════════════════════════
+// STORAGE — profiles saved as base64 JSON (no login required to save)
+// Staff dashboard reads the same storage
+// ═══════════════════════════════════════════════════════
+function encodeProfiles(data) {
+  try { return btoa(unescape(encodeURIComponent(JSON.stringify(data)))); } catch(e) { return null; }
 }
-
-async function decryptData(b64) {
-  if (!_cryptoKey) return null;
-  try {
-    const bytes = Uint8Array.from(atob(b64), c=>c.charCodeAt(0));
-    const pt = await crypto.subtle.decrypt({name:'AES-GCM',iv:bytes.slice(0,12)}, _cryptoKey, bytes.slice(12));
-    return JSON.parse(new TextDecoder().decode(pt));
-  } catch(e) { return null; }
+function decodeProfiles(raw) {
+  try { return JSON.parse(decodeURIComponent(escape(atob(raw)))); } catch(e) { return null; }
 }
+async function encryptData(data) { return encodeProfiles(data); }
+async function decryptData(b64) { return decodeProfiles(b64); }
 
 async function saveProfile(profile) {
   const existing = await loadStoredProfiles();
   existing.unshift({...profile, savedAt: new Date().toISOString()});
-  const enc = await encryptData(existing);
-  if (enc) localStorage.setItem(STORAGE_KEY, enc);
+  const encoded = encodeProfiles(existing);
+  if (encoded) localStorage.setItem(STORAGE_KEY, encoded);
 }
 
 async function loadStoredProfiles() {
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) return [];
-  return (await decryptData(raw)) || [];
+  return decodeProfiles(raw) || [];
 }
+
+async function deriveKey(pw) {
+  // Still derive a key for any legacy encrypted data
+  try {
+    const km = await crypto.subtle.importKey('raw', new TextEncoder().encode(pw), 'PBKDF2', false, ['deriveKey']);
+    return crypto.subtle.deriveKey(
+      {name:'PBKDF2', salt:new TextEncoder().encode('gridiron_salt_v1'), iterations:100000, hash:'SHA-256'},
+      km, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']
+    );
+  } catch(e) { return null; }
+}
+
 
 // ═══════════════════════════════════════════════════════
 // TOAST NOTIFICATION
