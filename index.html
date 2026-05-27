@@ -511,6 +511,190 @@ footer strong{color:var(--orange);font-family:var(--font-d);letter-spacing:1px}
 /* Overflow scroll for comparison table on mobile */
 .comp-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
 
+
+/* ═══ FULL RESULTS PAGE ═══════════════════════════════════════ */
+#results-page{display:none;position:fixed;inset:0;z-index:200;background:var(--black);overflow-y:auto;-webkit-overflow-scrolling:touch}
+#results-page.active{display:block}
+.rp-nav{position:sticky;top:0;z-index:10;background:rgba(8,6,8,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 1.25rem;padding-top:var(--safe-top);height:calc(58px + var(--safe-top));display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.rp-logo{font-family:var(--font-d);font-size:18px;letter-spacing:2px;color:var(--orange)}
+.rp-actions{display:flex;align-items:center;gap:10px}
+.rp-body{max-width:900px;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+@media(min-width:768px){.rp-body{padding:2rem 2rem 4rem}}
+
+/* Hero banner on results */
+.rp-hero{background:linear-gradient(135deg,rgba(122,27,46,0.25) 0%,rgba(224,96,32,0.1) 100%);border:1px solid rgba(184,45,66,0.3);border-radius:var(--r-lg);padding:1.75rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.rp-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--maroon-bright),var(--orange))}
+.rp-hero-top{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.rp-ava{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--maroon));display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:28px;color:#fff;letter-spacing:2px;flex-shrink:0}
+.rp-name{font-family:var(--font-d);font-size:clamp(28px,7vw,42px);letter-spacing:1px;color:var(--text);line-height:1}
+.rp-meta{font-size:13px;color:var(--text3);margin-top:4px}
+.rp-arch-wrap{margin-left:auto;text-align:right}
+.rp-arch-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+.rp-arch-name{font-family:var(--font-d);font-size:clamp(22px,5vw,32px);color:var(--orange);letter-spacing:1px;line-height:1}
+.rp-arch-style{font-size:12px;color:var(--text3);margin-top:3px}
+/* overall score ring area */
+.rp-scores-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
+@media(min-width:500px){.rp-scores-row{grid-template-columns:repeat(4,1fr)}}
+.rp-score-box{background:rgba(0,0,0,0.3);border-radius:8px;padding:.85rem;text-align:center}
+.rp-score-val{font-family:var(--font-d);font-size:32px;line-height:1;margin-bottom:2px}
+.rp-score-lbl{font-size:11px;color:var(--text3);line-height:1.3}
+
+/* Section headers */
+.rp-sec-head{display:flex;align-items:center;gap:10px;margin:1.5rem 0 1rem}
+.rp-sec-head h3{font-family:var(--font-d);font-size:22px;letter-spacing:1px;color:var(--text)}
+.rp-sec-line{flex:1;height:1px;background:var(--border)}
+.rp-sec-badge{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);background:var(--gold-dim);border:1px solid rgba(224,96,32,0.2);border-radius:4px;padding:3px 8px}
+
+/* Program fit card */
+.pfit-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+@media(min-width:600px){.pfit-grid{grid-template-columns:repeat(4,1fr)}}
+.pfit-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;text-align:center}
+.pfit-score{font-size:32px;font-weight:700;line-height:1;margin-bottom:4px}
+.pfit-name{font-size:12px;color:var(--text3);margin-bottom:8px;line-height:1.3}
+.pfit-bar{height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.pfit-fill{height:5px;border-radius:3px}
+.pfit-tag{font-size:10px;font-weight:700;letter-spacing:.5px}
+
+/* DISC grid */
+.disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.disc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem}
+.disc-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.disc-card-letter{font-family:var(--font-d);font-size:42px;line-height:1;letter-spacing:1px}
+.disc-card-score{font-size:26px;font-weight:700}
+.disc-card-name{font-size:12px;color:var(--text3);margin-bottom:.5rem}
+.disc-card-bar{height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;margin-bottom:.6rem}
+.disc-card-fill{height:5px;border-radius:3px}
+.disc-card-fear{font-size:11px;color:var(--text3);display:flex;align-items:flex-start;gap:5px;line-height:1.4}
+.disc-card-fear::before{content:'Fear:';color:var(--text3);flex-shrink:0;font-weight:500}
+
+/* Focus bars */
+.focus-list-full{display:flex;flex-direction:column;gap:12px}
+.focus-row{display:flex;align-items:center;gap:12px}
+.focus-row-name{font-size:14px;font-weight:500;color:var(--text);width:120px;flex-shrink:0}
+.focus-row-bar{flex:1;height:8px;background:var(--surface3);border-radius:4px;overflow:hidden}
+.focus-row-fill{height:8px;border-radius:4px;background:var(--orange)}
+.focus-row-score{font-size:13px;color:var(--text3);width:38px;text-align:right;flex-shrink:0}
+.focus-row-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;flex-shrink:0;letter-spacing:.3px}
+
+/* Values ranked */
+.vals-grid{display:flex;flex-direction:column;gap:8px}
+.val-row-full{display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r)}
+.val-rank-num{font-family:var(--font-d);font-size:24px;color:var(--orange);width:26px;flex-shrink:0;line-height:1}
+.val-icon{font-size:20px;flex-shrink:0}
+.val-info{flex:1}
+.val-name-full{font-size:15px;font-weight:600;color:var(--text)}
+.val-desc-full{font-size:12px;color:var(--text3);margin-top:2px;line-height:1.4}
+.val-badge-full{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:.5px;flex-shrink:0}
+.val-bar-row{flex:1;height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;max-width:80px}
+.val-bar-fill{height:5px;border-radius:3px;background:var(--orange)}
+
+/* Flags full */
+.flags-list{display:flex;flex-direction:column;gap:8px}
+.flag-full{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:var(--r);font-size:13px;line-height:1.6}
+.flag-full.g{background:rgba(90,170,122,0.08);border:1px solid rgba(90,170,122,0.2);color:#5aaa7a}
+.flag-full.a{background:rgba(224,96,32,0.08);border:1px solid rgba(224,96,32,0.2);color:var(--orange-light)}
+.flag-full.r{background:rgba(224,90,90,0.08);border:1px solid rgba(224,90,90,0.2);color:#e05a5a}
+.flag-full-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+
+/* Traits */
+.traits-grid-full{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:600px){.traits-grid-full{grid-template-columns:1fr 1fr 1fr}}
+.trait-col-full{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem}
+.trait-col-full h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.trait-col-full.str h4{color:#5aaa7a}
+.trait-col-full.imp h4{color:var(--orange)}
+.trait-col-full.stress h4{color:#e05a5a}
+.trait-item-full{display:flex;gap:8px;align-items:flex-start;margin-bottom:7px;font-size:13px;color:var(--text2);line-height:1.5}
+.trait-item-full::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.trait-col-full.str .trait-item-full::before{background:#5aaa7a}
+.trait-col-full.imp .trait-item-full::before{background:var(--orange)}
+.trait-col-full.stress .trait-item-full::before{background:#e05a5a}
+
+/* Action plan */
+.action-plan{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem}
+.action-plan-title{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:1.1rem}
+.action-item{display:flex;gap:12px;align-items:flex-start;padding:.9rem;background:var(--surface2);border-radius:var(--r);margin-bottom:.75rem;border:1px solid var(--border)}
+.action-item:last-child{margin-bottom:0}
+.action-num-badge{width:28px;height:28px;border-radius:50%;background:var(--gold-dim);border:1px solid rgba(224,96,32,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:16px;color:var(--orange);flex-shrink:0}
+.action-content{flex:1}
+.action-content strong{font-size:13px;font-weight:600;color:var(--text);display:block;margin-bottom:3px}
+.action-content p{font-size:13px;color:var(--text2);line-height:1.55;margin:0}
+
+/* Playbook AI debrief */
+.ai-debrief{background:linear-gradient(135deg,var(--surface),rgba(224,96,32,0.03));border:1px solid rgba(224,96,32,0.2);border-radius:var(--r-lg);padding:1.5rem}
+.ai-debrief-head{display:flex;align-items:center;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+.ai-badge{background:var(--gold-dim);border:1px solid rgba(224,96,32,0.3);border-radius:5px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--orange);letter-spacing:1px}
+.ai-debrief p{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:.85rem}
+.ai-debrief p:last-child{margin-bottom:0}
+.ai-debrief p strong{color:var(--text);font-weight:500}
+
+/* ═══ STAFF DASHBOARD ═══════════════════════════════════════ */
+#staff-dashboard{display:none;position:fixed;inset:0;z-index:300;background:var(--black);overflow-y:auto;-webkit-overflow-scrolling:touch}
+#staff-dashboard.active{display:block}
+.sd-nav{position:sticky;top:0;z-index:10;background:rgba(8,6,8,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 1.25rem;padding-top:var(--safe-top);height:calc(58px + var(--safe-top));display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.sd-body{max-width:1000px;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+@media(min-width:768px){.sd-body{padding:2rem 2rem 4rem}}
+
+/* Stats bar */
+.sd-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;margin-bottom:1.5rem}
+@media(min-width:600px){.sd-stats{grid-template-columns:repeat(4,1fr)}}
+.sd-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;text-align:center}
+.sd-stat-val{font-family:var(--font-d);font-size:clamp(28px,6vw,40px);color:var(--orange);line-height:1;margin-bottom:3px}
+.sd-stat-lbl{font-size:12px;color:var(--text3);line-height:1.3}
+
+/* Search + filter bar */
+.sd-toolbar{display:flex;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center}
+.sd-search{flex:1;min-width:200px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;color:var(--text);font-size:14px;outline:none;transition:border-color .2s}
+.sd-search:focus{border-color:var(--orange)}
+.sd-search::placeholder{color:var(--text3)}
+.sd-filter{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 12px;color:var(--text2);font-size:13px;outline:none;cursor:pointer;-webkit-appearance:none;min-width:130px}
+.sd-filter:focus{border-color:var(--orange)}
+.sd-sort{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 12px;color:var(--text2);font-size:13px;outline:none;cursor:pointer;-webkit-appearance:none}
+
+/* Profile cards in dashboard */
+.sd-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r-lg);margin-bottom:1rem;overflow:hidden;transition:border-color .2s}
+.sd-card:hover{border-color:rgba(224,96,32,0.3)}
+.sd-card-head{display:flex;align-items:center;gap:12px;padding:1.1rem 1.25rem;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sd-ava{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--maroon));display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:18px;color:#fff;flex-shrink:0}
+.sd-card-info{flex:1;min-width:0}
+.sd-card-name{font-family:var(--font-d);font-size:20px;letter-spacing:1px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sd-card-meta{font-size:12px;color:var(--text3);margin-top:1px}
+.sd-card-right{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.sd-arch-tag{background:var(--gold-dim);border:1px solid rgba(224,96,32,0.25);border-radius:5px;padding:3px 9px;font-size:11px;font-weight:600;color:var(--orange);white-space:nowrap}
+.sd-fit-score{font-family:var(--font-d);font-size:22px;line-height:1}
+.sd-expand-icon{font-size:16px;color:var(--text3);transition:transform .25s;flex-shrink:0}
+.sd-card.expanded .sd-expand-icon{transform:rotate(180deg)}
+.sd-card-scores{display:flex;gap:.75rem;padding:.6rem 1.25rem 1rem;flex-wrap:wrap;border-top:1px solid var(--border)}
+.sd-mini-score{font-size:12px;color:var(--text3)}
+.sd-mini-score strong{color:var(--text2)}
+
+/* Expanded detail panel */
+.sd-detail{display:none;padding:1.25rem;border-top:1px solid var(--border);background:var(--surface2)}
+.sd-card.expanded .sd-detail{display:block}
+.sd-detail-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:600px){.sd-detail-grid{grid-template-columns:1fr 1fr}}
+.sd-detail-section{background:var(--black);border:1px solid var(--border);border-radius:var(--r);padding:1rem}
+.sd-detail-title{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+.sd-detail-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;font-size:13px}
+.sd-detail-row span{color:var(--text2)}
+.sd-detail-row strong{color:var(--text);font-weight:500}
+.sd-bar-row{margin-bottom:8px}
+.sd-bar-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px}
+.sd-bar-label span{color:var(--text2)}
+.sd-bar-label strong{color:var(--text3)}
+.sd-bar{height:5px;background:var(--surface3);border-radius:3px;overflow:hidden}
+.sd-bar-fill{height:5px;border-radius:3px;background:var(--orange)}
+.sd-flag-mini{display:flex;gap:7px;padding:7px 9px;border-radius:6px;font-size:12px;line-height:1.4;margin-bottom:5px}
+.sd-flag-mini.g{background:rgba(90,170,122,0.08);border:1px solid rgba(90,170,122,0.18);color:#5aaa7a}
+.sd-flag-mini.a{background:rgba(224,96,32,0.08);border:1px solid rgba(224,96,32,0.18);color:var(--orange-light)}
+.sd-flag-mini.r{background:rgba(224,90,90,0.08);border:1px solid rgba(224,90,90,0.18);color:#e05a5a}
+.sd-card-actions{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
+.sd-view-btn{background:var(--orange);color:#fff;font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;touch-action:manipulation}
+.sd-view-btn:active{background:var(--orange-bright)}
+.sd-del-btn{background:rgba(224,90,90,0.1);border:1px solid rgba(224,90,90,0.2);color:#e05a5a;font-size:13px;padding:9px 16px;border-radius:7px;cursor:pointer;touch-action:manipulation}
+.sd-del-btn:active{background:rgba(224,90,90,0.2)}
+.sd-empty{text-align:center;padding:4rem 1.25rem;color:var(--text3);font-size:15px;line-height:1.7}
+
 </style>
 </head>
 <body>
@@ -518,26 +702,35 @@ footer strong{color:var(--orange);font-family:var(--font-d);letter-spacing:1px}
 <!-- ═══════════════════════════════════════════════════
      ACCESS GATE
 ═══════════════════════════════════════════════════ -->
-<div id="gate">
-  <div class="gate-inner">
-    <div class="gate-logo">GRIDIRON PROFILE</div>
-    <div class="gate-sub">Behavioral Intelligence Platform</div>
-    <div class="gate-badge">🔒 Restricted Access — Authorized Personnel Only</div>
-    <div class="gate-card">
-      <h2>STAFF ACCESS</h2>
-      <p>This platform is exclusively licensed to one Power 4 football program. Enter your staff access code to continue.</p>
-      <input class="gate-input" id="gate-code" type="password" placeholder="Enter access code" autocomplete="off" />
-      <div class="gate-err" id="gate-err">Incorrect code. Contact your director of player personnel.</div>
-      <button class="gate-btn" onclick="checkGate()">ENTER PLATFORM →</button>
-      <div class="gate-lock">🔐 &nbsp;Encrypted · Single-program license · Staff use only</div>
+<div id="staff-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:1.25rem">
+  <div style="width:100%;max-width:400px">
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div style="font-family:Bebas Neue,sans-serif;font-size:32px;letter-spacing:3px;color:var(--orange)">STAFF ACCESS</div>
+      <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-top:4px">Authorized Personnel Only</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--r-lg);padding:1.75rem">
+      <p style="font-size:13px;color:var(--text3);margin-bottom:1.25rem;line-height:1.6">Enter your staff access code to view all athlete profiles, detailed reports, and the full coaching dashboard.</p>
+      <input id="staff-code-input" type="password" placeholder="Enter staff access code" autocomplete="off" style="width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:14px 16px;color:var(--text);font-size:16px;outline:none;margin-bottom:10px;font-family:DM Sans,sans-serif;-webkit-appearance:none;transition:border-color .2s"/>
+      <div id="staff-code-err" style="font-size:13px;color:#e05a5a;margin-bottom:8px;display:none">Incorrect code. Contact your director of player personnel.</div>
+      <button onclick="checkStaffCode()" style="width:100%;background:var(--orange);color:#fff;font-weight:700;font-size:15px;padding:15px;border-radius:8px;border:none;cursor:pointer;touch-action:manipulation;font-family:DM Sans,sans-serif">ACCESS DASHBOARD</button>
+      <button onclick="closeStaffModal()" style="width:100%;background:transparent;color:var(--text3);font-size:13px;padding:10px;border:none;cursor:pointer;margin-top:6px;touch-action:manipulation;font-family:DM Sans,sans-serif">Cancel</button>
+      <div style="font-size:11px;color:var(--text3);margin-top:.75rem;text-align:center">AES-256 Encrypted</div>
     </div>
   </div>
 </div>
+<div id="main-site">
 
-<!-- ═══════════════════════════════════════════════════
-     MAIN SITE
-═══════════════════════════════════════════════════ -->
-<div id="main-site" style="display:none">
+<div id="staff-nav" style="display:none;position:fixed;top:0;left:0;right:0;z-index:101;background:linear-gradient(90deg,rgba(58,10,21,0.97),rgba(10,6,10,0.97));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(184,45,66,0.45);padding:0 1.25rem;padding-top:env(safe-area-inset-top,0px);height:calc(58px + env(safe-area-inset-top,0px));align-items:center;justify-content:space-between;gap:1rem">
+  <div style="font-family:Bebas Neue,sans-serif;font-size:18px;letter-spacing:2px;color:var(--orange);display:flex;align-items:center;gap:8px">
+    GRIDIRON PROFILE
+    <span style="background:rgba(184,45,66,0.3);border:1px solid rgba(184,45,66,0.5);border-radius:4px;padding:2px 7px;font-size:9px;letter-spacing:2px;color:#b82d42;font-family:DM Sans,sans-serif;font-weight:700">STAFF</span>
+  </div>
+  <div style="display:flex;gap:1.5rem;align-items:center">
+    <span onclick="openSaved()" style="color:#a09890;font-size:13px;cursor:pointer;touch-action:manipulation">Dashboard</span>
+    <span onclick="staffLogout()" style="color:#e05a5a;font-size:13px;cursor:pointer;touch-action:manipulation">Logout</span>
+  </div>
+</div>
+
 
 <!-- Exclusive banner -->
 <div class="excl-banner">
@@ -546,14 +739,12 @@ footer strong{color:var(--orange);font-family:var(--font-d);letter-spacing:1px}
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo" onclick="showPage('home')">GRIDIRON PROFILE <span>EXCLUSIVE</span></div>
+  <div class="nav-logo" onclick="showPage('home')">GRIDIRON PROFILE</div>
   <div class="nav-links">
-    <a onclick="showPage('home')" id="nav-home" class="active">Platform</a>
-    <a onclick="showPage('features')" id="nav-features">Features & FAQ</a>
-    <a onclick="openSaved()">Saved Profiles</a>
-    <a onclick="document.getElementById('how').scrollIntoView({behavior:'smooth'});showPage('home')">How It Works</a>
+    <a onclick="showPage('home')" id="nav-home" class="act">Home</a>
+    <a onclick="openAssessment()">Take Assessment</a>
   </div>
-  <button class="nav-cta" onclick="openAssessment()">TAKE ASSESSMENT</button>
+  <button class="nav-cta" onclick="openStaffModal()" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2);font-weight:600;font-size:13px;touch-action:manipulation">STAFF LOGIN</button>
 </nav>
 
 <!-- ═══ HOME PAGE ═══ -->
@@ -566,7 +757,7 @@ footer strong{color:var(--orange);font-family:var(--font-d);letter-spacing:1px}
       <div class="hero-left">
         <div class="hero-tag">Exclusively Licensed · Power 4 Football</div>
         <h1>KNOW EVERY<br><span class="o">ATHLETE'S</span><br><span class="m">WIRING.</span></h1>
-        <p class="hero-sub">The behavioral intelligence system built exclusively for your program. Assess, profile, and develop your roster with precision — from the transfer portal to game day.</p>
+        <p class="hero-sub">Answer honestly. Take your time. This assessment helps your coaches understand how to develop and support you — there are no right or wrong answers.</p>
         <div class="hero-btns">
           <button class="btn-primary" onclick="openAssessment()">TAKE THE ASSESSMENT</button>
           <button class="btn-outline" onclick="showPage('features')">Features & FAQ →</button>
@@ -1096,24 +1287,45 @@ footer strong{color:var(--orange);font-family:var(--font-d);letter-spacing:1px}
 // Access code: GRIDIRON2025 (change this to any code you want)
 const ACCESS_CODE = 'HOKIES2025';
 
-async function checkGate() {
-  const val = document.getElementById('gate-code').value.trim().toUpperCase();
+let _staffLoggedIn = false;
+
+function openStaffModal() {
+  const m = document.getElementById('staff-modal');
+  m.style.display = 'flex';
+  setTimeout(() => { const inp = document.getElementById('staff-code-input'); if(inp) inp.focus(); }, 150);
+}
+function closeStaffModal() {
+  document.getElementById('staff-modal').style.display = 'none';
+  const inp = document.getElementById('staff-code-input');
+  if(inp) inp.value = '';
+  document.getElementById('staff-code-err').style.display = 'none';
+}
+async function checkStaffCode() {
+  const val = document.getElementById('staff-code-input').value.trim().toUpperCase();
   if (val === ACCESS_CODE) {
-    _cryptoKey = await deriveKey(val);
-    document.getElementById('gate').style.opacity = '0';
-    document.getElementById('gate').style.transition = 'opacity .4s';
-    setTimeout(() => {
-      document.getElementById('gate').style.display = 'none';
-      document.getElementById('main-site').style.display = 'block';
-    }, 400);
+    _CK = await deriveKey(val);
+    _staffLoggedIn = true;
+    closeStaffModal();
+    document.getElementById('staff-nav').style.display = 'flex';
+    document.querySelector('nav').style.display = 'none';
+    showToast('Staff access granted');
+    setTimeout(() => openSaved(), 400);
   } else {
-    document.getElementById('gate-err').style.display = 'block';
-    document.getElementById('gate-code').style.borderColor = '#e05a5a';
-    setTimeout(() => { document.getElementById('gate-code').style.borderColor = ''; }, 1500);
+    document.getElementById('staff-code-err').style.display = 'block';
+    const inp = document.getElementById('staff-code-input');
+    if(inp){ inp.style.borderColor = '#e05a5a'; setTimeout(()=>inp.style.borderColor='',1500); }
   }
 }
-document.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && document.getElementById('gate').style.display !== 'none') checkGate();
+function staffLogout() {
+  _staffLoggedIn = false; _CK = null;
+  document.getElementById('staff-nav').style.display = 'none';
+  document.querySelector('nav').style.display = 'flex';
+  closeDashboard();
+  showToast('Logged out of staff access');
+}
+async function checkGate() { checkStaffCode(); }
+
+document.addEventListener('keydown',function(e){if(e.key==='Enter'){var m=document.getElementById('staff-modal');if(m&&m.style.display==='flex')checkStaffCode();}});
 });
 
 // ─── PAGE TABS ─────────────────────────────────────────────────
@@ -1358,8 +1570,291 @@ async function finishAssessment() {
   await saveProfile(profile);
   showToast('🔐 Profile encrypted & saved');
   setTimeout(() => sendResultsEmail(profile), 1500);
-  renderResults(r);
-  document.getElementById('results-overlay').classList.add('active');
+  showAthleteResults(profile);
+}
+
+
+// ═══════════════════════════════════════════════════════
+// FULL RESULTS PAGE (athlete-facing)
+// ═══════════════════════════════════════════════════════
+function closeResultsPage() {
+  document.getElementById('results-page').classList.remove('active');
+  if (_staffLoggedIn) setTimeout(() => openSaved(), 150);
+}
+
+
+function showAthleteResults(r) {
+  const {pvFit, vals, arch, disc, focus} = r;
+  const name = r.athleteName || state.athleteName || 'Athlete';
+  const pos = r.athletePos || state.athletePos || '';
+  const firstName = name.split(' ')[0];
+  const initials = (name.split(' ').map(n=>n[0]).join('').slice(0,2)||'??').toUpperCase();
+  const fit = pvFit ? pvFit.overall : 0;
+  const valIcons = {'Positive Attitude':'🔆','Elite Work Ethic':'⚙️','Willing to Sacrifice':'🤝','Compete in Everything':'🔥'};
+  const archDescs = {
+    'The Assessor':'You process deeply and execute with precision. Your film study and pre-snap preparation are genuine competitive advantages.',
+    'The Driver':'You are decisive and results-driven. You take charge when it matters and refuse to back down from any challenge.',
+    'The Catalyst':'You energize everyone around you. Your presence lifts the room and your intensity is contagious.',
+    'The Anchor':'You are the backbone of any team you are on. Consistent, dependable, and deeply loyal — your teammates count on you because you always deliver.',
+    'The Strategist':'You see the whole picture. Complex assignments and challenging systems are where you thrive.',
+    'The Ambassador':'You bridge gaps between coaches and players. Your presence makes teams more cohesive and connected.',
+    'The Builder':'You build mastery through disciplined repetition. In structured systems, there is no one more reliable.',
+    'The Commander':'You command respect without asking for it. Your presence alone raises the standard of everyone around you.',
+    'The Competitor':'Losing bothers you in every context — that edge drives elite daily preparation and elevates you when the stakes are highest.',
+    'The Analyst':'You are precise in everything you do. Detail-oriented and technically excellent, your execution is remarkably consistent.',
+    'The Advocate':'You compete for something bigger than yourself. Your teammates trust you because you fight for them every single day.',
+    'The Adapter':'You are one of the most coachable athletes in any program. You adjust quickly, read environments well, and fit any role.'
+  };
+  const archMsg = archDescs[arch] || 'You bring a unique combination of strengths to this program.';
+  const fitCol = fit>=75?'#5aaa7a':fit>=55?'var(--orange)':'#e05a5a';
+  const valDesc = {
+    'Positive Attitude':'You recover from adversity and keep your energy — a rare trait.',
+    'Elite Work Ethic':'You hold yourself to a standard without being told. That separates you.',
+    'Willing to Sacrifice':'You put the team above yourself — the foundation of any championship culture.',
+    'Compete in Everything':'You bring competitive intensity to every rep, every drill, every day.'
+  };
+
+  document.getElementById('rp-body').innerHTML = `
+    <div style="background:linear-gradient(135deg,rgba(122,27,46,0.2),rgba(224,96,32,0.08));border:1px solid rgba(184,45,66,0.25);border-radius:16px;padding:1.75rem;margin-bottom:1.5rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#b82d42,var(--orange))"></div>
+      <div style="display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.25rem">
+        <div style="width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,var(--orange),#7a1b2e);display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,sans-serif;font-size:26px;color:#fff;flex-shrink:0">${initials}</div>
+        <div style="flex:1">
+          <div style="font-family:Bebas Neue,sans-serif;font-size:clamp(24px,7vw,36px);letter-spacing:1px;color:#f2eeeb;line-height:1">${name.toUpperCase()}</div>
+          <div style="font-size:12px;color:#6a6260;margin-top:4px">${pos} &nbsp;·&nbsp; Assessment Complete ✓</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:10px;color:#6a6260;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Your Archetype</div>
+          <div style="font-family:Bebas Neue,sans-serif;font-size:clamp(20px,5vw,28px);color:var(--orange);letter-spacing:1px;line-height:1">${arch.replace('The','').trim().toUpperCase()}</div>
+        </div>
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1.1rem;border-left:3px solid var(--orange)">
+        <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem">What This Means For You</div>
+        <p style="font-size:15px;color:#f2eeeb;line-height:1.65;margin:0">${archMsg}</p>
+      </div>
+    </div>
+
+    <div style="font-family:Bebas Neue,sans-serif;font-size:22px;letter-spacing:1px;color:#f2eeeb;margin-bottom:.85rem">Your Program Values</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem">
+      ${[['Positive Attitude',pvFit?pvFit.attitude:0,'🔆'],['Elite Work Ethic',pvFit?pvFit.workEthic:0,'⚙️'],['Willing to Sacrifice',pvFit?pvFit.sacrifice:0,'🤝'],['Compete in Everything',pvFit?pvFit.compete:0,'🔥']].map(function(item){var vn=item[0],vs=item[1],ico=item[2];var col=vs>=75?'#5aaa7a':vs>=55?'var(--orange)':'#e05a5a';var tag=vs>=75?'STRENGTH':vs>=55?'GROWING':'FOCUS AREA';return '<div style="background:#18141a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1rem;text-align:center"><div style="font-size:24px;margin-bottom:4px">'+ico+'</div><div style="font-size:11px;color:#6a6260;margin-bottom:6px;line-height:1.3">'+vn+'</div><div style="font-size:26px;font-weight:700;color:'+col+';line-height:1;margin-bottom:4px">'+vs+'</div><div style="height:4px;background:#2a242d;border-radius:2px;overflow:hidden;margin-bottom:5px"><div style="height:4px;background:'+col+';width:'+vs+'%;border-radius:2px"></div></div><div style="font-size:10px;font-weight:700;color:'+col+';letter-spacing:.5px">'+tag+'</div></div>';}).join('')}
+    </div>
+
+    <div style="background:#18141a;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem">
+      <div style="font-family:Bebas Neue,sans-serif;font-size:20px;letter-spacing:1px;color:#f2eeeb;margin-bottom:1rem">Your Core Values — Ranked</div>
+      <div style="display:flex;flex-direction:column;gap:.6rem">
+        ${(vals||[]).map(function(v,i){var ico=valIcons[v.value]||'🏈';var desc=valDesc[v.value]||'';var cols=['var(--orange)','#5a8fe0','#5aaa7a','#6a6260'];var bord=i===0?'rgba(224,96,32,0.25)':'rgba(255,255,255,0.07)';return '<div style="display:flex;align-items:center;gap:12px;padding:.75rem 1rem;background:rgba(0,0,0,0.25);border-radius:8px;border:1px solid '+bord+'"><div style="font-family:Bebas Neue,sans-serif;font-size:21px;color:'+(cols[i]||'#6a6260')+';width:20px;flex-shrink:0;line-height:1">'+(i+1)+'</div><div style="font-size:18px;flex-shrink:0">'+ico+'</div><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#f2eeeb">'+v.value+'</div>'+(desc?'<div style="font-size:12px;color:#6a6260;margin-top:2px;line-height:1.4">'+desc+'</div>':'')+'</div>'+(i===0?'<div style="font-size:10px;font-weight:700;background:rgba(224,96,32,0.15);color:var(--orange);padding:3px 8px;border-radius:4px;border:1px solid rgba(224,96,32,0.3);white-space:nowrap">HIGHEST</div>':'')+'</div>';}).join('')}
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(122,27,46,0.1),rgba(224,96,32,0.04));border:1px solid rgba(184,45,66,0.18);border-radius:16px;padding:1.5rem;text-align:center;margin-bottom:1.5rem">
+      <div style="font-size:28px;margin-bottom:.6rem">✅</div>
+      <div style="font-family:Bebas Neue,sans-serif;font-size:20px;letter-spacing:1px;color:#f2eeeb;margin-bottom:.5rem">You are done!</div>
+      <p style="font-size:14px;color:#a09890;max-width:380px;margin:0 auto;line-height:1.65">Your results have been sent directly to the coaching staff. They will use this to understand how to develop and support you. There are no right or wrong answers.</p>
+    </div>
+    <div style="text-align:center;padding-bottom:2rem">
+      <button onclick="closeResultsPage()" style="background:transparent;border:1px solid rgba(255,255,255,0.13);color:#a09890;padding:12px 24px;border-radius:8px;font-size:14px;cursor:pointer;touch-action:manipulation;font-family:DM Sans,sans-serif;min-height:48px">Close</button>
+    </div>
+  `;
+  document.getElementById('results-page').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showResultsPage(r) {
+  if (_staffLoggedIn) { _showFullStaffProfile(r); }
+  else { showAthleteResults(r); }
+}
+
+function _showFullStaffProfile(r) {
+  const {disc,focus,pvFit,vals,arch,style:sty} = r;
+  const name = r.athleteName || state.athleteName || 'Athlete';
+  const pos = r.athletePos || state.athletePos || '';
+  const initials = (name.split(' ').map(n=>n[0]).join('').slice(0,2)||'??').toUpperCase();
+  const firstName = name.split(' ')[0];
+  const dC = {D:'#e05a5a',I:'var(--orange)',S:'#5aaa7a',C:'#5a8fe0'};
+  const dN = {D:'Dominance',I:'Influence',S:'Steadiness',C:'Correctness'};
+  const dF = {D:'Being taken advantage of',I:'Not being accepted',S:'Loss of security or change',C:'Being criticized or wrong'};
+  const dDesc = {
+    D:'You are direct, decisive, and results-driven. You take charge naturally and thrive when the stakes are high.',
+    I:'You are energetic, people-driven, and naturally inspiring. You elevate others and perform best in connected environments.',
+    S:'You are steady, loyal, and deeply consistent. Your teammates rely on you because you deliver every single time.',
+    C:'You are analytical, precise, and detail-oriented. Your film study and pre-snap preparation are genuine competitive advantages.'
+  };
+  const pD = Object.entries(disc).sort((a,b)=>b[1]-a[1])[0][0];
+  const flags = buildFlags(r);
+  const fit = pvFit?.overall || 0;
+  const fitCol = fit>=75?'#5aaa7a':fit>=55?'var(--orange)':'#e05a5a';
+
+  const valIcons = {'Positive Attitude':'🔆','Elite Work Ethic':'⚙️','Willing to Sacrifice':'🤝','Compete in Everything':'🔥'};
+
+  const traitMap = {
+    'The Assessor':{str:['Precise under pressure','Elite film study and pre-snap preparation','High self-accountability — you hold yourself to a standard','Thorough in every assignment'],imp:['Can over-analyze in real time and hesitate','Needs precise feedback — vague praise is frustrating','May disengage from high-energy team culture'],stress:['Goes quiet and withdraws internally','Replays mistakes on repeat','Becomes hypercritical of teammates and self']},
+    'The Driver':{str:['Decisive and fast-reacting in all situations','High urgency and competitive intensity every day','Natural situational leader when things get hard','Refuses to back down from any challenge'],imp:['Can overpower teammates in collaborative moments','Impatient with process-heavy systems','Struggles when questioned publicly by coaches'],stress:['Becomes more forceful and aggressive','May try to override play calls under pressure','Gets frustrated with teammates who move slower']},
+    'The Catalyst':{str:['Energizes and lifts the room in any moment','Natural hype and culture leader — the spark','Brings game-day intensity to everything','Connects with every personality type on the roster'],imp:['Intensity can drop when the spotlight is off','Can distract teammates during high-focus preparation','Sometimes prioritizes energy over technical execution'],stress:['Talks more, listens significantly less','Seeks external validation to stabilize','Energy can become disruptive rather than productive']},
+    'The Anchor':{str:['Consistent and dependable — never a bad day','Among the highest team-first loyalty on the roster','Emotionally steady presence in the locker room','Executes assignments reliably under any circumstances'],imp:['Avoids necessary conflict even when it is needed','Will not speak up when they disagree with a decision','Resistant to rapid scheme changes or sudden role shifts'],stress:['Becomes withdrawn and stops initiating','Internalizes frustration without expressing it','Quietly disengages from communication with staff']},
+    'The Strategist':{str:['Big-picture intelligence — understands the whole system','Connects scheme concepts exceptionally fast','Masters complex assignments others find difficult','Self-sufficient in preparation — needs minimal coaching prompts'],imp:['Can overthink in real-time game situations','May appear emotionally detached from teammates','Not naturally vocal as a leader or communicator'],stress:['Retreats fully into analysis mode','Impatient with less systematic thinkers','Shuts down verbally when overwhelmed']},
+    'The Ambassador':{str:['Natural bridge between coaching staff and players','High empathy and strong awareness of team dynamics','Significant off-field culture influence','Communicates across all personality types with ease'],imp:['Avoids hard accountability conversations when needed','Can be too relationship-focused at the expense of standards','Needs to be liked — can compromise expectations to preserve bonds'],stress:['Tries to smooth everything over at cost of honesty','Avoids confrontation even when it would help','Absorbs the stress of everyone around them']},
+    'The Builder':{str:['Achieves mastery through disciplined repetition','Exceptionally reliable within well-defined systems','High-quality technical execution on every assignment','Never-miss preparation habits across all contexts'],imp:['Slow to adapt when scheme or role changes rapidly','Can stagnate without new challenges to pursue','Struggles with open-ended or ambiguous assignments'],stress:['Becomes rigid and resistant to deviation','Double-checks everything compulsively','Frustrated by teammates who are less methodical']},
+    'The Commander':{str:['Instant credibility and commanding presence','Undeniable natural captain energy on any roster','Commands peer respect without asking for it','Elevates the intensity of everyone around them'],imp:['Creates friction if overlooked, benched, or sidelined','May challenge coaching authority under high pressure','Can dominate collaborative situations that need balance'],stress:['Becomes louder and more forceful in conflict','May challenge coaching decisions in group settings','Ego can become a liability if left unchecked']},
+    'The Competitor':{str:['Thrives in rivalry games and high-stakes moments','Game-day performance elevates to another level','Hatred of losing drives relentless daily preparation','Raises the competitive intensity of the entire position group'],imp:['Can generate a win-at-all-costs toxicity if unchecked','Carries individual losses and mistakes far too long','Extremely difficult to manage when benched or rotated'],stress:['Becomes combative with teammates and coaches','Loses perspective on team vs individual performance','Doubles down on aggression when things go wrong']},
+    'The Analyst':{str:['Detail-oriented in every assignment and alignment','Precise technical execution — every rep looks the same','Processes information deeply before responding','Highly reliable in technically complex schemes'],imp:['Slow to trust new coaches or systems — needs time','Needs more lead time to process scheme changes','Can miss social and emotional cues in team settings'],stress:['Goes completely quiet and stops communicating','Enters long internal processing periods','Can appear disengaged when actually deep in thought']},
+    'The Advocate':{str:['Purpose-driven — competes for something bigger than stats','Fights for teammates in any situation','High integrity presence that the locker room respects','Motivates through meaning and mission, not fear'],imp:['Highly sensitive to perceived unfairness in treatment','Can become a negative voice if disillusioned with the program','May prioritize relationships and feelings over performance decisions'],stress:['Becomes vocal about grievances — can recruit others','Loses trust quickly if handled inconsistently','Builds coalitions of frustration around shared grievances']},
+    'The Adapter':{str:['Highly coachable across any style or system','Handles position changes and role shifts with low friction','Reads and matches team energy in any environment','Smooth transitions into new programs or schemes'],imp:['Can lack strong identity in high-structure rigid systems','Too agreeable when pushback is actually needed','Loses competitive urgency without consistent external pressure'],stress:['Becomes passive and defers too heavily to others','Difficulty asserting perspective in critical moments','Competitive intensity can evaporate under prolonged adversity']}
+  };
+  const tr = traitMap[arch] || traitMap['The Adapter'];
+
+  // AI Debrief
+  const pDName = {D:'Dominance',I:'Influence',S:'Steadiness',C:'Correctness'}[pD];
+  const d1 = `${firstName} profiles as <strong>${arch}</strong> — a ${sty} behavioral pattern with <strong>${pDName}</strong> as the dominant driver. ${pD==='D'?`This means ${firstName} is at their absolute best when given authority, clear competitive stakes, and direct feedback. Directness from coaches reads as respect.`:pD==='I'?`This means ${firstName} performs best when the environment is energetic and connected. Isolation, repetitive drills without social context, or impersonal feedback will blunt engagement and effort.`:pD==='S'?`This means ${firstName} thrives when expectations are consistent and the environment is stable. Frequent scheme changes or unpredictable coaching behavior creates cognitive overload.`:`This means ${firstName} performs best when given time to prepare with detailed, precise information. Vague praise or unclear standards do not land — technical specificity does.`}`;
+  const topVal = vals[0]?.value || 'Compete in Everything';
+  const d2 = `Program culture fit overall score: <strong>${fit}/100</strong>. ${firstName}'s strongest expressed value is <strong>${topVal}</strong>. ${fit>=75?`Behavioral profile aligns strongly with all four program core values — this athlete is built for the culture you are building.`:fit>=55?`Solid behavioral foundation with specific development areas. Intentional onboarding and early expectations conversations will set this athlete up for success.`:`Meaningful gaps exist between behavioral tendencies and program culture values. A structured culture development plan is recommended — not a reason to avoid the athlete, but a reason to be intentional.`}`;
+
+  document.getElementById('rp-body').innerHTML = `
+    <!-- HERO -->
+    <div class="rp-hero">
+      <div class="rp-hero-top">
+        <div class="rp-ava">${initials}</div>
+        <div>
+          <div class="rp-name">${name.toUpperCase()}</div>
+          <div class="rp-meta">${pos} · Gridiron Profile Behavioral Assessment · ${new Date().toLocaleDateString()}</div>
+        </div>
+        <div class="rp-arch-wrap">
+          <div class="rp-arch-label">Your Archetype</div>
+          <div class="rp-arch-name">${arch.replace('The','').trim().toUpperCase()}</div>
+          <div class="rp-arch-style">${arch} · ${sty}</div>
+        </div>
+      </div>
+      <div class="rp-scores-row">
+        <div class="rp-score-box"><div class="rp-score-val" style="color:${fitCol}">${fit}</div><div class="rp-score-lbl">Program Culture Fit</div></div>
+        <div class="rp-score-box"><div class="rp-score-val" style="color:${dC[pD]}">${disc[pD]}</div><div class="rp-score-lbl">Primary Driver (${pD})</div></div>
+        <div class="rp-score-box"><div class="rp-score-val" style="color:${focus.stability>=70?'#5aaa7a':focus.stability>=45?'var(--orange)':'#e05a5a'}">${focus.stability}</div><div class="rp-score-lbl">Stability Score</div></div>
+        <div class="rp-score-box"><div class="rp-score-val" style="color:var(--orange)">${pvFit?.compete||0}</div><div class="rp-score-lbl">Compete Score</div></div>
+      </div>
+    </div>
+
+    <!-- PROGRAM FIT -->
+    <div class="rp-sec-head"><h3>Program Core Values Fit</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">4 VALUES</div></div>
+    <div class="pfit-grid" style="margin-bottom:1.5rem">
+      ${[['Positive Attitude',pvFit?.attitude||0,'🔆'],['Elite Work Ethic',pvFit?.workEthic||0,'⚙️'],['Willing to Sacrifice',pvFit?.sacrifice||0,'🤝'],['Compete in Everything',pvFit?.compete||0,'🔥']].map(([vn,vs,ico])=>{
+        const col=vs>=75?'#5aaa7a':vs>=55?'var(--orange)':'#e05a5a';
+        const tag=vs>=75?'STRONG FIT':vs>=55?'DEVELOPING':'NEEDS WORK';
+        return `<div class="pfit-card"><div class="pfit-score" style="color:${col}">${vs}</div><div class="pfit-name">${ico} ${vn}</div><div class="pfit-bar"><div class="pfit-fill" style="width:${vs}%;background:${col}"></div></div><div class="pfit-tag" style="color:${col}">${tag}</div></div>`;
+      }).join('')}
+    </div>
+
+    <!-- AI DEBRIEF -->
+    <div class="rp-sec-head"><h3>Playbook AI Debrief</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">AI ANALYSIS</div></div>
+    <div class="ai-debrief" style="margin-bottom:1.5rem">
+      <div class="ai-debrief-head"><div class="ai-badge">⚡ PLAYBOOK AI</div><span style="font-size:11px;color:var(--text3)">${Object.keys(state.answers||{}).length || 22} behavioral data points · 🔐 Encrypted & sent to staff</span></div>
+      <p>${d1}</p>
+      <p>${d2}</p>
+    </div>
+
+    <!-- DISC -->
+    <div class="rp-sec-head"><h3>DISC Behavioral Style</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">4 DIMENSIONS</div></div>
+    <div class="disc-grid" style="margin-bottom:1.5rem">
+      ${['D','I','S','C'].map(d => `
+        <div class="disc-card">
+          <div class="disc-card-top"><div class="disc-card-letter" style="color:${dC[d]}">${d}</div><div class="disc-card-score" style="color:${dC[d]}">${disc[d]}<span style="font-size:14px;color:var(--text3)">/100</span></div></div>
+          <div class="disc-card-name" style="color:${dC[d]};font-weight:600;font-size:13px">${dN[d]}</div>
+          <div class="disc-card-bar"><div class="disc-card-fill" style="width:${disc[d]}%;background:${dC[d]}"></div></div>
+          <div class="disc-card-fear">${dF[d]}</div>
+        </div>`).join('')}
+    </div>
+
+    <!-- FOCUS -->
+    <div class="rp-sec-head"><h3>Focus Domains</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">5 DOMAINS</div></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.5rem">
+      <div class="focus-list-full">
+        ${['flexibility','organization','communication','understanding','stability'].map(dom => {
+          const score = focus[dom]||0;
+          const col = score>=70?'#5aaa7a':score>=45?'var(--orange)':'#e05a5a';
+          const tag = score>=70?'STRONG':score>=45?'AVERAGE':'DEVELOP';
+          const descs = {flexibility:'Adapts quickly to new schemes and changes.',organization:'Manages preparation with structure and follow-through.',communication:'Communicates clearly and proactively on and off the field.',understanding:'Attuned to teammates and team dynamics.',stability:'Resilient under pressure — recovers quickly from adversity.'};
+          return `<div class="focus-row">
+            <div class="focus-row-name">${dom.charAt(0).toUpperCase()+dom.slice(1)}</div>
+            <div class="focus-row-bar"><div class="focus-row-fill" style="width:${score}%;background:${col}"></div></div>
+            <div class="focus-row-score" style="color:${col}">${score}</div>
+            <div class="focus-row-tag" style="background:${col}20;color:${col};border:1px solid ${col}40">${tag}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- VALUES -->
+    <div class="rp-sec-head"><h3>Program Values — Your Ranking</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">4 VALUES</div></div>
+    <div class="vals-grid" style="margin-bottom:1.5rem">
+      ${vals.map((v,i) => {
+        const score = Math.round((v.score/10)*100);
+        return `<div class="val-row-full">
+          <div class="val-rank-num">${i+1}</div>
+          <div class="val-icon">${valIcons[v.value]||'🏈'}</div>
+          <div class="val-info">
+            <div class="val-name-full">${v.value}</div>
+            <div class="val-desc-full">${i===0?'Your most strongly expressed program value — this is what drives you most.':i===1?'Second strongest — a significant driver in your daily decisions.':i===2?'Third strongest — present but not dominant.':'Lower expressed — present in the background.'}</div>
+          </div>
+          <div style="width:60px;flex-shrink:0">
+            <div class="val-bar-row"><div class="val-bar-fill" style="width:${score}%"></div></div>
+          </div>
+          ${i<3?`<div class="val-badge-full" style="${i===0?'background:rgba(224,96,32,0.15);color:var(--orange)':i===1?'background:rgba(90,143,224,0.12);color:#5a8fe0':'background:rgba(90,170,122,0.12);color:#5aaa7a'}">${i===0?'HIGHEST':i===1?'HIGH':'ACTIVE'}</div>`:''}
+        </div>`;
+      }).join('')}
+    </div>
+
+    <!-- STAFF FLAGS -->
+    <div class="rp-sec-head"><h3>Staff Flags</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">COACHING NOTES</div></div>
+    <div class="flags-list" style="margin-bottom:1.5rem">
+      ${flags.map(f => `<div class="flag-full ${f.t}"><div class="flag-full-icon">${f.i}</div><div>${f.m}</div></div>`).join('')}
+    </div>
+
+    <!-- BEHAVIORAL TRAITS -->
+    <div class="rp-sec-head"><h3>Behavioral Traits — ${arch}</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">PROFILE</div></div>
+    <div class="traits-grid-full" style="margin-bottom:1.5rem">
+      <div class="trait-col-full str"><h4>Strengths</h4>${tr.str.map(t=>`<div class="trait-item-full">${t}</div>`).join('')}</div>
+      <div class="trait-col-full imp"><h4>Development Areas</h4>${tr.imp.map(t=>`<div class="trait-item-full">${t}</div>`).join('')}</div>
+      <div class="trait-col-full stress"><h4>Under Stress</h4>${tr.stress.map(t=>`<div class="trait-item-full">${t}</div>`).join('')}</div>
+    </div>
+
+    <!-- ACTION PLAN -->
+    <div class="rp-sec-head"><h3>Coaching Action Plan</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">STAFF ONLY</div></div>
+    <div class="action-plan">
+      <div class="action-plan-title">Recommended Coaching Approach</div>
+      <div class="action-item">
+        <div class="action-num-badge">1</div>
+        <div class="action-content">
+          <strong>Communication style</strong>
+          <p>${disc.D>=65?`Use direct, outcome-focused language. ${firstName} respects brevity and clarity — softening criticism reads as weakness or uncertainty.`:disc.I>=65?`Lead with the relationship before the task. ${firstName} processes feedback significantly better when they feel seen and valued first.`:disc.S>=65?`Be consistent, predictable, and patient. ${firstName} responds to steady, trusted relationships — avoid public criticism.`:`Provide structured, evidence-based feedback with technical precision. ${firstName} needs specifics — not emotional appeals or vague encouragement.`}</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num-badge">2</div>
+        <div class="action-content">
+          <strong>Motivation — connect to ${topVal}</strong>
+          <p>${topVal==='Compete in Everything'?`${firstName}'s strongest program value is Compete in Everything. Keep competitive context front and center — head-to-head competition in practice, tracking improvement, and linking individual effort to team outcomes explicitly.`:topVal==='Elite Work Ethic'?`${firstName} self-identifies most strongly with work ethic. Acknowledge preparation quality explicitly and consistently — not just game performance. Recognition of the process matters as much as results.`:topVal==='Positive Attitude'?`${firstName} places Positive Attitude above other values. Use growth and resilience framing when delivering hard feedback — frame adversity as development, not failure.`:`${firstName} identifies most strongly with sacrifice. Acknowledge team-first choices publicly — these athletes need to know that choosing the team over themselves is seen and appreciated.`}</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num-badge">3</div>
+        <div class="action-content">
+          <strong>Pressure & adversity management</strong>
+          <p>${focus.stability<40?`Low Stability (${focus.stability}) — ${firstName} needs a structured mental reset protocol after mistakes, not passive time. Review film together after adversity to provide a technical anchor. Never use "shake it off" language — it lands as dismissal.`:focus.stability<60?`Moderate Stability (${focus.stability}) — monitor during extended high-pressure stretches. A mid-week individual check-in during rivalry weeks or bowl prep is recommended.`:`Strong emotional resilience (${focus.stability}) — ${firstName} is a stabilizing presence under pressure. Consider formal mentorship or on-field leadership responsibility.`}</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num-badge">4</div>
+        <div class="action-content">
+          <strong>Program fit & onboarding</strong>
+          <p>Overall program culture fit: <strong>${fit}/100</strong>. ${fit>=75?`Strong alignment across all four values — ${firstName} should integrate into your culture naturally from day one. Assign a leadership role early.`:fit>=55?`Solid foundation. Focus development conversations on ${(pvFit?.sacrifice||0)<55?'sacrifice and team-first behavior':(pvFit?.attitude||0)<55?'positive attitude and adversity response':'work ethic and self-direction'} in the first two weeks.`:`Meaningful culture fit gaps require a structured onboarding plan. Set clear expectations before day one. Assign a veteran culture mentor. Check in weekly for the first month.`}</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;padding:2rem 0 1rem">
+      <button class="bo" onclick="closeResultsPage()">← Close Results</button>
+    </div>
+  `;
+
+  document.getElementById('results-page').classList.add('active');
+  document.getElementById('rp-body').scrollTop = 0;
+  window.scrollTo(0, 0);
 }
 
 function renderResults(r) {
@@ -1634,47 +2129,187 @@ function sendResultsEmail(profile) {
 // SAVED PROFILES PANEL
 // ═══════════════════════════════════════════════════════
 async function openSaved() {
-  const profiles = await loadStoredProfiles();
-  // Create panel if not exists
-  let panel = document.getElementById('sp-panel');
-  if (!panel) {
-    panel = document.createElement('div');
-    panel.id = 'sp-panel';
-    panel.style.cssText = 'display:none;position:fixed;inset:0;z-index:500;background:#080608;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:1rem 1.25rem;padding-top:calc(1rem + env(safe-area-inset-top,0px));padding-bottom:calc(1rem + env(safe-area-inset-bottom,0px))';
-    document.body.appendChild(panel);
+  if (!_staffLoggedIn) { openStaffModal(); return; }
+  _allProfiles = await loadProfs();
+  if (!_allProfiles.length) {
+    _allProfiles = await loadStoredProfiles(); // fallback to old key
   }
-  const encBadge = '<span style="display:inline-flex;align-items:center;gap:6px;background:rgba(90,170,122,0.1);border:1px solid rgba(90,170,122,0.25);border-radius:6px;padding:4px 10px;font-size:11px;color:#5aaa7a;font-weight:600">🔐 AES-256 Encrypted</span>';
-  let html = `<div style="max-width:820px;margin:0 auto">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1.25rem">
-      <div style="font-family:Bebas Neue,sans-serif;font-size:clamp(24px,6vw,36px);letter-spacing:1.5px;color:#f2eeeb">SAVED PROFILES</div>
-      <button onclick="document.getElementById('sp-panel').style.display='none'" style="background:#201b22;border:1px solid rgba(255,255,255,0.13);border-radius:8px;color:#a09890;font-size:18px;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;touch-action:manipulation">✕</button>
+  _dashExpanded.clear();
+  renderDashboard(_allProfiles);
+  document.getElementById('staff-dashboard').classList.add('active');
+}
+
+function closeDashboard() {
+  document.getElementById('staff-dashboard').classList.remove('active');
+}
+
+let _allProfiles = [];
+let _dashExpanded = new Set();
+let _searchVal = '', _posFilter = '', _sortVal = 'date';
+
+function buildFlags(p) {
+  const flags = [];
+  const focus = p.focus || {}, disc = p.disc || {}, pvFit = p.pvFit || {}, vals = p.vals || [];
+  if ((focus.stability||50) < 35) flags.push({t:'r',i:'🚨',m:`Low Stability (${focus.stability}) — structured reset protocols needed after adversity`});
+  if ((focus.communication||50) < 35) flags.push({t:'r',i:'🚨',m:`Low Communication (${focus.communication}) — proactive staff check-ins essential; won't self-report`});
+  if ((disc.C||0) >= 75) flags.push({t:'a',i:'⚠️',m:`High Correctness (${disc.C}) — self-critical; needs precise evidence-based feedback`});
+  if ((disc.D||0) >= 80) flags.push({t:'a',i:'⚡',m:`High Dominance (${disc.D}) — channel through formal leadership role`});
+  if ((pvFit.sacrifice||50) < 50) flags.push({t:'a',i:'⚠️',m:`Sacrifice Fit: ${pvFit.sacrifice}/100 — discuss team-first expectations early`});
+  if ((pvFit.overall||0) >= 75) flags.push({t:'g',i:'✅',m:`Strong Program Fit (${pvFit.overall}/100) — low culture friction risk`});
+  if ((focus.flexibility||0) >= 70) flags.push({t:'g',i:'✅',m:`High Flexibility (${focus.flexibility}) — low installation risk for complex schemes`});
+  if ((pvFit.compete||0) >= 75) flags.push({t:'g',i:'✅',m:`Compete Score: ${pvFit.compete}/100 — brings genuine competitive intensity daily`});
+  if (vals[0]) flags.push({t:'g',i:'🎯',m:`Top Value: ${vals[0].value} — align motivation and recognition accordingly`});
+  return flags;
+}
+
+function renderDashboard(profiles) {
+  const body = document.getElementById('sd-body');
+  const total = profiles.length;
+  const avgFit = total ? Math.round(profiles.reduce((s,p)=>s+(p.pvFit?.overall||50),0)/total) : 0;
+  const avgStab = total ? Math.round(profiles.reduce((s,p)=>s+(p.focus?.stability||50),0)/total) : 0;
+  const highFit = profiles.filter(p=>(p.pvFit?.overall||0)>=75).length;
+  const fitCol = avgFit>=70?'#5aaa7a':avgFit>=50?'var(--orange)':'#e05a5a';
+
+  let html = `
+    <div style="margin-bottom:1.1rem">
+      <div class="lbl">Program Intelligence Dashboard</div>
+      <h2 style="font-size:clamp(24px,5vw,40px)">ALL ATHLETE PROFILES</h2>
+      <p style="font-size:13px;margin-top:.4rem;color:var(--text3)">Click any card to expand full detail. All data is AES-256 encrypted.</p>
     </div>
-    <div style="display:flex;align-items:center;gap:8px;font-size:12px;color:#6a6260;margin-bottom:1.25rem">${encBadge}<span style="margin-left:4px">All profiles encrypted at rest. Visible to authorized staff only.</span></div>`;
+    <div class="sd-stats">
+      <div class="sd-stat"><div class="sd-stat-val">${total}</div><div class="sd-stat-lbl">Total Profiles</div></div>
+      <div class="sd-stat"><div class="sd-stat-val" style="color:${fitCol}">${avgFit}</div><div class="sd-stat-lbl">Avg Program Fit</div></div>
+      <div class="sd-stat"><div class="sd-stat-val">${avgStab}</div><div class="sd-stat-lbl">Avg Stability</div></div>
+      <div class="sd-stat"><div class="sd-stat-val" style="color:#5aaa7a">${highFit}</div><div class="sd-stat-lbl">Strong Fit (75+)</div></div>
+    </div>
+    <div class="sd-toolbar">
+      <input class="sd-search" placeholder="🔍 Search by name or position..." oninput="filterDash(this.value)"/>
+      <select class="sd-filter" onchange="filterDashPos(this.value)">
+        <option value="">All Positions</option>
+        <option>Quarterback</option><option>Running Back</option><option>Wide Receiver</option>
+        <option>Tight End</option><option>Offensive Lineman</option><option>Defensive Lineman</option>
+        <option>Linebacker</option><option>Cornerback</option><option>Safety</option>
+        <option>Kicker / Punter</option><option>Special Teams</option>
+      </select>
+      <select class="sd-sort" onchange="sortDash(this.value)">
+        <option value="date">Newest First</option>
+        <option value="fit">Program Fit ↓</option>
+        <option value="stability">Stability ↓</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </div>`;
+
   if (!profiles.length) {
-    html += `<div style="text-align:center;padding:3rem 1rem;color:#6a6260;font-size:15px">No profiles saved yet.<br><br>Complete an assessment to see results here.</div>`;
+    html += `<div class="sd-empty">No profiles saved yet.<br><br>Complete an assessment — every result appears here automatically, fully encrypted.</div>`;
   } else {
     profiles.forEach((p,i) => {
-      html += `<div onclick="viewSaved(${i})" style="background:#18141a;border:1px solid rgba(255,255,255,0.13);border-radius:16px;padding:1.25rem;margin-bottom:.9rem;cursor:pointer;transition:border-color .2s" onmouseover="this.style.borderColor='var(--org,#e06020)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.13)'">
-        <div style="display:flex;align-items:center;gap:12px;margin-bottom:.75rem;flex-wrap:wrap">
-          <div style="width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,#e06020,#7a1b2e);display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,sans-serif;font-size:17px;color:#fff;flex-shrink:0">${p.initials||'??'}</div>
-          <div><div style="font-family:Bebas Neue,sans-serif;font-size:20px;color:#f2eeeb;letter-spacing:1px">${p.athleteName?.toUpperCase()||'UNKNOWN'}</div><div style="font-size:12px;color:#6a6260">${p.athletePos||''} · ${new Date(p.savedAt).toLocaleDateString()}</div></div>
-          <div style="margin-left:auto;background:rgba(224,96,32,0.13);border:1px solid rgba(224,96,32,0.3);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:#e06020">${p.arch||''}</div>
-          <button onclick="event.stopPropagation();deleteSaved(${i})" style="background:rgba(224,90,90,0.1);border:1px solid rgba(224,90,90,0.2);color:#e05a5a;font-size:12px;padding:5px 10px;border-radius:6px;touch-action:manipulation">Delete</button>
+      const isExp = _dashExpanded.has(i);
+      const fit = p.pvFit?.overall||0;
+      const fCol = fit>=75?'#5aaa7a':fit>=55?'var(--orange)':'#e05a5a';
+      const flags = buildFlags(p);
+      html += `<div class="sd-card${isExp?' expanded':''}" id="sdc-${i}">
+        <div class="sd-card-head" onclick="toggleCard(${i})">
+          <div class="sd-ava">${p.initials||'??'}</div>
+          <div class="sd-card-info">
+            <div class="sd-card-name">${(p.athleteName||'Unknown').toUpperCase()}</div>
+            <div class="sd-card-meta">${p.athletePos||'–'} · ${new Date(p.savedAt||Date.now()).toLocaleDateString()} · ${p.arch||'–'}</div>
+          </div>
+          <div class="sd-card-right">
+            <div class="sd-arch-tag" style="display:none" class="hide-mob">${(p.arch||'').replace('The ','')}</div>
+            <div class="sd-fit-score" style="color:${fCol}">${fit}<span style="font-size:11px;color:var(--text3)">/100</span></div>
+            <div class="sd-expand-icon">▼</div>
+          </div>
         </div>
-        <div style="display:flex;gap:1rem;flex-wrap:wrap">
-          <span style="font-size:12px;color:#6a6260">D:<strong style="color:#a09890">${p.disc?.D??'--'}</strong></span>
-          <span style="font-size:12px;color:#6a6260">I:<strong style="color:#a09890">${p.disc?.I??'--'}</strong></span>
-          <span style="font-size:12px;color:#6a6260">S:<strong style="color:#a09890">${p.disc?.S??'--'}</strong></span>
-          <span style="font-size:12px;color:#6a6260">C:<strong style="color:#a09890">${p.disc?.C??'--'}</strong></span>
-          <span style="font-size:12px;color:#6a6260">Stability:<strong style="color:#a09890">${p.focus?.stability??'--'}</strong></span>
-          <span style="font-size:12px;color:#6a6260">Top Value:<strong style="color:#a09890">${p.vals?.[0]?.value||'--'}</strong></span>
+        <div class="sd-card-scores">
+          <span class="sd-mini-score">Fit:<strong style="color:${fCol}">${fit}</strong></span>
+          <span class="sd-mini-score">D:<strong>${p.disc?.D??'–'}</strong></span>
+          <span class="sd-mini-score">I:<strong>${p.disc?.I??'–'}</strong></span>
+          <span class="sd-mini-score">S:<strong>${p.disc?.S??'–'}</strong></span>
+          <span class="sd-mini-score">C:<strong>${p.disc?.C??'–'}</strong></span>
+          <span class="sd-mini-score">Stability:<strong>${p.focus?.stability??'–'}</strong></span>
+        </div>
+        <div class="sd-detail">
+          <div class="sd-detail-grid">
+            <div class="sd-detail-section">
+              <div class="sd-detail-title">DISC — Behavioral Style</div>
+              ${['D','I','S','C'].map(d=>{const cols={D:'#e05a5a',I:'var(--orange)',S:'#5aaa7a',C:'#5a8fe0'};const names={D:'Dominance',I:'Influence',S:'Steadiness',C:'Correctness'};const sc=p.disc?.[d]||0;return `<div class="sd-bar-row"><div class="sd-bar-label"><span style="color:${cols[d]};font-weight:600">${d} — ${names[d]}</span><strong>${sc}/100</strong></div><div class="sd-bar"><div class="sd-bar-fill" style="width:${sc}%;background:${cols[d]}"></div></div></div>`;}).join('')}
+            </div>
+            <div class="sd-detail-section">
+              <div class="sd-detail-title">FOCUS — Cognitive Domains</div>
+              ${['flexibility','organization','communication','understanding','stability'].map(dom=>{const sc=p.focus?.[dom]||0;const col=sc>=70?'#5aaa7a':sc>=45?'var(--orange)':'#e05a5a';return `<div class="sd-bar-row"><div class="sd-bar-label"><span>${dom.charAt(0).toUpperCase()+dom.slice(1)}</span><strong style="color:${col}">${sc}/100</strong></div><div class="sd-bar"><div class="sd-bar-fill" style="width:${sc}%;background:${col}"></div></div></div>`;}).join('')}
+            </div>
+            <div class="sd-detail-section">
+              <div class="sd-detail-title">Program Values Fit</div>
+              ${[['Positive Attitude',p.pvFit?.attitude||0,'🔆'],['Elite Work Ethic',p.pvFit?.workEthic||0,'⚙️'],['Sacrifice',p.pvFit?.sacrifice||0,'🤝'],['Compete',p.pvFit?.compete||0,'🔥']].map(([nm,sc,ico])=>{const col=sc>=75?'#5aaa7a':sc>=55?'var(--orange)':'#e05a5a';return `<div class="sd-detail-row"><span>${ico} ${nm}</span><strong style="color:${col}">${sc}/100</strong></div>`;}).join('')}
+              <div style="margin-top:.6rem;padding:.5rem .75rem;background:rgba(0,0,0,.3);border-radius:6px;display:flex;justify-content:space-between">
+                <span style="font-size:13px;font-weight:600;color:var(--text)">Overall Fit</span>
+                <span style="font-family:Bebas Neue,sans-serif;font-size:20px;color:${fCol}">${fit}/100</span>
+              </div>
+            </div>
+            <div class="sd-detail-section">
+              <div class="sd-detail-title">Staff Flags</div>
+              ${flags.slice(0,5).map(f=>`<div class="sd-flag-mini ${f.t}"><span style="font-size:13px;flex-shrink:0">${f.i}</span><span>${f.m}</span></div>`).join('')}
+            </div>
+          </div>
+          <div class="sd-detail-section" style="margin-top:.85rem">
+            <div class="sd-detail-title">Program Values — Ranked</div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+              ${(p.vals||[]).map((v,vi)=>{const icons={'Positive Attitude':'🔆','Elite Work Ethic':'⚙️','Willing to Sacrifice':'🤝','Compete in Everything':'🔥'};return `<div style="display:flex;align-items:center;gap:6px;padding:5px 10px;background:rgba(0,0,0,.3);border-radius:6px;font-size:12px"><span style="font-family:Bebas Neue,sans-serif;font-size:16px;color:var(--orange)">${vi+1}</span><span style="color:var(--text2)">${icons[v.value]||''} ${v.value}</span></div>`;}).join('')}
+            </div>
+          </div>
+          <div class="sd-card-actions">
+            <button class="sd-view-btn" onclick="viewFullProfile(${i})">View Full Profile →</button>
+            <button class="sd-del-btn" onclick="deleteDash(${i})">Delete</button>
+          </div>
         </div>
       </div>`;
     });
   }
-  html += '</div>';
-  panel.innerHTML = html;
-  panel.style.display = 'block';
+  body.innerHTML = html;
+}
+
+function toggleCard(i) {
+  if (_dashExpanded.has(i)) _dashExpanded.delete(i);
+  else { _dashExpanded.clear(); _dashExpanded.add(i); }
+  renderDashboard(_allProfiles);
+  setTimeout(()=>{ const el=document.getElementById(`sdc-${i}`); if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'}); },120);
+}
+
+function filterDash(v) { _searchVal=v.toLowerCase(); applyFilters(); }
+function filterDashPos(v) { _posFilter=v; applyFilters(); }
+function sortDash(v) { _sortVal=v; applyFilters(); }
+
+function applyFilters() {
+  let ps = [..._allProfiles];
+  if (_searchVal) ps=ps.filter(p=>(p.athleteName||'').toLowerCase().includes(_searchVal)||(p.athletePos||'').toLowerCase().includes(_searchVal));
+  if (_posFilter) ps=ps.filter(p=>p.athletePos===_posFilter);
+  if (_sortVal==='fit') ps.sort((a,b)=>(b.pvFit?.overall||0)-(a.pvFit?.overall||0));
+  else if (_sortVal==='stability') ps.sort((a,b)=>(b.focus?.stability||0)-(a.focus?.stability||0));
+  else if (_sortVal==='name') ps.sort((a,b)=>(a.athleteName||'').localeCompare(b.athleteName||''));
+  else ps.sort((a,b)=>new Date(b.savedAt||0)-new Date(a.savedAt||0));
+  _dashExpanded.clear();
+  renderDashboard(ps);
+}
+
+async function viewFullProfile(i) {
+  const p = _allProfiles[i];
+  if (!p) return;
+  state.athleteName = p.athleteName;
+  state.athletePos = p.athletePos;
+  closeDashboard();
+  _showFullStaffProfile(p);
+}
+
+async function deleteDash(i) {
+  if (!confirm('Delete this profile? Cannot be undone.')) return;
+  const ps = await loadProfs();
+  ps.splice(i,1);
+  const e = await enc(ps);
+  if(e) localStorage.setItem(STORE_KEY,e);
+  else localStorage.removeItem(STORE_KEY);
+  _allProfiles = await loadProfs();
+  _dashExpanded.clear();
+  renderDashboard(_allProfiles);
 }
 
 async function viewSaved(i) {
@@ -1683,21 +2318,45 @@ async function viewSaved(i) {
   if (!p) return;
   state.athleteName = p.athleteName;
   state.athletePos = p.athletePos;
-  document.getElementById('sp-panel').style.display = 'none';
-  renderResults({disc:p.disc, focus:p.focus, vals:p.vals, arch:p.arch, style:p.style});
-  document.getElementById('results-overlay').classList.add('active');
+  showResultsPage(p);
 }
 
 async function deleteSaved(i) {
   if (!confirm('Delete this profile? This cannot be undone.')) return;
   const profiles = await loadStoredProfiles();
   profiles.splice(i,1);
-  const enc = await encryptData(profiles);
-  if (enc) localStorage.setItem(STORAGE_KEY, enc);
+  const e2 = await encryptData(profiles);
+  if(e2) localStorage.setItem(STORAGE_KEY,e2);
   else localStorage.removeItem(STORAGE_KEY);
   openSaved();
 }
 
+
 </script>
+
+<!-- ═══ FULL RESULTS PAGE ════════════════════════════════════ -->
+<div id="results-page">
+  <div class="rp-nav">
+    <div class="rp-logo">YOUR RESULTS</div>
+    <div class="rp-actions">
+      <span class="enc-badge" style="font-size:10px">🔐 SAVED</span>
+      <button class="close-btn" onclick="closeResultsPage()" style="font-size:16px">✕</button>
+    </div>
+  </div>
+  <div class="rp-body" id="rp-body"></div>
+</div>
+
+<!-- ═══ STAFF DASHBOARD ═══════════════════════════════════════ -->
+<div id="staff-dashboard">
+  <div class="sd-nav">
+    <div class="nlogo">SAVED PROFILES <span class="nexcl">STAFF</span></div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="enc-badge" style="font-size:10px">🔐 AES-256</span>
+      <button class="close-btn" onclick="closeDashboard()" style="font-size:16px">✕</button>
+    </div>
+  </div>
+  <div class="sd-body" id="sd-body"></div>
+</div>
+
 </body>
 </html>
