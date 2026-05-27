@@ -1330,7 +1330,6 @@ function renderAssessment() {
   </div>`;
 
   wrap.innerHTML = html;
-  wrap.scrollIntoView({behavior:'smooth'});
 }
 
 function startAssessment() {
@@ -1411,8 +1410,9 @@ async function finishAssessment() {
   const initials = state.athleteName.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
   const profile = {...r, athleteName:state.athleteName, athletePos:state.athletePos, initials};
   await saveProfile(profile);
-  showToast('🔐 Profile encrypted & saved');
-  setTimeout(() => sendResultsEmail(profile), 1500);
+  showToast('🔐 Profile saved');
+  // Refresh dashboard data so new profile appears immediately
+  if (_staffLoggedIn) { loadStoredProfiles().then(ps => { _allProfiles = ps; }); }
   showAthleteResults(profile);
 }
 
@@ -1499,7 +1499,6 @@ function showAthleteResults(r) {
     </div>
   `;
   document.getElementById('results-page').classList.add('active');
-  window.scrollTo(0,0);
 }
 
 function showResultsPage(r) {
@@ -1697,7 +1696,6 @@ function _showFullStaffProfile(r) {
 
   document.getElementById('results-page').classList.add('active');
   document.getElementById('rp-body').scrollTop = 0;
-  window.scrollTo(0, 0);
 }
 
 function renderResults(r) {
@@ -1974,9 +1972,6 @@ function sendResultsEmail(profile) {
 async function openSaved() {
   if (!_staffLoggedIn) { openStaffModal(); return; }
   _allProfiles = await loadStoredProfiles();
-  if (!_allProfiles.length) {
-    _allProfiles = await loadStoredProfiles(); // fallback to old key
-  }
   _dashExpanded.clear();
   renderDashboard(_allProfiles);
   document.getElementById('staff-dashboard').classList.add('active');
