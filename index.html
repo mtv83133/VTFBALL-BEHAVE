@@ -726,7 +726,8 @@ footer strong{color:var(--orange);font-family:var(--font-d);letter-spacing:1px}
     <span style="background:rgba(184,45,66,0.3);border:1px solid rgba(184,45,66,0.5);border-radius:4px;padding:2px 7px;font-size:9px;letter-spacing:2px;color:#b82d42;font-family:DM Sans,sans-serif;font-weight:700">STAFF</span>
   </div>
   <div style="display:flex;gap:1.5rem;align-items:center">
-    <span onclick="openSaved()" style="color:#a09890;font-size:13px;cursor:pointer;touch-action:manipulation">Dashboard</span>
+    <span onclick="openSaved()" style="color:#a09890;font-size:13px;cursor:pointer;touch-action:manipulation" onmouseover="this.style.color='#e06020'" onmouseout="this.style.color='#a09890'">Dashboard</span>
+    <span onclick="showStaffPage('features')" style="color:#a09890;font-size:13px;cursor:pointer;touch-action:manipulation" onmouseover="this.style.color='#e06020'" onmouseout="this.style.color='#a09890'">Features & FAQ</span>
     <span onclick="staffLogout()" style="color:#e05a5a;font-size:13px;cursor:pointer;touch-action:manipulation">Logout</span>
   </div>
 </div>
@@ -1101,8 +1102,7 @@ footer strong{color:var(--orange);font-family:var(--font-d);letter-spacing:1px}
   <p class="footer-excl">⚠ Exclusive Single-Program License — Unauthorized Distribution Prohibited</p>
 </footer>
 
-</div><!-- /page-features -->
-</div><!-- /main-site -->
+</div><!-- /page-features --><!-- /main-site -->
 
 
 <!-- ═══════════════════════════════════════════════════
@@ -1978,6 +1978,14 @@ async function openSaved() {
   _dashExpanded.clear();
   renderDashboard(_allProfiles);
   document.getElementById('staff-dashboard').classList.add('active');
+}
+
+
+function showStaffPage(page) {
+  closeDashboard();
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  const el = document.getElementById('page-' + page);
+  if (el) { el.classList.add('active'); window.scrollTo({top:0,behavior:'smooth'}); }
 }
 
 function closeDashboard() {
