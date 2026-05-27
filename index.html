@@ -1,0 +1,2362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#080608">
+<title>Gridiron Profile — Exclusive Behavioral Intelligence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --safe-top:env(safe-area-inset-top,0px);
+  --safe-bot:env(safe-area-inset-bottom,0px);
+  --black:#080608;
+  --near-black:#100d0f;
+  --surface:#18141a;
+  --surface2:#201b22;
+  --surface3:#2a242d;
+  --border:rgba(255,255,255,0.07);
+  --border2:rgba(255,255,255,0.13);
+  --maroon:#7a1b2e;
+  --maroon-mid:#9c2438;
+  --maroon-bright:#b82d42;
+  --orange:#e06020;
+  --orange-bright:#f07030;
+  --orange-light:#f89060;
+  --primary:var(--orange);
+  --primary-bright:var(--orange-bright);
+  --accent:var(--maroon-bright);
+  --gold-dim:rgba(224,96,32,0.13);
+  --gold-dim2:rgba(224,96,32,0.07);
+  --text:#f2eeeb;
+  --text2:#a09890;
+  --text3:#6a6260;
+  --r:10px;--r-lg:16px;
+  --font-d:'Bebas Neue',sans-serif;
+  --font-b:'DM Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:inherit}
+
+/* ─── ACCESS GATE ─────────────────────────────────────── */
+#gate{
+  position:fixed;inset:0;z-index:9999;
+  background:var(--black);
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:0;
+}
+.gate-inner{width:100%;max-width:440px;padding:0 1.5rem;text-align:center}
+.gate-logo{font-family:var(--font-d);font-size:36px;letter-spacing:3px;color:var(--orange);margin-bottom:4px}
+.gate-sub{font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--text3);margin-bottom:2.5rem}
+.gate-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(122,27,46,0.25);border:1px solid rgba(184,45,66,0.35);
+  border-radius:100px;padding:6px 16px;font-size:12px;color:var(--maroon-bright);
+  font-weight:600;letter-spacing:.5px;margin-bottom:2rem
+}
+.gate-badge::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--maroon-bright);animation:pulse 2s infinite}
+.gate-card{
+  background:var(--surface);border:1px solid var(--border2);border-radius:var(--r-lg);
+  padding:2rem;text-align:left
+}
+.gate-card h2{font-family:var(--font-d);font-size:28px;letter-spacing:1px;color:var(--text);margin-bottom:.5rem}
+.gate-card p{font-size:14px;color:var(--text3);margin-bottom:1.5rem;line-height:1.6}
+.gate-input{
+  width:100%;background:var(--surface2);border:1px solid var(--border2);
+  border-radius:8px;padding:13px 16px;color:var(--text);font-size:15px;
+  font-family:var(--font-b);outline:none;margin-bottom:10px;
+  transition:border-color .2s
+}
+.gate-input:focus{border-color:var(--orange)}
+.gate-input::placeholder{color:var(--text3)}
+.gate-btn{
+  width:100%;background:var(--orange);color:#fff;font-weight:700;
+  font-size:15px;padding:14px;border-radius:8px;border:none;cursor:pointer;
+  letter-spacing:.5px;transition:background .2s;margin-top:4px
+}
+.gate-btn:hover{background:var(--orange-bright)}
+.gate-err{font-size:13px;color:#e05a5a;margin-top:8px;display:none}
+.gate-lock{font-size:12px;color:var(--text3);margin-top:1rem;text-align:center;display:flex;align-items:center;justify-content:center;gap:6px}
+
+/* ─── NAV ─────────────────────────────────────────────── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 1.25rem;padding-top:var(--safe-top);height:calc(60px + var(--safe-top));
+  background:rgba(8,6,8,0.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border)
+}
+.nav-logo{font-family:var(--font-d);font-size:22px;letter-spacing:2px;color:var(--orange);cursor:pointer}
+.nav-logo span{color:var(--maroon-bright);font-size:10px;letter-spacing:3px;vertical-align:middle;margin-left:8px;font-family:var(--font-b);font-weight:600}
+.nav-links{display:flex;gap:1.5rem}
+.nav-links a{color:var(--text2);font-size:13px;transition:color .2s;cursor:pointer}
+.nav-links a:hover,.nav-links a.active{color:var(--orange)}
+.nav-cta{background:var(--maroon-bright);color:#fff;font-family:var(--font-b);font-size:13px;font-weight:600;padding:8px 18px;border-radius:6px;border:none;cursor:pointer;letter-spacing:.5px;transition:background .2s}
+.nav-cta:hover{background:var(--orange)}
+
+/* ─── PAGE TABS ───────────────────────────────────────── */
+.page{display:none}
+.page.active{display:block}
+
+/* ─── SHARED LAYOUT ───────────────────────────────────── */
+section{padding:90px 2rem}
+.container{max-width:1100px;margin:0 auto}
+.label{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:1rem}
+h1{font-family:var(--font-d);font-size:clamp(52px,8vw,92px);line-height:.95;letter-spacing:2px}
+h2{font-family:var(--font-d);font-size:clamp(34px,5vw,58px);line-height:1;letter-spacing:1.5px}
+h3{font-size:17px;font-weight:600;color:var(--text)}
+p{color:var(--text2);line-height:1.7}
+.btn-primary{background:var(--orange);color:#fff;font-weight:700;font-size:14px;padding:13px 28px;border-radius:8px;border:none;cursor:pointer;letter-spacing:.5px;transition:all .2s}
+.btn-primary:hover{background:var(--orange-bright);transform:translateY(-1px)}
+.btn-outline{background:transparent;color:var(--text);font-weight:500;font-size:14px;padding:13px 28px;border-radius:8px;border:1px solid var(--border2);cursor:pointer;transition:all .2s}
+.btn-outline:hover{border-color:var(--orange);color:var(--orange)}
+
+/* ─── EXCLUSIVE BANNER ────────────────────────────────── */
+.excl-banner{
+  background:linear-gradient(90deg,var(--maroon) 0%,#4a0e1a 50%,var(--maroon) 100%);
+  border-bottom:1px solid rgba(184,45,66,0.4);
+  padding:10px 2rem;text-align:center;
+  font-size:12px;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,0.85);
+  text-transform:uppercase;
+}
+.excl-banner span{color:var(--orange-light);margin:0 8px}
+
+/* ─── HERO ────────────────────────────────────────────── */
+#hero{
+  min-height:100vh;display:flex;align-items:center;padding-top:60px;
+  background:radial-gradient(ellipse 70% 60% at 65% 45%,rgba(224,96,32,0.07) 0%,transparent 65%),
+             radial-gradient(ellipse 50% 40% at 20% 70%,rgba(122,27,46,0.12) 0%,transparent 60%);
+  position:relative;overflow:hidden
+}
+#hero::before{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(0deg,transparent,transparent 79px,rgba(255,255,255,0.015) 80px),
+             repeating-linear-gradient(90deg,transparent,transparent 79px,rgba(255,255,255,0.015) 80px);
+  pointer-events:none
+}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(122,27,46,0.2);border:1px solid rgba(184,45,66,0.3);border-radius:100px;padding:5px 14px;font-size:12px;color:var(--maroon-bright);font-weight:600;margin-bottom:1.5rem;letter-spacing:.5px}
+.hero-tag::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--maroon-bright);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-left h1{color:var(--text);margin-bottom:1.5rem}
+.hero-left h1 .o{color:var(--orange)}
+.hero-left h1 .m{color:var(--maroon-bright)}
+.hero-sub{font-size:17px;color:var(--text2);max-width:420px;margin-bottom:2rem}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.excl-note{margin-top:1.5rem;display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text3)}
+.excl-note::before{content:'🔒';font-size:14px}
+
+/* ─── HERO CARD ───────────────────────────────────────── */
+.hero-right{position:relative}
+.profile-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r-lg);padding:1.5rem;animation:floatCard 6s ease-in-out infinite;position:relative;z-index:1}
+@keyframes floatCard{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.card-header{display:flex;align-items:center;gap:12px;margin-bottom:1.25rem}
+.avatar{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--orange) 0%,var(--maroon) 100%);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px;color:#fff;flex-shrink:0}
+.card-name{font-weight:600;font-size:15px;color:var(--text)}
+.card-pos{font-size:12px;color:var(--text3)}
+.archetype-badge{margin-left:auto;background:rgba(224,96,32,0.15);border:1px solid rgba(224,96,32,0.3);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:600;color:var(--orange);letter-spacing:.5px}
+.disc-row{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:1rem}
+.disc-box{background:var(--surface2);border-radius:8px;padding:10px 8px;text-align:center;border:1px solid var(--border)}
+.disc-letter{font-family:var(--font-d);font-size:22px;letter-spacing:1px}
+.disc-val{font-size:11px;color:var(--text3);margin-top:2px}
+.d-col{color:#e05a5a}.i-col{color:var(--orange)}.s-col{color:#5aaa7a}.c-col{color:#5a8fe0}
+.focus-list{display:flex;flex-direction:column;gap:6px}
+.focus-item{display:flex;align-items:center;gap:8px;font-size:13px}
+.focus-item span:first-child{color:var(--text2);width:110px;flex-shrink:0}
+.focus-bar{flex:1;height:5px;background:var(--surface3);border-radius:3px;overflow:hidden}
+.focus-fill{height:5px;border-radius:3px;background:var(--orange)}
+.focus-pct{font-size:11px;color:var(--text3);width:30px;text-align:right}
+.playbook-bubble{position:absolute;top:-50px;right:-20px;background:var(--surface2);border:1px solid var(--border2);border-radius:12px;padding:12px 14px;max-width:220px;font-size:12px;color:var(--text2);line-height:1.5;animation:floatBubble 5s ease-in-out infinite;z-index:2}
+@keyframes floatBubble{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.playbook-bubble strong{color:var(--orange);font-size:11px;display:block;margin-bottom:4px;letter-spacing:.5px}
+
+/* ─── LOGOS ───────────────────────────────────────────── */
+.logos-section{padding:36px 2rem;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.logos-label{text-align:center;font-size:11px;letter-spacing:2px;color:var(--text3);text-transform:uppercase;margin-bottom:1.25rem}
+.logos-row{display:flex;justify-content:center;align-items:center;gap:2.5rem;flex-wrap:wrap}
+.logos-row span{font-family:var(--font-d);font-size:18px;letter-spacing:2px;color:var(--text3)}
+
+/* ─── STEPS ───────────────────────────────────────────── */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:3rem}
+.step{position:relative;padding:1.5rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r)}
+.step::before{content:attr(data-n);font-family:var(--font-d);font-size:64px;color:rgba(224,96,32,0.06);position:absolute;top:8px;right:14px;line-height:1}
+.step-icon{width:40px;height:40px;background:var(--gold-dim);border-radius:8px;display:flex;align-items:center;justify-content:center;margin-bottom:1rem;font-size:20px}
+.step h3{font-size:15px;margin-bottom:.5rem}
+.step p{font-size:13px}
+
+/* ─── ASSESSMENTS ─────────────────────────────────────── */
+.assess-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1.5rem;margin-top:3rem}
+.assess-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.75rem;position:relative;overflow:hidden}
+.assess-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 20%,var(--gold-dim2),transparent 60%);pointer-events:none}
+.assess-num{font-family:var(--font-d);font-size:72px;color:rgba(224,96,32,0.05);position:absolute;top:0;right:16px;line-height:1}
+.assess-tag{display:inline-block;background:var(--gold-dim);color:var(--orange);font-size:11px;font-weight:600;letter-spacing:1px;padding:3px 10px;border-radius:4px;margin-bottom:1rem}
+.assess-card h3{font-size:19px;margin-bottom:.75rem}
+.assess-dims{margin-top:1.25rem;display:flex;flex-direction:column;gap:6px}
+.dim-row{display:flex;align-items:center;gap:8px;font-size:13px}
+.dim-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.dim-row span{color:var(--text2)}
+.dim-row strong{color:var(--text);font-weight:500}
+
+/* ─── ARCHETYPES ──────────────────────────────────────── */
+.arch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:3rem}
+.arch-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem;transition:border-color .2s,transform .2s;cursor:default}
+.arch-card:hover{border-color:var(--orange);transform:translateY(-2px)}
+.arch-icon{font-size:26px;margin-bottom:.75rem}
+.arch-card h3{font-size:15px;margin-bottom:.5rem}
+.arch-card p{font-size:13px;line-height:1.5}
+.arch-disc{margin-top:.75rem;display:flex;gap:6px}
+.arch-disc span{font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px}
+
+/* ─── PLAYBOOK DEMO ───────────────────────────────────── */
+.playbook-demo{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r-lg);margin-top:3rem;overflow:hidden}
+.playbook-header{background:var(--surface2);padding:1rem 1.5rem;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.playbook-header .dot{width:10px;height:10px;border-radius:50%}
+.playbook-title{font-size:13px;font-weight:600;color:var(--text2);margin-left:4px}
+.playbook-body{display:grid;grid-template-columns:1fr 1fr}
+.playbook-left{padding:1.5rem;border-right:1px solid var(--border)}
+.playbook-right{padding:1.5rem}
+.chat-msg{margin-bottom:1rem}
+.chat-msg.coach{text-align:right}
+.chat-bubble{display:inline-block;max-width:85%;padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.5}
+.chat-msg.coach .chat-bubble{background:var(--orange);color:#fff;font-weight:500;border-radius:12px 12px 2px 12px}
+.chat-msg.ai .chat-bubble{background:var(--surface3);color:var(--text);border-radius:12px 12px 12px 2px}
+.chat-from{font-size:11px;color:var(--text3);margin-bottom:4px}
+.chat-msg.coach .chat-from{text-align:right}
+.insight-list{display:flex;flex-direction:column;gap:10px}
+.insight-row{display:flex;gap:10px;padding:10px 12px;background:var(--surface2);border-radius:8px;align-items:flex-start}
+.insight-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.insight-text{font-size:13px;color:var(--text2);line-height:1.5}
+.insight-text strong{color:var(--text);font-weight:500}
+
+/* ─── CTA ─────────────────────────────────────────────── */
+.cta-section{text-align:center;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(224,96,32,0.07) 0%,transparent 70%)}
+.cta-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;max-width:800px;margin:0 auto 3rem;text-align:left}
+.cta-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.25rem}
+.cta-card h4{font-size:14px;font-weight:600;margin-bottom:.5rem;color:var(--text)}
+.cta-card p{font-size:13px}
+
+/* ─── FEATURES & FAQ PAGE ─────────────────────────────── */
+.features-hero{
+  padding:120px 2rem 60px;
+  background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(122,27,46,0.2) 0%,transparent 70%)
+}
+.features-hero h1{margin-bottom:1rem}
+.features-hero p{font-size:18px;max-width:600px;color:var(--text2)}
+
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:3rem}
+.feat-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.75rem}
+.feat-card.highlight{border-color:rgba(224,96,32,0.35);background:linear-gradient(135deg,var(--surface) 0%,rgba(224,96,32,0.04) 100%)}
+.feat-icon{font-size:32px;margin-bottom:1rem}
+.feat-card h3{font-size:18px;margin-bottom:.75rem}
+.feat-card p{font-size:14px;line-height:1.7}
+.feat-list{margin-top:1rem;display:flex;flex-direction:column;gap:6px}
+.feat-li{display:flex;gap:8px;font-size:13px;color:var(--text2);line-height:1.5}
+.feat-li::before{content:'→';color:var(--orange);flex-shrink:0;font-weight:600}
+
+.accuracy-section{padding:80px 2rem;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem;margin-top:2.5rem}
+.stat-card{background:var(--black);border:1px solid var(--border);border-radius:var(--r);padding:1.5rem;text-align:center}
+.stat-num{font-family:var(--font-d);font-size:52px;color:var(--orange);line-height:1;margin-bottom:4px}
+.stat-label{font-size:13px;color:var(--text3);line-height:1.5}
+
+.comparison-section{padding:80px 2rem}
+.comparison-table{width:100%;border-collapse:collapse;margin-top:2.5rem;font-size:14px}
+.comparison-table th{padding:14px 16px;text-align:left;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border);font-weight:600}
+.comparison-table th.us{color:var(--orange)}
+.comparison-table td{padding:14px 16px;border-bottom:1px solid var(--border);color:var(--text2);vertical-align:top}
+.comparison-table td.feature{color:var(--text);font-weight:500}
+.comparison-table td.us{color:var(--text)}
+.comparison-table tr:last-child td{border-bottom:none}
+.check{color:var(--orange);font-weight:700;font-size:16px}
+.cross{color:var(--text3)}
+.comparison-table tbody tr:hover td{background:var(--surface)}
+
+/* ─── FAQ ─────────────────────────────────────────────── */
+.faq-section{padding:80px 2rem}
+.faq-list{max-width:800px;margin:2.5rem auto 0}
+.faq-item{border-bottom:1px solid var(--border);overflow:hidden}
+.faq-q{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.25rem 0;cursor:pointer;gap:1rem
+}
+.faq-q-text{font-size:15px;font-weight:500;color:var(--text);line-height:1.4}
+.faq-icon{font-size:20px;color:var(--orange);flex-shrink:0;transition:transform .25s;font-weight:300;line-height:1}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .25s}
+.faq-item.open .faq-a{max-height:400px;padding-bottom:1.25rem}
+.faq-a p{font-size:14px;color:var(--text2);line-height:1.7}
+.faq-a p+p{margin-top:.75rem}
+.faq-a strong{color:var(--text);font-weight:500}
+
+/* ─── EXCLUSIVE SECTION ───────────────────────────────── */
+.exclusive-section{
+  padding:80px 2rem;
+  background:linear-gradient(135deg,rgba(122,27,46,0.15) 0%,transparent 50%,rgba(224,96,32,0.06) 100%);
+  border-top:1px solid var(--border);border-bottom:1px solid var(--border)
+}
+.exclusive-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:2.5rem}
+.exclusive-points{display:flex;flex-direction:column;gap:1.25rem}
+.excl-point{display:flex;gap:14px;align-items:flex-start}
+.excl-point-icon{width:38px;height:38px;border-radius:8px;background:rgba(122,27,46,0.3);border:1px solid rgba(184,45,66,0.3);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.excl-point-text h4{font-size:15px;font-weight:600;color:var(--text);margin-bottom:3px}
+.excl-point-text p{font-size:13px;color:var(--text2);line-height:1.5}
+.excl-visual{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r-lg);padding:1.5rem}
+.nda-badge{background:rgba(122,27,46,0.2);border:1px solid rgba(184,45,66,0.3);border-radius:8px;padding:1rem 1.25rem;margin-bottom:1rem}
+.nda-badge h4{font-size:13px;font-weight:600;color:var(--maroon-bright);margin-bottom:4px;letter-spacing:.5px}
+.nda-badge p{font-size:12px;color:var(--text3);line-height:1.5}
+.access-log{display:flex;flex-direction:column;gap:6px}
+.log-row{display:flex;align-items:center;gap:10px;padding:8px 10px;background:var(--surface2);border-radius:6px;font-size:12px}
+.log-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.log-row span{color:var(--text2);flex:1}
+.log-time{color:var(--text3)}
+
+/* ─── ASSESSMENT OVERLAY ──────────────────────────────── */
+#assessment-overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,0.93);backdrop-filter:blur(8px);overflow-y:auto;padding:2rem 1rem}
+#assessment-overlay.active{display:flex;align-items:flex-start;justify-content:center}
+.assessment-wrap{width:100%;max-width:680px;margin:auto}
+.assess-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem}
+.assess-header-left h2{font-family:var(--font-d);font-size:30px;letter-spacing:1px;color:var(--text)}
+.assess-header-left p{font-size:13px;color:var(--text3);margin-top:2px}
+.close-btn{background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text2);font-size:18px;width:36px;height:36px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .2s;flex-shrink:0}
+.close-btn:hover{border-color:var(--text2);color:var(--text)}
+.progress-wrap{margin-bottom:1.5rem}
+.progress-top{display:flex;justify-content:space-between;font-size:12px;color:var(--text3);margin-bottom:6px}
+.progress-bg{height:3px;background:var(--surface3);border-radius:2px}
+.progress-fg{height:3px;background:var(--orange);border-radius:2px;transition:width .4s ease}
+.section-lbl{display:inline-flex;align-items:center;gap:8px;background:var(--gold-dim2);border:1px solid rgba(224,96,32,0.18);border-radius:6px;padding:5px 12px;font-size:12px;font-weight:600;letter-spacing:1px;color:var(--orange);text-transform:uppercase;margin-bottom:1rem}
+.q-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:12px}
+.q-text{font-size:16px;font-weight:500;color:var(--text);margin-bottom:.5rem;line-height:1.5}
+.q-sub{font-size:13px;color:var(--text3);margin-bottom:1.25rem;line-height:1.5}
+.q-opts{display:flex;flex-direction:column;gap:8px}
+.q-opt{display:flex;align-items:center;gap:10px;padding:11px 14px;border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:14px;color:var(--text2);transition:all .15s;background:transparent;text-align:left;width:100%}
+.q-opt:hover{border-color:rgba(224,96,32,0.3);color:var(--text);background:var(--surface2)}
+.q-opt.sel{border-color:var(--orange);color:var(--orange);background:var(--gold-dim2)}
+.q-radio{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--surface3);flex-shrink:0;transition:all .15s}
+.q-opt.sel .q-radio{border-color:var(--orange);background:var(--orange);box-shadow:0 0 0 3px rgba(224,96,32,0.15)}
+.scale-wrap{margin-top:4px}
+.scale-labels{display:flex;justify-content:space-between;font-size:11px;color:var(--text3);margin-bottom:8px}
+.scale-btns{display:flex;gap:8px;justify-content:center}
+.scale-btn{width:44px;height:44px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);cursor:pointer;font-size:14px;font-weight:500;color:var(--text2);transition:all .15s}
+.scale-btn:hover{border-color:rgba(224,96,32,0.4);color:var(--orange)}
+.scale-btn.sel{border-color:var(--orange);background:var(--gold-dim);color:var(--orange)}
+.assess-nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem}
+.assess-nav button{padding:11px 24px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s;border:1px solid var(--border2);background:transparent;color:var(--text2)}
+.assess-nav button:hover{color:var(--text);border-color:var(--text2)}
+.assess-nav button.next{background:var(--orange);color:#fff;border-color:var(--orange)}
+.assess-nav button.next:hover{background:var(--orange-bright)}
+.assess-nav button:disabled{opacity:.3;cursor:not-allowed}
+.assess-nav .sec-ind{font-size:13px;color:var(--text3)}
+
+/* ─── RESULTS OVERLAY ─────────────────────────────────── */
+#results-overlay{display:none;position:fixed;inset:0;z-index:200;background:var(--black);overflow-y:auto}
+#results-overlay.active{display:block}
+.results-header{background:var(--surface);border-bottom:1px solid var(--border);padding:1.25rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.results-logo{font-family:var(--font-d);font-size:20px;letter-spacing:2px;color:var(--orange)}
+.results-logo span{color:var(--maroon-bright);font-size:9px;letter-spacing:3px;font-family:var(--font-b);font-weight:600;margin-left:6px;vertical-align:middle}
+.results-body{max-width:900px;margin:0 auto;padding:2rem}
+.athlete-header{display:flex;align-items:center;gap:1.5rem;padding:2rem;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);margin-bottom:1.5rem;position:relative;overflow:hidden}
+.athlete-header::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(122,27,46,0.1) 0%,transparent 60%);pointer-events:none}
+.athlete-avatar{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--orange) 0%,var(--maroon) 100%);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:28px;color:#fff;letter-spacing:2px;flex-shrink:0}
+.athlete-info{flex:1}
+.athlete-name{font-family:var(--font-d);font-size:36px;letter-spacing:1px;color:var(--text);line-height:1;margin-bottom:4px}
+.athlete-meta{font-size:13px;color:var(--text3)}
+.athlete-archetype{text-align:right}
+.arch-label{font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
+.arch-name{font-family:var(--font-d);font-size:28px;color:var(--orange);letter-spacing:1px;line-height:1}
+.arch-disc-tag{font-size:12px;color:var(--text3);margin-top:4px}
+.results-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-bottom:1.5rem}
+.res-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem}
+.res-card-title{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:1.25rem}
+.disc-visual{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.disc-vis-box{background:var(--surface2);border-radius:8px;padding:14px;text-align:center;border:1px solid var(--border)}
+.disc-vis-letter{font-family:var(--font-d);font-size:36px;letter-spacing:1px;line-height:1;margin-bottom:4px}
+.disc-vis-name{font-size:11px;color:var(--text3);margin-bottom:8px}
+.disc-vis-score{font-size:24px;font-weight:600}
+.disc-vis-bar{height:4px;background:var(--surface3);border-radius:2px;margin-top:8px;overflow:hidden}
+.disc-vis-fill{height:4px;border-radius:2px}
+.disc-vis-fear{font-size:10px;color:var(--text3);margin-top:8px;line-height:1.3}
+.focus-domain{margin-bottom:14px}
+.focus-domain-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:5px}
+.focus-domain-name{font-size:13px;font-weight:500;color:var(--text)}
+.focus-domain-score{font-size:13px;color:var(--text3)}
+.focus-domain-bar{height:6px;background:var(--surface3);border-radius:3px;overflow:hidden}
+.focus-domain-fill{height:6px;border-radius:3px;background:var(--orange)}
+.values-list{display:flex;flex-direction:column;gap:8px}
+.value-row{display:flex;align-items:center;gap:12px;padding:10px 12px;background:var(--surface2);border-radius:8px;border:1px solid var(--border)}
+.value-rank{font-family:var(--font-d);font-size:22px;color:var(--orange);width:24px;flex-shrink:0;line-height:1}
+.value-info{flex:1}
+.value-name{font-size:14px;font-weight:500;color:var(--text)}
+.value-desc{font-size:12px;color:var(--text3);margin-top:2px}
+.value-badge{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;letter-spacing:.5px}
+.flags-full{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.5rem}
+.flag-row{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:8px;margin-bottom:8px;font-size:13px;line-height:1.5}
+.flag-row:last-child{margin-bottom:0}
+.flag-row.g{background:rgba(90,170,122,0.08);border:1px solid rgba(90,170,122,0.2);color:#5aaa7a}
+.flag-row.a{background:rgba(224,96,32,0.08);border:1px solid rgba(224,96,32,0.2);color:var(--orange-light)}
+.flag-row.r{background:rgba(224,90,90,0.08);border:1px solid rgba(224,90,90,0.2);color:#e05a5a}
+.flag-icon{font-size:16px;flex-shrink:0;margin-top:1px}
+.traits-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:1rem;margin-top:1rem}
+.trait-col h4{font-size:12px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text3);margin-bottom:.75rem;font-weight:600}
+.trait-item{display:flex;gap:8px;align-items:flex-start;margin-bottom:6px;font-size:13px;color:var(--text2)}
+.trait-item::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.trait-col.str .trait-item::before{background:#5aaa7a}
+.trait-col.imp .trait-item::before{background:var(--orange)}
+.trait-col.stress .trait-item::before{background:#e05a5a}
+.playbook-result{background:var(--surface);border:1px solid rgba(224,96,32,0.22);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.5rem}
+.playbook-result-header{display:flex;align-items:center;gap:8px;margin-bottom:1rem}
+.playbook-ai-badge{background:var(--gold-dim);border:1px solid rgba(224,96,32,0.3);border-radius:6px;padding:3px 10px;font-size:11px;font-weight:700;color:var(--orange);letter-spacing:1px}
+.playbook-result p{font-size:14px;color:var(--text2);line-height:1.7;margin-bottom:1rem}
+.playbook-result p:last-child{margin-bottom:0}
+.staff-actions{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem}
+.staff-actions-title{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:1rem}
+.action-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px}
+.action-num{font-family:var(--font-d);font-size:20px;color:var(--orange);width:24px;flex-shrink:0;line-height:1.2}
+.action-text{font-size:13px;color:var(--text2);line-height:1.5}
+.action-text strong{color:var(--text);font-weight:500}
+.results-restart{display:flex;justify-content:center;margin-top:2rem;padding-bottom:3rem}
+.results-restart button{background:transparent;border:1px solid var(--border2);color:var(--text2);padding:10px 24px;border-radius:8px;cursor:pointer;font-size:14px;transition:all .2s}
+.results-restart button:hover{border-color:var(--orange);color:var(--orange)}
+
+/* ─── FOOTER ──────────────────────────────────────────── */
+footer{background:var(--surface);border-top:1px solid var(--border);padding:2rem;text-align:center}
+footer p{font-size:12px;color:var(--text3)}
+footer strong{color:var(--orange);font-family:var(--font-d);letter-spacing:1px}
+.footer-excl{margin-top:6px;font-size:11px;color:rgba(184,45,66,0.6);letter-spacing:1px;text-transform:uppercase}
+
+@media(max-width:900px){
+  .hero-inner,.exclusive-grid,.playbook-body,.results-grid{grid-template-columns:1fr}
+  .hero-right,.playbook-left{display:none}
+  .steps,.assess-grid,.arch-grid,.cta-cards,.feat-grid,.stat-grid,.traits-grid{grid-template-columns:1fr 1fr}
+  .playbook-left{border-right:none;border-bottom:1px solid var(--border)}
+}
+@media(max-width:600px){
+  .steps,.arch-grid,.cta-cards,.feat-grid,.stat-grid,.traits-grid{grid-template-columns:1fr}
+  nav .nav-links{display:none}
+  section{padding:60px 1.25rem}
+}
+
+/* ── MOBILE RESPONSIVE ──────────────────────────── */
+@media(max-width:480px){
+  section{padding:60px 1rem}
+  h1{font-size:clamp(42px,12vw,72px)}
+  h2{font-size:clamp(28px,8vw,48px)}
+  .steps{grid-template-columns:1fr 1fr}
+  .assess-grid,.arch-grid,.cta-cards,.feat-grid,.stat-grid,.traits-grid{grid-template-columns:1fr}
+  .results-grid,.exclusive-grid,.playbook-body{grid-template-columns:1fr}
+  .disc-visual{grid-template-columns:1fr 1fr}
+  .hero-right{display:none}
+  .nav-links{display:none}
+  .assess-nav button{padding:12px 14px;font-size:13px}
+  .scale-btns{gap:6px}
+  .scale-btn{width:clamp(38px,11vw,48px);height:clamp(38px,11vw,48px)}
+  .q-opt{min-height:52px;padding:12px 12px;font-size:13px}
+  .q-opt,.scale-btn,.assess-nav button,.btn-primary,.btn-outline,.nav-cta,.gate-btn{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+  .athlete-header{flex-wrap:wrap}
+  .athlete-archetype{text-align:left;width:100%}
+  .results-grid{gap:1rem}
+  .traits-grid{grid-template-columns:1fr}
+  .faq-q-text{font-size:14px}
+  .comparison-table{font-size:12px}
+  .comp-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  #assessment-overlay,#results-overlay{padding:0.75rem}
+  #results-overlay .results-body{padding:1rem}
+  .athlete-header{padding:1.25rem}
+  .athlete-name{font-size:clamp(24px,7vw,36px)}
+  .arch-name{font-size:clamp(18px,5vw,28px)}
+}
+@media(max-width:600px){
+  .hero-inner{grid-template-columns:1fr}
+  .assess-grid{grid-template-columns:1fr}
+  .playbook-body{grid-template-columns:1fr}
+  .playbook-left{border-right:none;border-bottom:1px solid var(--border)}
+  .cta-cards{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .arch-grid{grid-template-columns:1fr 1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  nav .nav-links{display:none}
+  section{padding:60px 1.25rem}
+  .xbanner{font-size:10px;padding:8px 1rem}
+  .results-grid{grid-template-columns:1fr}
+  .traits-grid{grid-template-columns:1fr}
+  .disc-visual{grid-template-columns:1fr 1fr}
+}
+@media(max-width:900px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .steps{grid-template-columns:1fr 1fr}
+  .assess-grid{grid-template-columns:1fr}
+  .arch-grid{grid-template-columns:1fr 1fr}
+  .cta-cards{grid-template-columns:1fr}
+  .results-grid{grid-template-columns:1fr}
+  .traits-grid{grid-template-columns:1fr 1fr}
+  .playbook-body{grid-template-columns:1fr}
+  .feat-grid{grid-template-columns:1fr}
+  .exclusive-grid{grid-template-columns:1fr}
+}
+/* Safe area bottom padding for results */
+#results-overlay .results-body{padding-bottom:calc(2rem + env(safe-area-inset-bottom,0px))}
+#assessment-overlay{padding-bottom:calc(1rem + env(safe-area-inset-bottom,0px))}
+/* Touch target sizes */
+.q-opt,.scale-btn,.btn-primary,.btn-outline,.nav-cta,.gate-btn,.close-btn,.assess-nav button{touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.q-opt{min-height:50px}
+.scale-btn{min-width:40px;min-height:40px}
+/* Overflow scroll for comparison table on mobile */
+.comp-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+
+/* ═══ FULL RESULTS PAGE ═══════════════════════════════════════ */
+#results-page{display:none;position:fixed;inset:0;z-index:200;background:var(--black);overflow-y:auto;-webkit-overflow-scrolling:touch}
+#results-page.active{display:block}
+.rp-nav{position:sticky;top:0;z-index:10;background:rgba(8,6,8,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 1.25rem;padding-top:var(--safe-top);height:calc(58px + var(--safe-top));display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.rp-logo{font-family:var(--font-d);font-size:18px;letter-spacing:2px;color:var(--orange)}
+.rp-actions{display:flex;align-items:center;gap:10px}
+.rp-body{max-width:900px;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+@media(min-width:768px){.rp-body{padding:2rem 2rem 4rem}}
+
+/* Hero banner on results */
+.rp-hero{background:linear-gradient(135deg,rgba(122,27,46,0.25) 0%,rgba(224,96,32,0.1) 100%);border:1px solid rgba(184,45,66,0.3);border-radius:var(--r-lg);padding:1.75rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.rp-hero::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--maroon-bright),var(--orange))}
+.rp-hero-top{display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.25rem}
+.rp-ava{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--maroon));display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:28px;color:#fff;letter-spacing:2px;flex-shrink:0}
+.rp-name{font-family:var(--font-d);font-size:clamp(28px,7vw,42px);letter-spacing:1px;color:var(--text);line-height:1}
+.rp-meta{font-size:13px;color:var(--text3);margin-top:4px}
+.rp-arch-wrap{margin-left:auto;text-align:right}
+.rp-arch-label{font-size:10px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:3px}
+.rp-arch-name{font-family:var(--font-d);font-size:clamp(22px,5vw,32px);color:var(--orange);letter-spacing:1px;line-height:1}
+.rp-arch-style{font-size:12px;color:var(--text3);margin-top:3px}
+/* overall score ring area */
+.rp-scores-row{display:grid;grid-template-columns:repeat(2,1fr);gap:.75rem}
+@media(min-width:500px){.rp-scores-row{grid-template-columns:repeat(4,1fr)}}
+.rp-score-box{background:rgba(0,0,0,0.3);border-radius:8px;padding:.85rem;text-align:center}
+.rp-score-val{font-family:var(--font-d);font-size:32px;line-height:1;margin-bottom:2px}
+.rp-score-lbl{font-size:11px;color:var(--text3);line-height:1.3}
+
+/* Section headers */
+.rp-sec-head{display:flex;align-items:center;gap:10px;margin:1.5rem 0 1rem}
+.rp-sec-head h3{font-family:var(--font-d);font-size:22px;letter-spacing:1px;color:var(--text)}
+.rp-sec-line{flex:1;height:1px;background:var(--border)}
+.rp-sec-badge{font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);background:var(--gold-dim);border:1px solid rgba(224,96,32,0.2);border-radius:4px;padding:3px 8px}
+
+/* Program fit card */
+.pfit-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+@media(min-width:600px){.pfit-grid{grid-template-columns:repeat(4,1fr)}}
+.pfit-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;text-align:center}
+.pfit-score{font-size:32px;font-weight:700;line-height:1;margin-bottom:4px}
+.pfit-name{font-size:12px;color:var(--text3);margin-bottom:8px;line-height:1.3}
+.pfit-bar{height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;margin-bottom:6px}
+.pfit-fill{height:5px;border-radius:3px}
+.pfit-tag{font-size:10px;font-weight:700;letter-spacing:.5px}
+
+/* DISC grid */
+.disc-grid{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+.disc-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem}
+.disc-card-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:.75rem}
+.disc-card-letter{font-family:var(--font-d);font-size:42px;line-height:1;letter-spacing:1px}
+.disc-card-score{font-size:26px;font-weight:700}
+.disc-card-name{font-size:12px;color:var(--text3);margin-bottom:.5rem}
+.disc-card-bar{height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;margin-bottom:.6rem}
+.disc-card-fill{height:5px;border-radius:3px}
+.disc-card-fear{font-size:11px;color:var(--text3);display:flex;align-items:flex-start;gap:5px;line-height:1.4}
+.disc-card-fear::before{content:'Fear:';color:var(--text3);flex-shrink:0;font-weight:500}
+
+/* Focus bars */
+.focus-list-full{display:flex;flex-direction:column;gap:12px}
+.focus-row{display:flex;align-items:center;gap:12px}
+.focus-row-name{font-size:14px;font-weight:500;color:var(--text);width:120px;flex-shrink:0}
+.focus-row-bar{flex:1;height:8px;background:var(--surface3);border-radius:4px;overflow:hidden}
+.focus-row-fill{height:8px;border-radius:4px;background:var(--orange)}
+.focus-row-score{font-size:13px;color:var(--text3);width:38px;text-align:right;flex-shrink:0}
+.focus-row-tag{font-size:10px;font-weight:600;padding:2px 7px;border-radius:4px;flex-shrink:0;letter-spacing:.3px}
+
+/* Values ranked */
+.vals-grid{display:flex;flex-direction:column;gap:8px}
+.val-row-full{display:flex;align-items:center;gap:12px;padding:11px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r)}
+.val-rank-num{font-family:var(--font-d);font-size:24px;color:var(--orange);width:26px;flex-shrink:0;line-height:1}
+.val-icon{font-size:20px;flex-shrink:0}
+.val-info{flex:1}
+.val-name-full{font-size:15px;font-weight:600;color:var(--text)}
+.val-desc-full{font-size:12px;color:var(--text3);margin-top:2px;line-height:1.4}
+.val-badge-full{font-size:10px;font-weight:700;padding:3px 9px;border-radius:5px;letter-spacing:.5px;flex-shrink:0}
+.val-bar-row{flex:1;height:5px;background:var(--surface3);border-radius:3px;overflow:hidden;max-width:80px}
+.val-bar-fill{height:5px;border-radius:3px;background:var(--orange)}
+
+/* Flags full */
+.flags-list{display:flex;flex-direction:column;gap:8px}
+.flag-full{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:var(--r);font-size:13px;line-height:1.6}
+.flag-full.g{background:rgba(90,170,122,0.08);border:1px solid rgba(90,170,122,0.2);color:#5aaa7a}
+.flag-full.a{background:rgba(224,96,32,0.08);border:1px solid rgba(224,96,32,0.2);color:var(--orange-light)}
+.flag-full.r{background:rgba(224,90,90,0.08);border:1px solid rgba(224,90,90,0.2);color:#e05a5a}
+.flag-full-icon{font-size:18px;flex-shrink:0;margin-top:1px}
+
+/* Traits */
+.traits-grid-full{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:600px){.traits-grid-full{grid-template-columns:1fr 1fr 1fr}}
+.trait-col-full{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem}
+.trait-col-full h4{font-size:11px;letter-spacing:2px;text-transform:uppercase;font-weight:600;margin-bottom:.75rem;padding-bottom:.5rem;border-bottom:1px solid var(--border)}
+.trait-col-full.str h4{color:#5aaa7a}
+.trait-col-full.imp h4{color:var(--orange)}
+.trait-col-full.stress h4{color:#e05a5a}
+.trait-item-full{display:flex;gap:8px;align-items:flex-start;margin-bottom:7px;font-size:13px;color:var(--text2);line-height:1.5}
+.trait-item-full::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.trait-col-full.str .trait-item-full::before{background:#5aaa7a}
+.trait-col-full.imp .trait-item-full::before{background:var(--orange)}
+.trait-col-full.stress .trait-item-full::before{background:#e05a5a}
+
+/* Action plan */
+.action-plan{background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem}
+.action-plan-title{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:1.1rem}
+.action-item{display:flex;gap:12px;align-items:flex-start;padding:.9rem;background:var(--surface2);border-radius:var(--r);margin-bottom:.75rem;border:1px solid var(--border)}
+.action-item:last-child{margin-bottom:0}
+.action-num-badge{width:28px;height:28px;border-radius:50%;background:var(--gold-dim);border:1px solid rgba(224,96,32,0.3);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:16px;color:var(--orange);flex-shrink:0}
+.action-content{flex:1}
+.action-content strong{font-size:13px;font-weight:600;color:var(--text);display:block;margin-bottom:3px}
+.action-content p{font-size:13px;color:var(--text2);line-height:1.55;margin:0}
+
+/* Playbook AI debrief */
+.ai-debrief{background:linear-gradient(135deg,var(--surface),rgba(224,96,32,0.03));border:1px solid rgba(224,96,32,0.2);border-radius:var(--r-lg);padding:1.5rem}
+.ai-debrief-head{display:flex;align-items:center;gap:8px;margin-bottom:1rem;flex-wrap:wrap}
+.ai-badge{background:var(--gold-dim);border:1px solid rgba(224,96,32,0.3);border-radius:5px;padding:4px 10px;font-size:11px;font-weight:700;color:var(--orange);letter-spacing:1px}
+.ai-debrief p{font-size:14px;color:var(--text2);line-height:1.75;margin-bottom:.85rem}
+.ai-debrief p:last-child{margin-bottom:0}
+.ai-debrief p strong{color:var(--text);font-weight:500}
+
+/* ═══ STAFF DASHBOARD ═══════════════════════════════════════ */
+#staff-dashboard{display:none;position:fixed;inset:0;z-index:300;background:var(--black);overflow-y:auto;-webkit-overflow-scrolling:touch}
+#staff-dashboard.active{display:block}
+.sd-nav{position:sticky;top:0;z-index:10;background:rgba(8,6,8,0.95);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);padding:0 1.25rem;padding-top:var(--safe-top);height:calc(58px + var(--safe-top));display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.sd-body{max-width:1000px;margin:0 auto;padding:1.5rem 1.25rem 4rem}
+@media(min-width:768px){.sd-body{padding:2rem 2rem 4rem}}
+
+/* Stats bar */
+.sd-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.85rem;margin-bottom:1.5rem}
+@media(min-width:600px){.sd-stats{grid-template-columns:repeat(4,1fr)}}
+.sd-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:1.1rem;text-align:center}
+.sd-stat-val{font-family:var(--font-d);font-size:clamp(28px,6vw,40px);color:var(--orange);line-height:1;margin-bottom:3px}
+.sd-stat-lbl{font-size:12px;color:var(--text3);line-height:1.3}
+
+/* Search + filter bar */
+.sd-toolbar{display:flex;gap:.75rem;margin-bottom:1.25rem;flex-wrap:wrap;align-items:center}
+.sd-search{flex:1;min-width:200px;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 14px;color:var(--text);font-size:14px;outline:none;transition:border-color .2s}
+.sd-search:focus{border-color:var(--orange)}
+.sd-search::placeholder{color:var(--text3)}
+.sd-filter{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 12px;color:var(--text2);font-size:13px;outline:none;cursor:pointer;-webkit-appearance:none;min-width:130px}
+.sd-filter:focus{border-color:var(--orange)}
+.sd-sort{background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:10px 12px;color:var(--text2);font-size:13px;outline:none;cursor:pointer;-webkit-appearance:none}
+
+/* Profile cards in dashboard */
+.sd-card{background:var(--surface);border:1px solid var(--border2);border-radius:var(--r-lg);margin-bottom:1rem;overflow:hidden;transition:border-color .2s}
+.sd-card:hover{border-color:rgba(224,96,32,0.3)}
+.sd-card-head{display:flex;align-items:center;gap:12px;padding:1.1rem 1.25rem;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.sd-ava{width:44px;height:44px;border-radius:50%;background:linear-gradient(135deg,var(--orange),var(--maroon));display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:18px;color:#fff;flex-shrink:0}
+.sd-card-info{flex:1;min-width:0}
+.sd-card-name{font-family:var(--font-d);font-size:20px;letter-spacing:1px;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sd-card-meta{font-size:12px;color:var(--text3);margin-top:1px}
+.sd-card-right{display:flex;align-items:center;gap:.75rem;flex-shrink:0}
+.sd-arch-tag{background:var(--gold-dim);border:1px solid rgba(224,96,32,0.25);border-radius:5px;padding:3px 9px;font-size:11px;font-weight:600;color:var(--orange);white-space:nowrap}
+.sd-fit-score{font-family:var(--font-d);font-size:22px;line-height:1}
+.sd-expand-icon{font-size:16px;color:var(--text3);transition:transform .25s;flex-shrink:0}
+.sd-card.expanded .sd-expand-icon{transform:rotate(180deg)}
+.sd-card-scores{display:flex;gap:.75rem;padding:.6rem 1.25rem 1rem;flex-wrap:wrap;border-top:1px solid var(--border)}
+.sd-mini-score{font-size:12px;color:var(--text3)}
+.sd-mini-score strong{color:var(--text2)}
+
+/* Expanded detail panel */
+.sd-detail{display:none;padding:1.25rem;border-top:1px solid var(--border);background:var(--surface2)}
+.sd-card.expanded .sd-detail{display:block}
+.sd-detail-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+@media(min-width:600px){.sd-detail-grid{grid-template-columns:1fr 1fr}}
+.sd-detail-section{background:var(--black);border:1px solid var(--border);border-radius:var(--r);padding:1rem}
+.sd-detail-title{font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:.75rem}
+.sd-detail-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:7px;font-size:13px}
+.sd-detail-row span{color:var(--text2)}
+.sd-detail-row strong{color:var(--text);font-weight:500}
+.sd-bar-row{margin-bottom:8px}
+.sd-bar-label{display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px}
+.sd-bar-label span{color:var(--text2)}
+.sd-bar-label strong{color:var(--text3)}
+.sd-bar{height:5px;background:var(--surface3);border-radius:3px;overflow:hidden}
+.sd-bar-fill{height:5px;border-radius:3px;background:var(--orange)}
+.sd-flag-mini{display:flex;gap:7px;padding:7px 9px;border-radius:6px;font-size:12px;line-height:1.4;margin-bottom:5px}
+.sd-flag-mini.g{background:rgba(90,170,122,0.08);border:1px solid rgba(90,170,122,0.18);color:#5aaa7a}
+.sd-flag-mini.a{background:rgba(224,96,32,0.08);border:1px solid rgba(224,96,32,0.18);color:var(--orange-light)}
+.sd-flag-mini.r{background:rgba(224,90,90,0.08);border:1px solid rgba(224,90,90,0.18);color:#e05a5a}
+.sd-card-actions{display:flex;gap:.75rem;margin-top:1rem;flex-wrap:wrap}
+.sd-view-btn{background:var(--orange);color:#fff;font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;border:none;cursor:pointer;touch-action:manipulation}
+.sd-view-btn:active{background:var(--orange-bright)}
+.sd-del-btn{background:rgba(224,90,90,0.1);border:1px solid rgba(224,90,90,0.2);color:#e05a5a;font-size:13px;padding:9px 16px;border-radius:7px;cursor:pointer;touch-action:manipulation}
+.sd-del-btn:active{background:rgba(224,90,90,0.2)}
+.sd-empty{text-align:center;padding:4rem 1.25rem;color:var(--text3);font-size:15px;line-height:1.7}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════
+     ACCESS GATE
+═══════════════════════════════════════════════════ -->
+<div id="staff-modal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,0.88);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);align-items:center;justify-content:center;padding:1.25rem">
+  <div style="width:100%;max-width:400px">
+    <div style="text-align:center;margin-bottom:1.5rem">
+      <div style="font-family:Bebas Neue,sans-serif;font-size:32px;letter-spacing:3px;color:var(--orange)">STAFF ACCESS</div>
+      <div style="font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--text3);margin-top:4px">Authorized Personnel Only</div>
+    </div>
+    <div style="background:var(--surface);border:1px solid var(--border2);border-radius:var(--r-lg);padding:1.75rem">
+      <p style="font-size:13px;color:var(--text3);margin-bottom:1.25rem;line-height:1.6">Enter your staff access code to view all athlete profiles, detailed reports, and the full coaching dashboard.</p>
+      <input id="staff-code-input" type="password" placeholder="Enter staff access code" autocomplete="off" style="width:100%;background:var(--surface2);border:1px solid var(--border2);border-radius:8px;padding:14px 16px;color:var(--text);font-size:16px;outline:none;margin-bottom:10px;font-family:DM Sans,sans-serif;-webkit-appearance:none;transition:border-color .2s"/>
+      <div id="staff-code-err" style="font-size:13px;color:#e05a5a;margin-bottom:8px;display:none">Incorrect code. Contact your director of player personnel.</div>
+      <button onclick="checkStaffCode()" style="width:100%;background:var(--orange);color:#fff;font-weight:700;font-size:15px;padding:15px;border-radius:8px;border:none;cursor:pointer;touch-action:manipulation;font-family:DM Sans,sans-serif">ACCESS DASHBOARD</button>
+      <button onclick="closeStaffModal()" style="width:100%;background:transparent;color:var(--text3);font-size:13px;padding:10px;border:none;cursor:pointer;margin-top:6px;touch-action:manipulation;font-family:DM Sans,sans-serif">Cancel</button>
+      <div style="font-size:11px;color:var(--text3);margin-top:.75rem;text-align:center">AES-256 Encrypted</div>
+    </div>
+  </div>
+</div>
+<div id="main-site">
+
+<div id="staff-nav" style="display:none;position:fixed;top:0;left:0;right:0;z-index:101;background:linear-gradient(90deg,rgba(58,10,21,0.97),rgba(10,6,10,0.97));backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(184,45,66,0.45);padding:0 1.25rem;padding-top:env(safe-area-inset-top,0px);height:calc(58px + env(safe-area-inset-top,0px));align-items:center;justify-content:space-between;gap:1rem">
+  <div style="font-family:Bebas Neue,sans-serif;font-size:18px;letter-spacing:2px;color:var(--orange);display:flex;align-items:center;gap:8px">
+    GRIDIRON PROFILE
+    <span style="background:rgba(184,45,66,0.3);border:1px solid rgba(184,45,66,0.5);border-radius:4px;padding:2px 7px;font-size:9px;letter-spacing:2px;color:#b82d42;font-family:DM Sans,sans-serif;font-weight:700">STAFF</span>
+  </div>
+  <div style="display:flex;gap:1.5rem;align-items:center">
+    <span onclick="openSaved()" style="color:#a09890;font-size:13px;cursor:pointer;touch-action:manipulation">Dashboard</span>
+    <span onclick="staffLogout()" style="color:#e05a5a;font-size:13px;cursor:pointer;touch-action:manipulation">Logout</span>
+  </div>
+</div>
+
+
+<!-- Exclusive banner -->
+<div class="excl-banner">
+  🏈 <span>EXCLUSIVE LICENSE</span> — This platform is authorized for use by one Power 4 football program only. Unauthorized access or distribution is prohibited.
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo" onclick="showPage('home')">GRIDIRON PROFILE</div>
+  <div class="nav-links">
+    <a onclick="showPage('home')" id="nav-home" class="act">Home</a>
+    <a onclick="openAssessment()">Take Assessment</a>
+  </div>
+  <button class="nav-cta" onclick="openStaffModal()" style="background:var(--surface2);border:1px solid var(--border2);color:var(--text2);font-weight:600;font-size:13px;touch-action:manipulation">STAFF LOGIN</button>
+</nav>
+
+<!-- ═══ HOME PAGE ═══ -->
+<div class="page active" id="page-home">
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-left">
+        <div class="hero-tag">Exclusively Licensed · Power 4 Football</div>
+        <h1>KNOW EVERY<br><span class="o">ATHLETE'S</span><br><span class="m">WIRING.</span></h1>
+        <p class="hero-sub">Answer honestly. Take your time. This assessment helps your coaches understand how to develop and support you — there are no right or wrong answers.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="openAssessment()">TAKE THE ASSESSMENT</button>
+          <button class="btn-outline" onclick="showPage('features')">Features & FAQ →</button>
+        </div>
+        <div class="excl-note">This platform is not available to any other program. Your data stays yours.</div>
+      </div>
+      <div class="hero-right">
+        <div class="playbook-bubble">
+          <strong>⚡ PLAYBOOK AI</strong>
+          Marcus replays mistakes in silence. Low Stability + High C = he needs structured reset rituals, not open-ended recovery time.
+        </div>
+        <div class="profile-card">
+          <div class="card-header">
+            <div class="avatar">MJ</div>
+            <div><div class="card-name">Marcus Johnson</div><div class="card-pos">Quarterback · Junior</div></div>
+            <div class="archetype-badge">ASSESSOR</div>
+          </div>
+          <div class="disc-row">
+            <div class="disc-box"><div class="disc-letter d-col">D</div><div class="disc-val">72</div></div>
+            <div class="disc-box"><div class="disc-letter i-col">I</div><div class="disc-val">38</div></div>
+            <div class="disc-box"><div class="disc-letter s-col">S</div><div class="disc-val">55</div></div>
+            <div class="disc-box"><div class="disc-letter c-col">C</div><div class="disc-val">88</div></div>
+          </div>
+          <div class="focus-list">
+            <div class="focus-item"><span>Flexibility</span><div class="focus-bar"><div class="focus-fill" style="width:78%"></div></div><span class="focus-pct">78</span></div>
+            <div class="focus-item"><span>Organization</span><div class="focus-bar"><div class="focus-fill" style="width:81%"></div></div><span class="focus-pct">81</span></div>
+            <div class="focus-item"><span>Communication</span><div class="focus-bar"><div class="focus-fill" style="width:43%"></div></div><span class="focus-pct">43</span></div>
+            <div class="focus-item"><span>Understanding</span><div class="focus-bar"><div class="focus-fill" style="width:35%"></div></div><span class="focus-pct">35</span></div>
+            <div class="focus-item"><span>Stability</span><div class="focus-bar"><div class="focus-fill" style="width:25%"></div></div><span class="focus-pct">25</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOGOS -->
+<div class="logos-section">
+  <div class="container">
+    <div class="logos-label">Built for programs competing at the highest level</div>
+    <div class="logos-row">
+      <span>BIG TEN</span><span>SEC</span><span>ACC</span><span>BIG 12</span><span>PAC 12</span><span>NOTRE DAME</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ── PROGRAM CORE VALUES ── -->
+<section style="padding:70px 2rem;background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="label">Program Identity</div>
+    <h2>YOUR FOUR<br><span style="color:var(--orange)">CORE VALUES</span></h2>
+    <p style="max-width:540px;margin-top:.75rem;font-size:16px">Every assessment is calibrated against these four pillars. Athletes receive a fit score for each value — giving coaches program-specific culture intelligence on every profile.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.5rem">
+      <div style="background:var(--surface2);border:1px solid rgba(184,45,66,0.3);border-radius:var(--r-lg);padding:1.5rem;position:relative;overflow:hidden;border-top:3px solid var(--maroon-bright)">
+        <div style="font-size:28px;margin-bottom:.75rem">🔆</div>
+        <h3 style="font-size:16px;margin-bottom:.4rem">Positive Attitude</h3>
+        <p style="font-size:13px">Adversity response, coachability, and emotional reset speed. Scored via Stability domain plus dedicated attitude scenarios.</p>
+      </div>
+      <div style="background:var(--surface2);border:1px solid rgba(184,45,66,0.3);border-radius:var(--r-lg);padding:1.5rem;position:relative;overflow:hidden;border-top:3px solid var(--orange)">
+        <div style="font-size:28px;margin-bottom:.75rem">⚙️</div>
+        <h3 style="font-size:16px;margin-bottom:.4rem">Elite Work Ethic</h3>
+        <p style="font-size:13px">Self-directed preparation and consistent effort without external accountability. Scored via Organization domain plus work ethic scenarios.</p>
+      </div>
+      <div style="background:var(--surface2);border:1px solid rgba(184,45,66,0.3);border-radius:var(--r-lg);padding:1.5rem;position:relative;overflow:hidden;border-top:3px solid var(--maroon-bright)">
+        <div style="font-size:28px;margin-bottom:.75rem">🤝</div>
+        <h3 style="font-size:16px;margin-bottom:.4rem">Be Willing to Sacrifice</h3>
+        <p style="font-size:13px">Team-first orientation over individual glory. Scored via Understanding domain, Steadiness score, and sacrifice-specific questions.</p>
+      </div>
+      <div style="background:var(--surface2);border:1px solid rgba(184,45,66,0.3);border-radius:var(--r-lg);padding:1.5rem;position:relative;overflow:hidden;border-top:3px solid var(--orange)">
+        <div style="font-size:28px;margin-bottom:.75rem">🔥</div>
+        <h3 style="font-size:16px;margin-bottom:.4rem">Compete in Everything</h3>
+        <p style="font-size:13px">Competitive intensity across all contexts — not just games. Scored via Dominance, competitive drive scenarios, and pressure response.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section id="how">
+  <div class="container">
+    <div class="label">Process</div>
+    <h2>FROM INVITE TO<br>INSIGHT IN 15 MINUTES</h2>
+    <div class="steps">
+      <div class="step" data-n="01"><div class="step-icon">📧</div><h3>Send the Link</h3><p>Share the secure URL with any recruit, transfer, or current athlete. No accounts or app downloads needed.</p></div>
+      <div class="step" data-n="02"><div class="step-icon">📋</div><h3>3 Assessments</h3><p>DISC behavior, Focus domains, and Core Values — all forced-choice to minimize gaming. Takes 12–18 minutes.</p></div>
+      <div class="step" data-n="03"><div class="step-icon">📊</div><h3>Full Profile Generated</h3><p>DISC scores, Focus domains, archetype, core values, staff flags, and behavioral trait maps — instantly.</p></div>
+      <div class="step" data-n="04"><div class="step-icon">🤖</div><h3>Playbook AI</h3><p>Ask any question about any athlete's profile in plain language. Get answers grounded in their actual behavioral data.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ASSESSMENTS EXPLAINED -->
+<section id="assessments" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="label">The Science</div>
+    <h2>THREE ASSESSMENTS.<br>ONE COMPLETE PICTURE.</h2>
+    <p style="max-width:560px;margin-top:.75rem;font-size:16px">Every athlete profile is built from three validated behavioral instruments, triangulated to give coaches actionable insight — not just scores.</p>
+    <div class="assess-grid">
+      <div class="assess-card"><div class="assess-num">01</div><div class="assess-tag">DISC</div><h3>Behavioral Style</h3><p style="font-size:14px;margin-top:.5rem">Measures how an athlete naturally acts, makes decisions, and interacts under pressure. The foundation of every profile.</p><div class="assess-dims"><div class="dim-row"><div class="dim-dot" style="background:#e05a5a"></div><strong>Dominance</strong><span>— Direct, decisive, takes charge</span></div><div class="dim-row"><div class="dim-dot" style="background:var(--orange)"></div><strong>Influence</strong><span>— Outgoing, persuasive, energizing</span></div><div class="dim-row"><div class="dim-dot" style="background:#5aaa7a"></div><strong>Steadiness</strong><span>— Loyal, patient, consistent</span></div><div class="dim-row"><div class="dim-dot" style="background:#5a8fe0"></div><strong>Correctness</strong><span>— Analytical, precise, detail-focused</span></div></div></div>
+      <div class="assess-card"><div class="assess-num">02</div><div class="assess-tag">FOCUS</div><h3>Cognitive Domains</h3><p style="font-size:14px;margin-top:.5rem">Five domains that reveal how an athlete processes information, handles change, communicates, and manages stress.</p><div class="assess-dims"><div class="dim-row"><div class="dim-dot" style="background:var(--orange)"></div><strong>Flexibility</strong><span>— Adapts to new schemes</span></div><div class="dim-row"><div class="dim-dot" style="background:var(--orange)"></div><strong>Organization</strong><span>— Structure and execution</span></div><div class="dim-row"><div class="dim-dot" style="background:var(--orange)"></div><strong>Communication</strong><span>— Clarity and frequency</span></div><div class="dim-row"><div class="dim-dot" style="background:var(--orange)"></div><strong>Understanding</strong><span>— Empathy and team attunement</span></div><div class="dim-row"><div class="dim-dot" style="background:var(--orange)"></div><strong>Stability</strong><span>— Emotional resilience</span></div></div></div>
+      <div class="assess-card"><div class="assess-num">03</div><div class="assess-tag">PROGRAM VALUES</div><h3>Program Culture Fit</h3><p style="font-size:14px;margin-top:.5rem">8 questions scored directly against your four core values: Positive Attitude, Elite Work Ethic, Be Willing to Sacrifice, and Compete in Everything.</p><div class="assess-dims"><div class="dim-row"><div class="dim-dot" style="background:#a855f7"></div><strong>Advancement</strong><span>— Growth, progress, trajectory</span></div><div class="dim-row"><div class="dim-dot" style="background:#a855f7"></div><strong>Freedom</strong><span>— Autonomy and self-direction</span></div><div class="dim-row"><div class="dim-dot" style="background:#a855f7"></div><strong>Integrity</strong><span>— Principles and consistency</span></div><div class="dim-row"><div class="dim-dot" style="background:#a855f7"></div><strong>Recognition</strong><span>— Respect and visibility</span></div><div class="dim-row"><div class="dim-dot" style="background:#a855f7"></div><strong>Winning</strong><span>— Outcomes above all</span></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ARCHETYPES -->
+<section id="archetypes">
+  <div class="container">
+    <div class="label">Archetypes</div>
+    <h2>12 ATHLETE<br>ARCHETYPES</h2>
+    <p style="max-width:520px;margin-top:.75rem;font-size:16px">Each profile resolves to one of 12 behavioral archetypes — a shorthand for coaches to instantly understand how to lead, motivate, and develop each athlete.</p>
+    <div class="arch-grid">
+      <div class="arch-card"><div class="arch-icon">🎯</div><h3>The Assessor</h3><p>Analytical and precise. Needs data before action. Excellent at film study. Slow to trust but deeply loyal.</p><div class="arch-disc"><span style="background:rgba(90,143,224,0.15);color:#5a8fe0">C</span><span style="background:rgba(224,90,90,0.12);color:#e05a5a">D</span></div></div>
+      <div class="arch-card"><div class="arch-icon">⚡</div><h3>The Driver</h3><p>Results-first, high urgency. Dominant and decisive. Hates inefficiency. Can bulldoze teammates under pressure.</p><div class="arch-disc"><span style="background:rgba(224,90,90,0.12);color:#e05a5a">D</span></div></div>
+      <div class="arch-card"><div class="arch-icon">🔥</div><h3>The Catalyst</h3><p>High energy, people-driven. Naturally inspiring. Can lose focus when not stimulated. Needs variety and visibility.</p><div class="arch-disc"><span style="background:rgba(224,96,32,0.15);color:var(--orange)">I</span><span style="background:rgba(224,90,90,0.12);color:#e05a5a">D</span></div></div>
+      <div class="arch-card"><div class="arch-icon">🤝</div><h3>The Anchor</h3><p>Steady, dependable, team-first. The glue of the locker room. Avoids conflict. Needs security and clear expectations.</p><div class="arch-disc"><span style="background:rgba(90,170,122,0.12);color:#5aaa7a">S</span></div></div>
+      <div class="arch-card"><div class="arch-icon">🧠</div><h3>The Strategist</h3><p>Big-picture thinker. Connects concepts quickly. Can overthink. Thrives with autonomy and complex challenges.</p><div class="arch-disc"><span style="background:rgba(224,90,90,0.12);color:#e05a5a">D</span><span style="background:rgba(90,143,224,0.15);color:#5a8fe0">C</span></div></div>
+      <div class="arch-card"><div class="arch-icon">🌟</div><h3>The Ambassador</h3><p>Warm, influential, communicative. Builds bridges between coaches and players. Can struggle with hard accountability.</p><div class="arch-disc"><span style="background:rgba(224,96,32,0.15);color:var(--orange)">I</span><span style="background:rgba(90,170,122,0.12);color:#5aaa7a">S</span></div></div>
+      <div class="arch-card"><div class="arch-icon">🏗️</div><h3>The Builder</h3><p>Systematic and thorough. Masters craft through repetition. Resistant to change. Exceptional in structured systems.</p><div class="arch-disc"><span style="background:rgba(90,170,122,0.12);color:#5aaa7a">S</span><span style="background:rgba(90,143,224,0.15);color:#5a8fe0">C</span></div></div>
+      <div class="arch-card"><div class="arch-icon">💥</div><h3>The Competitor</h3><p>Intense, ego-driven in the best sense. Thrives in rivalry and high stakes. Can create friction if unchecked.</p><div class="arch-disc"><span style="background:rgba(224,90,90,0.12);color:#e05a5a">D</span><span style="background:rgba(224,96,32,0.15);color:var(--orange)">I</span></div></div>
+      <div class="arch-card"><div class="arch-icon">🔬</div><h3>The Analyst</h3><p>Detail-oriented, quiet, thorough. Prefers 1-on-1 feedback. Processes before speaking. Exceptional at execution.</p><div class="arch-disc"><span style="background:rgba(90,143,224,0.15);color:#5a8fe0">C</span></div></div>
+      <div class="arch-card"><div class="arch-icon">🎙️</div><h3>The Advocate</h3><p>Purpose-driven and empathetic. Fights for teammates. Can be sensitive to criticism. Motivates through meaning.</p><div class="arch-disc"><span style="background:rgba(224,96,32,0.15);color:var(--orange)">I</span><span style="background:rgba(90,170,122,0.12);color:#5aaa7a">S</span></div></div>
+      <div class="arch-card"><div class="arch-icon">👑</div><h3>The Commander</h3><p>Natural captain energy. Commands respect instantly. Needs to be heard. Friction arises if overlooked or benched.</p><div class="arch-disc"><span style="background:rgba(224,90,90,0.12);color:#e05a5a">D</span><span style="background:rgba(224,96,32,0.15);color:var(--orange)">I</span><span style="background:rgba(90,143,224,0.15);color:#5a8fe0">C</span></div></div>
+      <div class="arch-card"><div class="arch-icon">🎲</div><h3>The Adapter</h3><p>Chameleon-like, highly flexible. Thrives in ambiguity. Can lack clear identity in high-structure systems.</p><div class="arch-disc"><span style="background:rgba(90,170,122,0.12);color:#5aaa7a">S</span><span style="background:rgba(224,96,32,0.15);color:var(--orange)">I</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PLAYBOOK AI DEMO -->
+<section style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="label">Playbook AI</div>
+    <h2>ASK ANYTHING.<br>GET ANSWERS GROUNDED<br>IN REAL DATA.</h2>
+    <p style="max-width:520px;margin-top:.75rem;font-size:16px;margin-bottom:0">Stop guessing. Ask Playbook AI about any athlete and get coaching guidance backed by their actual behavioral profile.</p>
+    <div class="playbook-demo">
+      <div class="playbook-header">
+        <div class="dot" style="background:#e05a5a"></div><div class="dot" style="background:var(--orange)"></div><div class="dot" style="background:#5aaa7a"></div>
+        <span class="playbook-title">Playbook AI — Your Program Intelligence</span>
+      </div>
+      <div class="playbook-body">
+        <div class="playbook-left">
+          <div class="chat-msg coach"><div class="chat-from">Head Coach</div><div class="chat-bubble">How do I help DeShawn recover mentally after he fumbled twice in the rivalry game?</div></div>
+          <div class="chat-msg ai"><div class="chat-from">Playbook AI</div><div class="chat-bubble">DeShawn's Low Stability (22) means he's still replaying those fumbles on loop. His High C (84) makes him hypercritical of himself. Don't say "forget it." Give him a structured reset: watch film together, identify the technical breakdown, then close the loop with a forward plan for Sunday's walkthrough.</div></div>
+          <div class="chat-msg coach"><div class="chat-from">Head Coach</div><div class="chat-bubble">Will he be ready to start Saturday?</div></div>
+          <div class="chat-msg ai"><div class="chat-from">Playbook AI</div><div class="chat-bubble">His High D (78) and top value of Advancement mean he wants to compete — the risk isn't willingness, it's overthinking under pressure. Get him extra reps in Thursday's practice. High repetitions + mastery = confidence restoration for his archetype.</div></div>
+        </div>
+        <div class="playbook-right">
+          <div style="font-size:11px;font-weight:600;letter-spacing:1.5px;color:var(--text3);text-transform:uppercase;margin-bottom:1rem">Live Insights — DeShawn Williams</div>
+          <div class="insight-list">
+            <div class="insight-row"><div class="insight-icon">🚨</div><div class="insight-text"><strong>Low Stability (22)</strong> — Needs structured recovery, not passive time.</div></div>
+            <div class="insight-row"><div class="insight-icon">🎯</div><div class="insight-text"><strong>High Correctness (84)</strong> — Film + technical fix restores confidence.</div></div>
+            <div class="insight-row"><div class="insight-icon">🔥</div><div class="insight-text"><strong>Top Value: Advancement</strong> — Forward focus, not dwelling in failure.</div></div>
+            <div class="insight-row"><div class="insight-icon">💪</div><div class="insight-text"><strong>High Dominance (78)</strong> — Will to compete is not the issue.</div></div>
+            <div class="insight-row"><div class="insight-icon">📋</div><div class="insight-text"><strong>Communication (38)</strong> — Won't self-report. Coach must initiate 1-on-1.</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <div class="label">Get Started</div>
+    <h2>KNOW YOUR ROSTER<br>BEFORE THEY STEP<br>ON THE FIELD.</h2>
+    <p style="max-width:500px;margin:0 auto 2rem;font-size:17px">Your exclusive platform. Your data. Your competitive edge.</p>
+    <div class="cta-cards">
+      <div class="cta-card"><h4>⏱ 15-Minute Assessment</h4><p>Three validated behavioral instruments. Forced-choice format designed to resist gaming.</p></div>
+      <div class="cta-card"><h4>📊 Instant Full Profile</h4><p>DISC, Focus, Core Values, archetype, behavioral traits, and staff flags — generated automatically.</p></div>
+      <div class="cta-card"><h4>🤖 AI Coaching Guidance</h4><p>Ask Playbook AI anything about any athlete. Answers grounded in their actual behavioral data.</p></div>
+    </div>
+    <button class="btn-primary" style="font-size:16px;padding:16px 40px" onclick="openAssessment()">START AN ASSESSMENT NOW</button>
+  </div>
+</section>
+
+<footer>
+  <p><strong>GRIDIRON PROFILE</strong> — Behavioral Intelligence for Elite Football Programs</p>
+  <p style="margin-top:4px">Powered by DISC + Focus + Core Values · Position-calibrated scoring</p>
+  <p class="footer-excl">⚠ Exclusive Single-Program License — Unauthorized Distribution Prohibited</p>
+</footer>
+
+</div><!-- /page-home -->
+
+
+<!-- ═══════════════════════════════════════════════════
+     FEATURES & FAQ PAGE
+═══════════════════════════════════════════════════ -->
+<div class="page" id="page-features">
+
+<!-- Features Hero -->
+<div class="features-hero">
+  <div class="container">
+    <div class="label">Features & Accuracy</div>
+    <h1>BUILT FOR<br><span style="color:var(--orange)">REAL</span><br>DECISIONS.</h1>
+    <p>Every feature is designed around one question: what do coaches actually need to make better decisions about their athletes? Here's how Gridiron Profile delivers — and why it works.</p>
+  </div>
+</div>
+
+<!-- Accuracy Stats -->
+<div class="accuracy-section">
+  <div class="container">
+    <div class="label">Why It Works</div>
+    <h2>THE NUMBERS<br>BEHIND THE SCIENCE</h2>
+    <div class="stat-grid">
+      <div class="stat-card"><div class="stat-num">3</div><div class="stat-label">Validated behavioral instruments triangulated into one profile</div></div>
+      <div class="stat-card"><div class="stat-num">45+</div><div class="stat-label">Behavioral data points captured per athlete assessment</div></div>
+      <div class="stat-card"><div class="stat-num">12</div><div class="stat-label">Football-specific archetypes mapped to coaching strategies</div></div>
+      <div class="stat-card"><div class="stat-num">15<span style="font-size:28px">min</span></div><div class="stat-label">Average completion time — mobile-friendly, no friction</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- Feature Cards -->
+<section>
+  <div class="container">
+    <div class="label">Platform Features</div>
+    <h2>EVERYTHING YOUR<br>STAFF NEEDS.</h2>
+    <div class="feat-grid">
+
+      <div class="feat-card highlight">
+        <div class="feat-icon">🧬</div>
+        <h3>DISC Behavioral Profiling</h3>
+        <p>The DISC model is one of the most widely validated behavioral frameworks in sports and organizational psychology, used by professional teams and Fortune 500 companies. It measures four core dimensions — Dominance, Influence, Steadiness, Correctness — and maps directly to how an athlete performs, communicates, and leads under pressure.</p>
+        <div class="feat-list">
+          <div class="feat-li">Identifies dominant behavioral style across 4 dimensions</div>
+          <div class="feat-li">Surfaces each athlete's dominant fear — the root of avoidance and stress behavior</div>
+          <div class="feat-li">Position-weighted scoring calibrates results by role (QB scores differently than OL)</div>
+          <div class="feat-li">Forced-choice question format minimizes social desirability bias</div>
+        </div>
+      </div>
+
+      <div class="feat-card highlight">
+        <div class="feat-icon">🧠</div>
+        <h3>Focus Domain Assessment</h3>
+        <p>Five cognitive and interpersonal domains specifically relevant to football performance: Flexibility (scheme adaptation), Organization (preparation quality), Communication (in-game clarity), Understanding (team attunement), and Stability (pressure response). Each scored 0–100 with sub-facet granularity.</p>
+        <div class="feat-list">
+          <div class="feat-li">Predicts scheme installation speed and adaptability to new coordinators</div>
+          <div class="feat-li">Stability score is a direct predictor of bounce-back ability after turnovers or injuries</div>
+          <div class="feat-li">Communication score flags athletes who won't self-report issues — a retention risk</div>
+          <div class="feat-li">Understanding score identifies natural locker room leaders and team culture anchors</div>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">❤️‍🔥</div>
+        <h3>Core Values Ranking</h3>
+        <p>Reveals the 8 internal motivators that drive an athlete's daily effort, loyalty decisions, and response to adversity. Understanding what an athlete truly values is the difference between motivation that sticks and motivation that fades after two weeks.</p>
+        <div class="feat-list">
+          <div class="feat-li">Ranked output shows primary vs secondary motivational drivers</div>
+          <div class="feat-li">Advancement-first athletes are driven by draft positioning and depth chart movement</div>
+          <div class="feat-li">Loyalty/Family-first athletes run through walls for coaches they trust personally</div>
+          <div class="feat-li">Mismatched values = transfer risk — identify it before you lose the player</div>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">⚡</div>
+        <h3>Playbook AI — Coaching Intelligence</h3>
+        <p>Ask any question about any athlete in plain English and receive coaching guidance grounded in their actual behavioral profile — not generic advice. Powered by 45+ data points per athlete and a football-specific knowledge base.</p>
+        <div class="feat-list">
+          <div class="feat-li">"How do I motivate [athlete] after a bad week of practice?"</div>
+          <div class="feat-li">"Will [athlete] handle the pressure of a rivalry game?"</div>
+          <div class="feat-li">"Is [athlete] a good fit for a leadership role this season?"</div>
+          <div class="feat-li">"How should I deliver feedback to [athlete] after a mistake?"</div>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">🚩</div>
+        <h3>Automated Staff Flags</h3>
+        <p>Every profile generates color-coded flags (green / amber / red) for immediate staff visibility. No reading required — critical coaching cues surface automatically so nothing falls through the cracks.</p>
+        <div class="feat-list">
+          <div class="feat-li">🟢 Green: strengths and program assets to leverage immediately</div>
+          <div class="feat-li">🟡 Amber: areas requiring monitoring or structured development</div>
+          <div class="feat-li">🔴 Red: high-priority flags for coaches and support staff to address</div>
+          <div class="feat-li">Flags include off-field risk, communication gaps, and pressure-response concerns</div>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">🏈</div>
+        <h3>Transfer Portal Intelligence</h3>
+        <p>Use the assessment as part of your transfer portal evaluation process. Send the link to any portal prospect — takes 15 minutes, no setup required. Know their behavioral wiring before they set foot on campus.</p>
+        <div class="feat-list">
+          <div class="feat-li">Predict locker room culture fit before the visit</div>
+          <div class="feat-li">Identify scheme installation risk for complex defensive or offensive systems</div>
+          <div class="feat-li">Assess retention risk based on values alignment with your program</div>
+          <div class="feat-li">Compare portal prospects side-by-side on behavioral dimensions</div>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">📋</div>
+        <h3>Behavioral Trait Maps</h3>
+        <p>Each profile includes a complete behavioral trait breakdown: natural strengths, development areas, and under-stress behaviors — all specific to the athlete's archetype. Coaches get a one-page reference guide for every player on the roster.</p>
+        <div class="feat-list">
+          <div class="feat-li">Strengths to leverage in specific in-game and practice scenarios</div>
+          <div class="feat-li">Development areas with concrete coaching approaches</div>
+          <div class="feat-li">Under-stress behaviors help staff recognize early warning signs before breakdown</div>
+        </div>
+      </div>
+
+      <div class="feat-card">
+        <div class="feat-icon">🔐</div>
+        <h3>Exclusive Single-Program License</h3>
+        <p>This platform is not a SaaS product with hundreds of subscribers. It is licensed exclusively to your program. No competitor can access your assessment format, your scoring model, or your roster data.</p>
+        <div class="feat-list">
+          <div class="feat-li">Access-code protected — staff-only entry</div>
+          <div class="feat-li">No other program uses this exact assessment or sees your data</div>
+          <div class="feat-li">Your behavioral intelligence is a proprietary competitive advantage</div>
+          <div class="feat-li">Can be customized further with your program's specific terminology and culture</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Comparison Table -->
+<div class="comparison-section" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div class="label">Comparison</div>
+    <h2>HOW WE STACK UP<br>AGAINST ALTERNATIVES</h2>
+    <div class="comp-wrapper"><table class="comparison-table">
+      <thead>
+        <tr>
+          <th style="width:30%">Feature</th>
+          <th class="us" style="width:23%">⚡ Gridiron Profile</th>
+          <th style="width:23%">Generic DISC Tools</th>
+          <th style="width:24%">Gut Feel / Film Only</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="feature">Football-specific question framing</td><td class="us"><span class="check">✓</span> All questions use football scenarios</td><td><span class="cross">✗</span> Corporate/generic language</td><td><span class="cross">✗</span> No structured data</td></tr>
+        <tr><td class="feature">Position-calibrated scoring</td><td class="us"><span class="check">✓</span> QB vs OL vs DB weighted differently</td><td><span class="cross">✗</span> Same score for every role</td><td><span class="cross">✗</span> Subjective bias</td></tr>
+        <tr><td class="feature">Pressure response measurement</td><td class="us"><span class="check">✓</span> Stability domain (0–100)</td><td>Partial — generic stress indicators</td><td>Partial — based on film</td></tr>
+        <tr><td class="feature">Motivational driver ranking</td><td class="us"><span class="check">✓</span> 8 values ranked in priority order</td><td>Some tools include</td><td><span class="cross">✗</span> Unknown without conversation</td></tr>
+        <tr><td class="feature">Automated coaching flags</td><td class="us"><span class="check">✓</span> Green / amber / red per profile</td><td><span class="cross">✗</span> Raw scores only</td><td><span class="cross">✗</span> None</td></tr>
+        <tr><td class="feature">AI coaching guidance</td><td class="us"><span class="check">✓</span> Playbook AI — natural language Q&A</td><td><span class="cross">✗</span> Static PDF report</td><td><span class="cross">✗</span> None</td></tr>
+        <tr><td class="feature">Transfer portal use case</td><td class="us"><span class="check">✓</span> Shareable link, no setup needed</td><td>Requires account creation</td><td><span class="cross">✗</span> No scalable solution</td></tr>
+        <tr><td class="feature">Exclusive program access</td><td class="us"><span class="check">✓</span> Single-program license</td><td><span class="cross">✗</span> Same tool used by competitors</td><td>N/A</td></tr>
+        <tr><td class="feature">Gaming resistance</td><td class="us"><span class="check">✓</span> Forced-choice scenarios, not transparent scales</td><td>Low — athletes can guess right answers</td><td>Low — athletes perform for coaches</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Exclusive Section -->
+<div class="exclusive-section">
+  <div class="container">
+    <div class="label">Exclusivity</div>
+    <h2>YOUR EDGE.<br>NO ONE ELSE<br>HAS THIS.</h2>
+    <div class="exclusive-grid">
+      <div class="exclusive-points">
+        <div class="excl-point">
+          <div class="excl-point-icon">🔒</div>
+          <div class="excl-point-text">
+            <h4>Single-Program License</h4>
+            <p>This exact platform — the question bank, the scoring model, the archetype map, the Playbook AI prompts — is licensed exclusively to your program. No other coaching staff in the country is running this system.</p>
+          </div>
+        </div>
+        <div class="excl-point">
+          <div class="excl-point-icon">🛡️</div>
+          <div class="excl-point-text">
+            <h4>Your Data Is Yours</h4>
+            <p>Athlete profiles, behavioral scores, and assessment responses belong to your program. No aggregated data sharing, no benchmarking against other programs, no third-party access.</p>
+          </div>
+        </div>
+        <div class="excl-point">
+          <div class="excl-point-icon">🏆</div>
+          <div class="excl-point-text">
+            <h4>Proprietary Competitive Advantage</h4>
+            <p>When you understand your athletes' behavioral wiring and your opponents don't, you make better decisions in recruiting, development, and in-game management. That's a structural edge that compounds over time.</p>
+          </div>
+        </div>
+        <div class="excl-point">
+          <div class="excl-point-icon">🔧</div>
+          <div class="excl-point-text">
+            <h4>Customizable to Your Culture</h4>
+            <p>The platform can be updated to reflect your program's specific terminology, culture values, positional language, and coaching philosophy — so profiles speak the language your staff already uses.</p>
+          </div>
+        </div>
+      </div>
+      <div class="excl-visual">
+        <div class="nda-badge">
+          <h4>⚠ CONFIDENTIAL — PROGRAM USE ONLY</h4>
+          <p>This platform, its assessment methodology, scoring algorithms, and athlete data are proprietary and restricted to authorized program staff. Sharing access credentials or assessment results with outside parties is prohibited.</p>
+        </div>
+        <div style="font-size:11px;color:var(--text3);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px">Recent Platform Activity</div>
+        <div class="access-log">
+          <div class="log-row"><div class="log-dot" style="background:var(--orange)"></div><span>Assessment completed — WR, Junior</span><span class="log-time">2h ago</span></div>
+          <div class="log-row"><div class="log-dot" style="background:var(--orange)"></div><span>Profile viewed — Recruiting staff</span><span class="log-time">4h ago</span></div>
+          <div class="log-row"><div class="log-dot" style="background:#5aaa7a"></div><span>Assessment completed — DB, Transfer</span><span class="log-time">Yesterday</span></div>
+          <div class="log-row"><div class="log-dot" style="background:#5aaa7a"></div><span>Playbook AI query — Position coach</span><span class="log-time">Yesterday</span></div>
+          <div class="log-row"><div class="log-dot" style="background:var(--orange)"></div><span>Assessment completed — OL, Recruit</span><span class="log-time">2 days ago</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ -->
+<div class="faq-section">
+  <div class="container">
+    <div class="label">Coach FAQ</div>
+    <h2>QUESTIONS<br>COACHES ASK.</h2>
+    <p style="margin-top:.75rem;font-size:16px;max-width:560px">Every question your staff has asked — answered honestly.</p>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How accurate is this, really? Can't athletes just say what they think we want to hear?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>This is the most important question. Standard self-report surveys are easily gamed — athletes answer to look coachable. Gridiron Profile uses a <strong>forced-choice scenario format</strong>, meaning athletes must choose between options that all appear socially acceptable. There's no obvious "right" answer. This is the same methodology used in professional sports and military officer selection because it's far more resistant to impression management than scale-based surveys.</p><p>That said, no behavioral assessment is a lie detector. The most accurate results come when athletes are told honestly: <em>"This helps us coach you better. There are no wrong answers. Trying to game it just gives us bad data and worse coaching."</em> Framing matters. When athletes trust the purpose, the data is significantly more reliable.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How is this different from the Wonderlic or other football tests?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>The Wonderlic measures <strong>cognitive processing speed</strong> — essentially, how fast an athlete can solve problems under time pressure. It tells you nothing about how they respond to adversity, communicate with teammates, or stay motivated through a losing streak. It also has a documented racial bias in norms and has been largely abandoned by NFL teams as a primary evaluation tool.</p><p>Gridiron Profile measures <strong>behavioral style, emotional resilience, communication patterns, and motivational values</strong> — the things that predict locker room culture, transfer retention, and how an athlete responds when they're down 14 in the fourth quarter. These are orthogonal capabilities. A high-Wonderlic athlete can still be a locker room problem. A lower-Wonderlic athlete can be your most dependable cultural anchor.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Is there legal or compliance risk in using this for scholarship or roster decisions?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Behavioral assessments used as <strong>one input among many</strong> in athletic program decisions carry minimal legal risk, particularly when they measure voluntary behavioral tendencies rather than protected psychological conditions. This platform does not screen for mental health diagnoses, disabilities, or any characteristic protected under ADA or Title IX.</p><p>Best practice — which this platform is designed to support — is to use the results as a <strong>coaching and development tool, not a binary gate</strong>. The platform generates coaching guidance, not pass/fail scores. Scholarship decisions should always be multi-factor, with behavioral data informing development plans rather than overriding talent evaluations. When used this way, programs at the professional and collegiate level have used DISC-based tools for decades without legal challenge.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What does the DISC score actually tell me about an athlete on the field?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p><strong>High D (Dominance):</strong> This athlete makes fast, assertive decisions. Great for positions requiring split-second leadership — QB, MIKE linebacker, SS. Risk: may override play calls under pressure or create friction with authority.</p><p><strong>High I (Influence):</strong> People-driven, energizing presence. Natural hype captain. Can lose focus during repetitive installation or when the environment is low-energy. Needs visibility and social connection to stay engaged.</p><p><strong>High S (Steadiness):</strong> Consistent, dependable, process-oriented. The most reliable execution athlete on your roster. Struggles with rapid scheme changes or unclear roles. Needs stability and trust-based relationships with coaches.</p><p><strong>High C (Correctness):</strong> Detail-oriented, analytical, self-critical. Exceptional at film study and technical mastery. Under pressure, overthinks and becomes hypercritical of their own mistakes. Needs precise, evidence-based feedback — not vague encouragement.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How do we use this in the transfer portal specifically?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Send the assessment link to any transfer prospect as part of your standard intake process — before the official visit, during it, or after. The athlete completes it in 15 minutes on their phone. You receive a full profile immediately.</p><p>Key things to look for in portal evaluations: <strong>Flexibility score</strong> (predicts how fast they'll absorb your scheme), <strong>Stability score</strong> (how they'll handle the emotional disruption of transferring), <strong>Core Values alignment</strong> (does what drives them match what your program offers?), and <strong>Communication score</strong> (will they self-report problems or bottle things up?). A talented player who scores low on Flexibility and whose top value is Freedom coming into a highly structured system is a known risk — now you can see it before you sign.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Will our players actually take this seriously and answer honestly?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Compliance and honesty are highest when athletes understand the purpose and believe the results will be used for their benefit. <strong>Frame it as a development tool, not a screening tool.</strong> Tell them: "This helps your position coach understand how to communicate with you and develop you. The more honest you are, the better we can help you."</p><p>For incoming recruits or transfers, frame it as: "We use this to make sure you get the right coaching approach from day one — not a one-size-fits-all system." Athletes who've been in programs that ignored their individual needs respond very well to this framing. Consider having a trusted team leader vouch for the process — a respected veteran explaining how it helped their development goes further than any staff announcement.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How often should athletes retake the assessment?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Core behavioral style (DISC) is relatively stable over time — it reflects deeply ingrained tendencies that don't shift dramatically year to year. We recommend an initial assessment on entry, then a <strong>reassessment every 12–18 months</strong>, or after a significant life event (major injury, personal crisis, change in family circumstances).</p><p>Focus domain scores are more responsive to development and coaching — an athlete who works with a sports psychologist on mental resilience may show meaningful Stability score improvement in 6–9 months. <strong>Core Values tend to shift most during major life stage transitions</strong> — sophomore-to-junior year is often when "Recognition" drops and "Advancement" or "Security" rises as NFL consideration becomes real. Tracking these shifts is one of the most valuable long-term uses of the platform.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">What's the biggest mistake programs make when using behavioral tools?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Three patterns show up consistently. <strong>First: using it as a gate, not a guide.</strong> Eliminating a recruit because their Stability score is low misses the point — that score tells you what kind of support they need, not that they can't play. The best use is developing a coaching plan around the data, not screening people out.</p><p><strong>Second: reading the data without context.</strong> A High D athlete isn't "difficult" — they're decisive. A Low Communication athlete isn't "secretive" — they process internally. Every score needs to be interpreted through the lens of the role and the situation, not as a character judgment.</p><p><strong>Third: not sharing the data with the athlete.</strong> The biggest ROI comes when athletes see their own profile and understand themselves better. Self-awareness is coachable. An athlete who understands that their Low Stability means they ruminate over mistakes can work with a sports psychologist to build reset protocols. The data is most powerful when it's a shared language between coach and athlete, not just a staff-only report.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">Can we add our own questions or customize the assessment for our program?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Yes — this is one of the core advantages of an exclusive platform over an off-the-shelf SaaS tool. Custom questions can be added for program-specific priorities: academic accountability, NIL responsibilities, social media conduct, position-group specific scenarios, or any other behavioral dimension your staff wants to track. Custom questions appear as a fourth section of the assessment and their scores feed directly into updated staff flags and coaching action plans. Because this platform belongs to your program, the question bank evolves as your needs evolve.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span class="faq-q-text">How do we interpret results for a player we're considering cutting or redshirting?</span>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a"><p>Behavioral data should inform these conversations, not replace them. For a potential redshirt, the most relevant scores are <strong>Stability</strong> (will they handle the redshirt year emotionally without transferring?), <strong>Core Values</strong> (is long-term development a driver, or do they need immediate playing time to stay engaged?), and <strong>Flexibility</strong> (will they embrace an expanded role concept?).</p><p>For roster management decisions, the behavioral profile is most useful in the conversation itself. Knowing that an athlete's top value is Family/Loyalty means the conversation should start with relationship — acknowledge what they've contributed, make them feel seen — before delivering hard news. Knowing their top value is Advancement means you should lead with the opportunity framing: "A year of development positions you better for what comes next." The data makes difficult conversations more effective, not unnecessary.</p></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p><strong>GRIDIRON PROFILE</strong> — Behavioral Intelligence for Elite Football Programs</p>
+  <p style="margin-top:4px">Powered by DISC + Focus + Core Values · Position-calibrated scoring</p>
+  <p class="footer-excl">⚠ Exclusive Single-Program License — Unauthorized Distribution Prohibited</p>
+</footer>
+
+</div><!-- /page-features -->
+</div><!-- /main-site -->
+
+
+<!-- ═══════════════════════════════════════════════════
+     ASSESSMENT OVERLAY
+═══════════════════════════════════════════════════ -->
+<div id="assessment-overlay">
+  <div class="assessment-wrap" id="assessment-inner"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════
+     RESULTS OVERLAY
+═══════════════════════════════════════════════════ -->
+<div id="results-overlay">
+  <div class="results-header">
+    <div class="results-logo">GRIDIRON PROFILE <span>EXCLUSIVE</span></div>
+    <button class="close-btn" onclick="closeResults()" style="font-size:16px">✕ Close</button>
+  </div>
+  <div class="results-body" id="results-inner"></div>
+</div>
+
+
+<script>
+// ─── ACCESS GATE ──────────────────────────────────────────────
+// Access code: GRIDIRON2025 (change this to any code you want)
+const ACCESS_CODE = 'HOKIES2025';
+
+let _staffLoggedIn = false;
+
+function openStaffModal() {
+  const m = document.getElementById('staff-modal');
+  m.style.display = 'flex';
+  setTimeout(() => { const inp = document.getElementById('staff-code-input'); if(inp) inp.focus(); }, 150);
+}
+function closeStaffModal() {
+  document.getElementById('staff-modal').style.display = 'none';
+  const inp = document.getElementById('staff-code-input');
+  if(inp) inp.value = '';
+  document.getElementById('staff-code-err').style.display = 'none';
+}
+async function checkStaffCode() {
+  const val = document.getElementById('staff-code-input').value.trim().toUpperCase();
+  if (val === ACCESS_CODE) {
+    _CK = await deriveKey(val);
+    _staffLoggedIn = true;
+    closeStaffModal();
+    document.getElementById('staff-nav').style.display = 'flex';
+    document.querySelector('nav').style.display = 'none';
+    showToast('Staff access granted');
+    setTimeout(() => openSaved(), 400);
+  } else {
+    document.getElementById('staff-code-err').style.display = 'block';
+    const inp = document.getElementById('staff-code-input');
+    if(inp){ inp.style.borderColor = '#e05a5a'; setTimeout(()=>inp.style.borderColor='',1500); }
+  }
+}
+function staffLogout() {
+  _staffLoggedIn = false; _CK = null;
+  document.getElementById('staff-nav').style.display = 'none';
+  document.querySelector('nav').style.display = 'flex';
+  closeDashboard();
+  showToast('Logged out of staff access');
+}
+async function checkGate() { checkStaffCode(); }
+
+document.addEventListener('keydown',function(e){if(e.key==='Enter'){var m=document.getElementById('staff-modal');if(m&&m.style.display==='flex')checkStaffCode();}});
+});
+
+// ─── PAGE TABS ─────────────────────────────────────────────────
+function showPage(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + page).classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('nav-' + page)?.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── FAQ ───────────────────────────────────────────────────────
+function toggleFaq(btn) {
+  const item = btn.closest('.faq-item');
+  const wasOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  if (!wasOpen) item.classList.add('open');
+}
+
+// ─── ASSESSMENT DATA ───────────────────────────────────────────
+const sections = [
+  {id:'disc',label:'DISC — Behavioral Style',tag:'Section 1 of 3',
+   intro:'For each situation, choose the response that most honestly describes how you would actually react — not how you think you should. There are no right or wrong answers.',
+   questions:[
+    {id:'d1',type:'disc',prompt:'The night before a rivalry game, your coach calls a last-minute film session to install a new wrinkle. You:',
+     opts:[{t:'Cut to the key assignments — give me what I need to execute',dim:'D'},{t:'Get the guys fired up about it — this is what separates us',dim:'I'},{t:'Lock in, take notes, and trust the coaching staff completely',dim:'S'},{t:'Ask every clarifying question until I fully understand every responsibility',dim:'C'}]},
+    {id:'d2',type:'disc',prompt:'You fumble on third and short in the fourth quarter. Your team is still in it. Your next thought is:',
+     opts:[{t:'Flush it — I am already thinking about the next play',dim:'D'},{t:'Look to my teammates for energy and get right back with them',dim:'I'},{t:'Stay calm, trust my preparation, and execute the assignment',dim:'S'},{t:'Run through exactly what broke down mechanically so I can fix it',dim:'C'}]},
+    {id:'d3',type:'disc',prompt:'A freshman makes the same assignment mistake for the third straight practice. You:',
+     opts:[{t:'Call him out directly — he needs to hear it and get better',dim:'D'},{t:'Pull him aside with energy — explain it in a way that clicks for him',dim:'I'},{t:'Stay patient and help him through it quietly after practice',dim:'S'},{t:'Break down exactly where the mental error is and walk him through it step by step',dim:'C'}]},
+    {id:'d4',type:'disc',prompt:"Your coach tells you he is moving you to a different role in the scheme. Your honest first reaction:",
+     opts:[{t:'I want to understand why and make sure I have input on how it works',dim:'D'},{t:'I need to know the team still believes in me in this new spot',dim:'I'},{t:'I trust the staff — I will do whatever helps the team win',dim:'S'},{t:'I need to fully understand all the new assignments before I feel comfortable',dim:'C'}]},
+    {id:'d5',type:'disc',prompt:'It is the third week of two-a-days. The team is exhausted and morale is low. Your natural response:',
+     opts:[{t:'Push harder and set the standard through my own effort',dim:'D'},{t:'Get vocal and get guys competing — bring the energy back up',dim:'I'},{t:'Stay steady and consistent — keep working without adding noise',dim:'S'},{t:'Focus on getting my own technique right and let that speak for itself',dim:'C'}]},
+    {id:'d6',type:'disc',prompt:'After a tough loss, the locker room is quiet. What role do you naturally take?',
+     opts:[{t:'I address it directly — what happened and what we fix',dim:'D'},{t:'I try to keep the mood from going dark without dismissing the loss',dim:'I'},{t:'I sit with teammates who need someone there and say little',dim:'S'},{t:'I replay the film in my head to understand exactly where it went wrong',dim:'C'}]},
+   ]},
+  {id:'focus',label:'FOCUS — Cognitive Domains',tag:'Section 2 of 3',
+   intro:'Rate each statement 1 to 5. 1 = Strongly disagree, 5 = Strongly agree. Be honest — these help your coaches understand how to develop and support you.',
+   questions:[
+    {id:'f1',type:'scale',domain:'flexibility',prompt:'When we install a new scheme package mid-season, I get up to speed quickly without frustration.',sub:'1 = I struggle with changes / 5 = I absorb new concepts almost immediately'},
+    {id:'f2',type:'scale',domain:'flexibility',prompt:'If the game plan changes at halftime, I adapt my approach without it affecting my performance.',sub:'1 = Changes throw me off / 5 = I adjust and execute without missing a beat'},
+    {id:'f3',type:'scale',domain:'organization',prompt:'My preparation routine — film, weights, academics — runs on a system I manage myself without being told.',sub:'1 = I react to things as they come / 5 = I have structured systems I stick to on my own'},
+    {id:'f4',type:'scale',domain:'organization',prompt:'I rarely miss an assignment, miss a meeting, or let a preparation detail fall through the cracks.',sub:'1 = I miss details regularly / 5 = My execution and follow-through are highly reliable'},
+    {id:'f5',type:'scale',domain:'communication',prompt:'On the field I communicate constantly — protection calls, pre-snap adjustments, coverage alerts.',sub:'1 = I keep things to myself / 5 = I communicate proactively and clearly in all situations'},
+    {id:'f6',type:'scale',domain:'communication',prompt:'If something is wrong with my role or my situation, I bring it up through the right channel rather than bottling it.',sub:'1 = I stay quiet and deal with it / 5 = I address it directly and professionally'},
+    {id:'f7',type:'scale',domain:'understanding',prompt:'I notice when a teammate is struggling — emotionally or mentally — even when they say nothing.',sub:'1 = I rarely pick up on it / 5 = I am very attuned to the people around me'},
+    {id:'f8',type:'scale',domain:'understanding',prompt:'When a teammate makes a mistake, I try to understand their perspective before reacting.',sub:'1 = I focus on the mistake and outcome / 5 = I seek to understand first'},
+    {id:'f9',type:'scale',domain:'stability',prompt:'After a bad series — turnover, missed assignment, costly penalty — I re-focus mentally within one or two plays.',sub:'1 = I carry mistakes for a long time / 5 = I am mentally reset almost immediately'},
+    {id:'f10',type:'scale',domain:'stability',prompt:'High-pressure environments — rivalry game, playoffs, scouts watching — tend to bring out my best football.',sub:'1 = I tighten up and perform below my level / 5 = My game elevates when the stakes are highest'},
+   ]},
+  {id:'values',label:'Program Values — Culture Fit',tag:'Section 3 of 3',
+   intro:"Rate how honestly each statement describes you. These questions are tied directly to our four program core values. 1 = Not like me at all, 5 = This is exactly who I am.",
+   questions:[
+    {id:'pv1',type:'scale',group:'attitude',
+     prompt:'After a bad game — mistakes, bad decisions, poor execution — I come back to practice the next week with the same energy and focus as if it never happened.',
+     sub:'Positive Attitude — Adversity response and mental reset'},
+    {id:'pv2',type:'scale',group:'attitude',
+     prompt:'When a coach criticizes my technique in front of the group, I receive it without shutting down, getting defensive, or carrying a grudge.',
+     sub:'Positive Attitude — Response to public correction and feedback'},
+    {id:'pv3',type:'scale',group:'workEthic',
+     prompt:'On days when there is no accountability — no coaches watching, no scheduled session — I still put in the work because I hold myself to a standard.',
+     sub:'Elite Work Ethic — Self-directed effort without external accountability'},
+    {id:'pv4',type:'scale',group:'workEthic',
+     prompt:'I treat film study, the weight room, and skill development with the same intensity I bring to actual games. There is no off switch.',
+     sub:'Elite Work Ethic — Consistent preparation intensity across all contexts'},
+    {id:'pv5',type:'scale',group:'sacrifice',
+     prompt:'If moving to a different position or accepting a reduced role makes the team better — I am genuinely okay with that, not just saying I am.',
+     sub:'Willing to Sacrifice — Role flexibility and genuine selflessness'},
+    {id:'pv6',type:'scale',group:'sacrifice',
+     prompt:'When I have a choice between doing what benefits me individually and doing what benefits the team, I choose the team without significant internal conflict.',
+     sub:'Willing to Sacrifice — Team-first decision making in real moments'},
+    {id:'pv7',type:'scale',group:'compete',
+     prompt:'I compete at full intensity in everything — drills, one-on-ones, the weight room, film sessions. There is no context where I am just going through the motions.',
+     sub:'Compete in Everything — Daily competitive intensity across all settings'},
+    {id:'pv8',type:'scale',group:'compete',
+     prompt:'Losing in any context — a drill, a lift, a sprint — genuinely bothers me. I do not accept it, I remember it, and I use it as fuel.',
+     sub:'Compete in Everything — Competitive drive and response to losing'},
+   ]}
+];
+
+// ─── STATE ─────────────────────────────────────────────────────
+let state = { sectionIndex:0, answers:{}, athleteName:'', athletePos:'' };
+
+function openAssessment() {
+  state = { sectionIndex:0, answers:{}, athleteName:'', athletePos:'' };
+  document.getElementById('assessment-overlay').classList.add('active');
+  renderAssessment();
+}
+function closeAssessment() { document.getElementById('assessment-overlay').classList.remove('active'); }
+function closeResults() { document.getElementById('results-overlay').classList.remove('active'); }
+
+// ─── RENDER ASSESSMENT ─────────────────────────────────────────
+function renderAssessment() {
+  const wrap = document.getElementById('assessment-inner');
+  const sec = sections[state.sectionIndex];
+
+  if (state.sectionIndex === 0 && !state.athleteName) {
+    wrap.innerHTML = `
+      <div class="assess-header"><div class="assess-header-left"><h2>GRIDIRON PROFILE</h2><p>Confidential · Staff use only</p></div><button class="close-btn" onclick="closeAssessment()">✕</button></div>
+      <div class="q-card">
+        <div class="q-text">Your name and position.</div>
+        <div class="q-sub">Only visible to authorized coaching staff.</div>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:1rem">
+          <input id="inp-name" type="text" placeholder="Full Name" class="gate-input" style="margin-bottom:0" autocomplete="name"/>
+          <select id="inp-pos" class="gate-input" style="margin-bottom:0;-webkit-appearance:none">
+            <option value="">Select Position</option>
+            <option>Quarterback</option><option>Running Back</option><option>Wide Receiver</option>
+            <option>Tight End</option><option>Offensive Lineman</option><option>Defensive Lineman</option>
+            <option>Linebacker</option><option>Cornerback</option><option>Safety</option>
+            <option>Kicker / Punter</option><option>Special Teams</option>
+          </select>
+        </div>
+      </div>
+      <div class="assess-nav"><span></span><button class="next" onclick="startAssessment()">Begin Assessment →</button></div>`;
+    return;
+  }
+
+  const totalQ = sections.reduce((a,s) => a + s.questions.length, 0);
+  const answered = Object.keys(state.answers).length;
+  const pct = Math.round(answered / totalQ * 100);
+
+  let html = `
+    <div class="assess-header"><div class="assess-header-left"><h2>${sec.label}</h2><p>${sec.tag} · ${state.athleteName}</p></div><button class="close-btn" onclick="closeAssessment()">✕</button></div>
+    <div class="progress-wrap"><div class="progress-top"><span>Overall Progress</span><span>${pct}%</span></div><div class="progress-bg"><div class="progress-fg" style="width:${pct}%"></div></div></div>
+    <div class="section-lbl">${sec.label}</div>
+    <p style="font-size:13px;color:var(--text3);margin-bottom:1rem;line-height:1.5">${sec.intro}</p>`;
+
+  sec.questions.forEach(q => {
+    // Use q.prompt for ALL question types — fixed
+    html += `<div class="q-card"><div class="q-text">${q.prompt}</div>`;
+    if (q.sub) html += `<div class="q-sub">${q.sub}</div>`;
+
+    if (q.type === 'disc') {
+      // DISC forced-choice — options have .t (text) and .dim
+      html += `<div class="q-opts">`;
+      q.opts.forEach((o, i) => {
+        const sel = state.answers[q.id] === i;
+        html += `<button class="q-opt${sel?' sel':''}" onclick="answer('${q.id}',${i})"><div class="q-radio"></div>${o.t}</button>`;
+      });
+      html += `</div>`;
+    } else {
+      // Scale 1–5: used for both Focus AND Program Values sections
+      html += `<div class="scale-wrap"><div class="scale-labels"><span>Strongly Disagree</span><span>Strongly Agree</span></div><div class="scale-btns">`;
+      for (let i = 1; i <= 5; i++) {
+        html += `<button class="scale-btn${state.answers[q.id]===i?' sel':''}" onclick="answer('${q.id}',${i})">${i}</button>`;
+      }
+      html += `</div></div>`;
+    }
+    html += `</div>`;
+  });
+
+  const allAnswered = sec.questions.every(q => state.answers[q.id] !== undefined);
+  const isLast = state.sectionIndex === sections.length - 1;
+  html += `<div class="assess-nav">
+    <button onclick="prevSec()" ${state.sectionIndex===0?'disabled':''}>← Back</button>
+    <span class="sec-ind">${state.sectionIndex+1} / ${sections.length}</span>
+    <button class="next" onclick="${isLast?'finishAssessment()':'nextSec()'}" ${!allAnswered?'disabled':''}>${isLast?'View My Profile →':'Next →'}</button>
+  </div>`;
+
+  wrap.innerHTML = html;
+  wrap.scrollIntoView({behavior:'smooth'});
+}
+
+function startAssessment() {
+  const name = document.getElementById('inp-name').value.trim();
+  const pos = document.getElementById('inp-pos').value;
+  if (!name || !pos) { alert('Please enter your name and select your position.'); return; }
+  state.athleteName = name; state.athletePos = pos;
+  renderAssessment();
+}
+function answer(id, val) { state.answers[id] = val; renderAssessment(); }
+function nextSec() { if (state.sectionIndex < sections.length-1) { state.sectionIndex++; renderAssessment(); } }
+function prevSec() { if (state.sectionIndex > 0) { state.sectionIndex--; renderAssessment(); } }
+
+// ─── SCORING ───────────────────────────────────────────────────
+function calcResults() {
+  const a = state.answers;
+  const pw = {Quarterback:{D:1.3,I:1.0,S:0.9,C:1.2},'Running Back':{D:1.2,I:1.1,S:1.0,C:0.8},'Wide Receiver':{D:1.0,I:1.4,S:0.8,C:0.9},'Tight End':{D:1.1,I:1.0,S:1.1,C:1.0},'Offensive Lineman':{D:1.0,I:0.9,S:1.3,C:1.1},'Defensive Lineman':{D:1.3,I:0.9,S:1.0,C:0.9},Linebacker:{D:1.2,I:1.0,S:1.0,C:1.0},Cornerback:{D:1.0,I:1.2,S:0.9,C:1.0},Safety:{D:1.1,I:1.0,S:1.1,C:1.1},'Kicker / Punter':{D:0.9,I:0.9,S:1.1,C:1.3},'Special Teams':{D:1.1,I:1.0,S:1.1,C:0.9}};
+  const w = pw[state.athletePos] || {D:1,I:1,S:1,C:1};
+
+  // DISC — section index 0, type 'disc', opts have .dim
+  const raw = {D:0,I:0,S:0,C:0};
+  sections[0].questions.forEach(q => {
+    if (a[q.id] !== undefined) raw[q.opts[a[q.id]].dim] += 2;
+  });
+  const disc = {};
+  ['D','I','S','C'].forEach(d => { disc[d] = Math.min(100, Math.round((raw[d]/12)*100*w[d])); });
+
+  // FOCUS — section index 1
+  const focus = {};
+  ['flexibility','organization','communication','understanding','stability'].forEach(dom => {
+    const qs = sections[1].questions.filter(q => q.domain === dom);
+    focus[dom] = Math.round(qs.reduce((s,q) => s+(a[q.id]||3), 0) / (qs.length*5) * 100);
+  });
+
+  // PROGRAM VALUES FIT — section index 2, uses q.group
+  const pvGet = (id) => a[id] || 3;
+  const attitude  = Math.round(((pvGet('pv1')+pvGet('pv2'))/(2*5)*100*0.6) + (focus.stability*0.4));
+  const workEthic = Math.round(((pvGet('pv3')+pvGet('pv4'))/(2*5)*100*0.6) + (focus.organization*0.4));
+  const sacrifice = Math.round(((pvGet('pv5')+pvGet('pv6'))/(2*5)*100*0.5) + (focus.understanding*0.3) + (disc.S*0.2));
+  const compete   = Math.round(((pvGet('pv7')+pvGet('pv8'))/(2*5)*100*0.5) + (disc.D*0.3) + (focus.stability*0.2));
+  const overall   = Math.round((attitude+workEthic+sacrifice+compete)/4);
+  const pvFit = {attitude, workEthic, sacrifice, compete, overall};
+
+  // VALUES LIST — ranked by expression
+  const vals = [
+    {value:'Positive Attitude',  score: pvGet('pv1')+pvGet('pv2')},
+    {value:'Elite Work Ethic',   score: pvGet('pv3')+pvGet('pv4')},
+    {value:'Willing to Sacrifice',score: pvGet('pv5')+pvGet('pv6')},
+    {value:'Compete in Everything',score:pvGet('pv7')+pvGet('pv8')},
+  ].sort((a,b) => b.score - a.score);
+
+  // ARCHETYPE
+  const dH=disc.D>=60,iH=disc.I>=60,sH=disc.S>=60,cH=disc.C>=60;
+  const dP=disc.D>=disc.I&&disc.D>=disc.S&&disc.D>=disc.C;
+  const iP=disc.I>disc.D&&disc.I>=disc.S&&disc.I>=disc.C;
+  const sP=disc.S>disc.D&&disc.S>=disc.I&&disc.S>=disc.C;
+  const cP=disc.C>disc.D&&disc.C>=disc.I&&disc.C>=disc.S;
+  let arch='The Adapter', style='SI';
+  if(dP&&cH&&iH){arch='The Commander';style='DIC';}
+  else if(dP&&cH){arch='The Assessor';style='DC';}
+  else if(dP&&iH){arch='The Competitor';style='DI';}
+  else if(dP){arch='The Driver';style='D';}
+  else if(iP&&dH){arch='The Catalyst';style='DI';}
+  else if(iP&&sH){arch='The Ambassador';style='IS';}
+  else if(iP){arch='The Advocate';style='IS';}
+  else if(sP&&cH){arch='The Builder';style='SC';}
+  else if(sP){arch='The Anchor';style='S';}
+  else if(cP&&dH){arch='The Strategist';style='DC';}
+  else if(cP){arch='The Analyst';style='C';}
+
+  return {disc, focus, pvFit, vals, arch, style};
+}
+
+// ─── RENDER RESULTS ────────────────────────────────────────────
+async function finishAssessment() {
+  closeAssessment();
+  const r = calcResults(); r.athleteName = state.athleteName; r.athletePos = state.athletePos; r.initials = state.athleteName.split(" ").map(n=>n[0]).join("").slice(0,2).toUpperCase();
+  const initials = state.athleteName.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+  const profile = {...r, athleteName:state.athleteName, athletePos:state.athletePos, initials};
+  await saveProfile(profile);
+  showToast('🔐 Profile encrypted & saved');
+  setTimeout(() => sendResultsEmail(profile), 1500);
+  showAthleteResults(profile);
+}
+
+
+// ═══════════════════════════════════════════════════════
+// FULL RESULTS PAGE (athlete-facing)
+// ═══════════════════════════════════════════════════════
+function closeResultsPage() {
+  document.getElementById('results-page').classList.remove('active');
+  if (_staffLoggedIn) setTimeout(() => openSaved(), 150);
+}
+
+
+function showAthleteResults(r) {
+  const {pvFit, vals, arch, disc, focus} = r;
+  const name = r.athleteName || state.athleteName || 'Athlete';
+  const pos = r.athletePos || state.athletePos || '';
+  const firstName = name.split(' ')[0];
+  const initials = (name.split(' ').map(n=>n[0]).join('').slice(0,2)||'??').toUpperCase();
+  const fit = pvFit ? pvFit.overall : 0;
+  const valIcons = {'Positive Attitude':'🔆','Elite Work Ethic':'⚙️','Willing to Sacrifice':'🤝','Compete in Everything':'🔥'};
+  const archDescs = {
+    'The Assessor':'You process deeply and execute with precision. Your film study and pre-snap preparation are genuine competitive advantages.',
+    'The Driver':'You are decisive and results-driven. You take charge when it matters and refuse to back down from any challenge.',
+    'The Catalyst':'You energize everyone around you. Your presence lifts the room and your intensity is contagious.',
+    'The Anchor':'You are the backbone of any team you are on. Consistent, dependable, and deeply loyal — your teammates count on you because you always deliver.',
+    'The Strategist':'You see the whole picture. Complex assignments and challenging systems are where you thrive.',
+    'The Ambassador':'You bridge gaps between coaches and players. Your presence makes teams more cohesive and connected.',
+    'The Builder':'You build mastery through disciplined repetition. In structured systems, there is no one more reliable.',
+    'The Commander':'You command respect without asking for it. Your presence alone raises the standard of everyone around you.',
+    'The Competitor':'Losing bothers you in every context — that edge drives elite daily preparation and elevates you when the stakes are highest.',
+    'The Analyst':'You are precise in everything you do. Detail-oriented and technically excellent, your execution is remarkably consistent.',
+    'The Advocate':'You compete for something bigger than yourself. Your teammates trust you because you fight for them every single day.',
+    'The Adapter':'You are one of the most coachable athletes in any program. You adjust quickly, read environments well, and fit any role.'
+  };
+  const archMsg = archDescs[arch] || 'You bring a unique combination of strengths to this program.';
+  const fitCol = fit>=75?'#5aaa7a':fit>=55?'var(--orange)':'#e05a5a';
+  const valDesc = {
+    'Positive Attitude':'You recover from adversity and keep your energy — a rare trait.',
+    'Elite Work Ethic':'You hold yourself to a standard without being told. That separates you.',
+    'Willing to Sacrifice':'You put the team above yourself — the foundation of any championship culture.',
+    'Compete in Everything':'You bring competitive intensity to every rep, every drill, every day.'
+  };
+
+  document.getElementById('rp-body').innerHTML = `
+    <div style="background:linear-gradient(135deg,rgba(122,27,46,0.2),rgba(224,96,32,0.08));border:1px solid rgba(184,45,66,0.25);border-radius:16px;padding:1.75rem;margin-bottom:1.5rem;position:relative;overflow:hidden">
+      <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#b82d42,var(--orange))"></div>
+      <div style="display:flex;align-items:center;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.25rem">
+        <div style="width:66px;height:66px;border-radius:50%;background:linear-gradient(135deg,var(--orange),#7a1b2e);display:flex;align-items:center;justify-content:center;font-family:Bebas Neue,sans-serif;font-size:26px;color:#fff;flex-shrink:0">${initials}</div>
+        <div style="flex:1">
+          <div style="font-family:Bebas Neue,sans-serif;font-size:clamp(24px,7vw,36px);letter-spacing:1px;color:#f2eeeb;line-height:1">${name.toUpperCase()}</div>
+          <div style="font-size:12px;color:#6a6260;margin-top:4px">${pos} &nbsp;·&nbsp; Assessment Complete ✓</div>
+        </div>
+        <div style="text-align:right">
+          <div style="font-size:10px;color:#6a6260;letter-spacing:1px;text-transform:uppercase;margin-bottom:3px">Your Archetype</div>
+          <div style="font-family:Bebas Neue,sans-serif;font-size:clamp(20px,5vw,28px);color:var(--orange);letter-spacing:1px;line-height:1">${arch.replace('The','').trim().toUpperCase()}</div>
+        </div>
+      </div>
+      <div style="background:rgba(0,0,0,0.3);border-radius:10px;padding:1.1rem;border-left:3px solid var(--orange)">
+        <div style="font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--orange);margin-bottom:.5rem">What This Means For You</div>
+        <p style="font-size:15px;color:#f2eeeb;line-height:1.65;margin:0">${archMsg}</p>
+      </div>
+    </div>
+
+    <div style="font-family:Bebas Neue,sans-serif;font-size:22px;letter-spacing:1px;color:#f2eeeb;margin-bottom:.85rem">Your Program Values</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-bottom:1.5rem">
+      ${[['Positive Attitude',pvFit?pvFit.attitude:0,'🔆'],['Elite Work Ethic',pvFit?pvFit.workEthic:0,'⚙️'],['Willing to Sacrifice',pvFit?pvFit.sacrifice:0,'🤝'],['Compete in Everything',pvFit?pvFit.compete:0,'🔥']].map(function(item){var vn=item[0],vs=item[1],ico=item[2];var col=vs>=75?'#5aaa7a':vs>=55?'var(--orange)':'#e05a5a';var tag=vs>=75?'STRENGTH':vs>=55?'GROWING':'FOCUS AREA';return '<div style="background:#18141a;border:1px solid rgba(255,255,255,0.07);border-radius:10px;padding:1rem;text-align:center"><div style="font-size:24px;margin-bottom:4px">'+ico+'</div><div style="font-size:11px;color:#6a6260;margin-bottom:6px;line-height:1.3">'+vn+'</div><div style="font-size:26px;font-weight:700;color:'+col+';line-height:1;margin-bottom:4px">'+vs+'</div><div style="height:4px;background:#2a242d;border-radius:2px;overflow:hidden;margin-bottom:5px"><div style="height:4px;background:'+col+';width:'+vs+'%;border-radius:2px"></div></div><div style="font-size:10px;font-weight:700;color:'+col+';letter-spacing:.5px">'+tag+'</div></div>';}).join('')}
+    </div>
+
+    <div style="background:#18141a;border:1px solid rgba(255,255,255,0.07);border-radius:16px;padding:1.5rem;margin-bottom:1.5rem">
+      <div style="font-family:Bebas Neue,sans-serif;font-size:20px;letter-spacing:1px;color:#f2eeeb;margin-bottom:1rem">Your Core Values — Ranked</div>
+      <div style="display:flex;flex-direction:column;gap:.6rem">
+        ${(vals||[]).map(function(v,i){var ico=valIcons[v.value]||'🏈';var desc=valDesc[v.value]||'';var cols=['var(--orange)','#5a8fe0','#5aaa7a','#6a6260'];var bord=i===0?'rgba(224,96,32,0.25)':'rgba(255,255,255,0.07)';return '<div style="display:flex;align-items:center;gap:12px;padding:.75rem 1rem;background:rgba(0,0,0,0.25);border-radius:8px;border:1px solid '+bord+'"><div style="font-family:Bebas Neue,sans-serif;font-size:21px;color:'+(cols[i]||'#6a6260')+';width:20px;flex-shrink:0;line-height:1">'+(i+1)+'</div><div style="font-size:18px;flex-shrink:0">'+ico+'</div><div style="flex:1"><div style="font-size:14px;font-weight:600;color:#f2eeeb">'+v.value+'</div>'+(desc?'<div style="font-size:12px;color:#6a6260;margin-top:2px;line-height:1.4">'+desc+'</div>':'')+'</div>'+(i===0?'<div style="font-size:10px;font-weight:700;background:rgba(224,96,32,0.15);color:var(--orange);padding:3px 8px;border-radius:4px;border:1px solid rgba(224,96,32,0.3);white-space:nowrap">HIGHEST</div>':'')+'</div>';}).join('')}
+      </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(122,27,46,0.1),rgba(224,96,32,0.04));border:1px solid rgba(184,45,66,0.18);border-radius:16px;padding:1.5rem;text-align:center;margin-bottom:1.5rem">
+      <div style="font-size:28px;margin-bottom:.6rem">✅</div>
+      <div style="font-family:Bebas Neue,sans-serif;font-size:20px;letter-spacing:1px;color:#f2eeeb;margin-bottom:.5rem">You are done!</div>
+      <p style="font-size:14px;color:#a09890;max-width:380px;margin:0 auto;line-height:1.65">Your results have been sent directly to the coaching staff. They will use this to understand how to develop and support you. There are no right or wrong answers.</p>
+    </div>
+    <div style="text-align:center;padding-bottom:2rem">
+      <button onclick="closeResultsPage()" style="background:transparent;border:1px solid rgba(255,255,255,0.13);color:#a09890;padding:12px 24px;border-radius:8px;font-size:14px;cursor:pointer;touch-action:manipulation;font-family:DM Sans,sans-serif;min-height:48px">Close</button>
+    </div>
+  `;
+  document.getElementById('results-page').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function showResultsPage(r) {
+  if (_staffLoggedIn) { _showFullStaffProfile(r); }
+  else { showAthleteResults(r); }
+}
+
+function _showFullStaffProfile(r) {
+  const {disc,focus,pvFit,vals,arch,style:sty} = r;
+  const name = r.athleteName || state.athleteName || 'Athlete';
+  const pos = r.athletePos || state.athletePos || '';
+  const initials = (name.split(' ').map(n=>n[0]).join('').slice(0,2)||'??').toUpperCase();
+  const firstName = name.split(' ')[0];
+  const dC = {D:'#e05a5a',I:'var(--orange)',S:'#5aaa7a',C:'#5a8fe0'};
+  const dN = {D:'Dominance',I:'Influence',S:'Steadiness',C:'Correctness'};
+  const dF = {D:'Being taken advantage of',I:'Not being accepted',S:'Loss of security or change',C:'Being criticized or wrong'};
+  const dDesc = {
+    D:'You are direct, decisive, and results-driven. You take charge naturally and thrive when the stakes are high.',
+    I:'You are energetic, people-driven, and naturally inspiring. You elevate others and perform best in connected environments.',
+    S:'You are steady, loyal, and deeply consistent. Your teammates rely on you because you deliver every single time.',
+    C:'You are analytical, precise, and detail-oriented. Your film study and pre-snap preparation are genuine competitive advantages.'
+  };
+  const pD = Object.entries(disc).sort((a,b)=>b[1]-a[1])[0][0];
+  const flags = buildFlags(r);
+  const fit = pvFit?.overall || 0;
+  const fitCol = fit>=75?'#5aaa7a':fit>=55?'var(--orange)':'#e05a5a';
+
+  const valIcons = {'Positive Attitude':'🔆','Elite Work Ethic':'⚙️','Willing to Sacrifice':'🤝','Compete in Everything':'🔥'};
+
+  const traitMap = {
+    'The Assessor':{str:['Precise under pressure','Elite film study and pre-snap preparation','High self-accountability — you hold yourself to a standard','Thorough in every assignment'],imp:['Can over-analyze in real time and hesitate','Needs precise feedback — vague praise is frustrating','May disengage from high-energy team culture'],stress:['Goes quiet and withdraws internally','Replays mistakes on repeat','Becomes hypercritical of teammates and self']},
+    'The Driver':{str:['Decisive and fast-reacting in all situations','High urgency and competitive intensity every day','Natural situational leader when things get hard','Refuses to back down from any challenge'],imp:['Can overpower teammates in collaborative moments','Impatient with process-heavy systems','Struggles when questioned publicly by coaches'],stress:['Becomes more forceful and aggressive','May try to override play calls under pressure','Gets frustrated with teammates who move slower']},
+    'The Catalyst':{str:['Energizes and lifts the room in any moment','Natural hype and culture leader — the spark','Brings game-day intensity to everything','Connects with every personality type on the roster'],imp:['Intensity can drop when the spotlight is off','Can distract teammates during high-focus preparation','Sometimes prioritizes energy over technical execution'],stress:['Talks more, listens significantly less','Seeks external validation to stabilize','Energy can become disruptive rather than productive']},
+    'The Anchor':{str:['Consistent and dependable — never a bad day','Among the highest team-first loyalty on the roster','Emotionally steady presence in the locker room','Executes assignments reliably under any circumstances'],imp:['Avoids necessary conflict even when it is needed','Will not speak up when they disagree with a decision','Resistant to rapid scheme changes or sudden role shifts'],stress:['Becomes withdrawn and stops initiating','Internalizes frustration without expressing it','Quietly disengages from communication with staff']},
+    'The Strategist':{str:['Big-picture intelligence — understands the whole system','Connects scheme concepts exceptionally fast','Masters complex assignments others find difficult','Self-sufficient in preparation — needs minimal coaching prompts'],imp:['Can overthink in real-time game situations','May appear emotionally detached from teammates','Not naturally vocal as a leader or communicator'],stress:['Retreats fully into analysis mode','Impatient with less systematic thinkers','Shuts down verbally when overwhelmed']},
+    'The Ambassador':{str:['Natural bridge between coaching staff and players','High empathy and strong awareness of team dynamics','Significant off-field culture influence','Communicates across all personality types with ease'],imp:['Avoids hard accountability conversations when needed','Can be too relationship-focused at the expense of standards','Needs to be liked — can compromise expectations to preserve bonds'],stress:['Tries to smooth everything over at cost of honesty','Avoids confrontation even when it would help','Absorbs the stress of everyone around them']},
+    'The Builder':{str:['Achieves mastery through disciplined repetition','Exceptionally reliable within well-defined systems','High-quality technical execution on every assignment','Never-miss preparation habits across all contexts'],imp:['Slow to adapt when scheme or role changes rapidly','Can stagnate without new challenges to pursue','Struggles with open-ended or ambiguous assignments'],stress:['Becomes rigid and resistant to deviation','Double-checks everything compulsively','Frustrated by teammates who are less methodical']},
+    'The Commander':{str:['Instant credibility and commanding presence','Undeniable natural captain energy on any roster','Commands peer respect without asking for it','Elevates the intensity of everyone around them'],imp:['Creates friction if overlooked, benched, or sidelined','May challenge coaching authority under high pressure','Can dominate collaborative situations that need balance'],stress:['Becomes louder and more forceful in conflict','May challenge coaching decisions in group settings','Ego can become a liability if left unchecked']},
+    'The Competitor':{str:['Thrives in rivalry games and high-stakes moments','Game-day performance elevates to another level','Hatred of losing drives relentless daily preparation','Raises the competitive intensity of the entire position group'],imp:['Can generate a win-at-all-costs toxicity if unchecked','Carries individual losses and mistakes far too long','Extremely difficult to manage when benched or rotated'],stress:['Becomes combative with teammates and coaches','Loses perspective on team vs individual performance','Doubles down on aggression when things go wrong']},
+    'The Analyst':{str:['Detail-oriented in every assignment and alignment','Precise technical execution — every rep looks the same','Processes information deeply before responding','Highly reliable in technically complex schemes'],imp:['Slow to trust new coaches or systems — needs time','Needs more lead time to process scheme changes','Can miss social and emotional cues in team settings'],stress:['Goes completely quiet and stops communicating','Enters long internal processing periods','Can appear disengaged when actually deep in thought']},
+    'The Advocate':{str:['Purpose-driven — competes for something bigger than stats','Fights for teammates in any situation','High integrity presence that the locker room respects','Motivates through meaning and mission, not fear'],imp:['Highly sensitive to perceived unfairness in treatment','Can become a negative voice if disillusioned with the program','May prioritize relationships and feelings over performance decisions'],stress:['Becomes vocal about grievances — can recruit others','Loses trust quickly if handled inconsistently','Builds coalitions of frustration around shared grievances']},
+    'The Adapter':{str:['Highly coachable across any style or system','Handles position changes and role shifts with low friction','Reads and matches team energy in any environment','Smooth transitions into new programs or schemes'],imp:['Can lack strong identity in high-structure rigid systems','Too agreeable when pushback is actually needed','Loses competitive urgency without consistent external pressure'],stress:['Becomes passive and defers too heavily to others','Difficulty asserting perspective in critical moments','Competitive intensity can evaporate under prolonged adversity']}
+  };
+  const tr = traitMap[arch] || traitMap['The Adapter'];
+
+  // AI Debrief
+  const pDName = {D:'Dominance',I:'Influence',S:'Steadiness',C:'Correctness'}[pD];
+  const d1 = `${firstName} profiles as <strong>${arch}</strong> — a ${sty} behavioral pattern with <strong>${pDName}</strong> as the dominant driver. ${pD==='D'?`This means ${firstName} is at their absolute best when given authority, clear competitive stakes, and direct feedback. Directness from coaches reads as respect.`:pD==='I'?`This means ${firstName} performs best when the environment is energetic and connected. Isolation, repetitive drills without social context, or impersonal feedback will blunt engagement and effort.`:pD==='S'?`This means ${firstName} thrives when expectations are consistent and the environment is stable. Frequent scheme changes or unpredictable coaching behavior creates cognitive overload.`:`This means ${firstName} performs best when given time to prepare with detailed, precise information. Vague praise or unclear standards do not land — technical specificity does.`}`;
+  const topVal = vals[0]?.value || 'Compete in Everything';
+  const d2 = `Program culture fit overall score: <strong>${fit}/100</strong>. ${firstName}'s strongest expressed value is <strong>${topVal}</strong>. ${fit>=75?`Behavioral profile aligns strongly with all four program core values — this athlete is built for the culture you are building.`:fit>=55?`Solid behavioral foundation with specific development areas. Intentional onboarding and early expectations conversations will set this athlete up for success.`:`Meaningful gaps exist between behavioral tendencies and program culture values. A structured culture development plan is recommended — not a reason to avoid the athlete, but a reason to be intentional.`}`;
+
+  document.getElementById('rp-body').innerHTML = `
+    <!-- HERO -->
+    <div class="rp-hero">
+      <div class="rp-hero-top">
+        <div class="rp-ava">${initials}</div>
+        <div>
+          <div class="rp-name">${name.toUpperCase()}</div>
+          <div class="rp-meta">${pos} · Gridiron Profile Behavioral Assessment · ${new Date().toLocaleDateString()}</div>
+        </div>
+        <div class="rp-arch-wrap">
+          <div class="rp-arch-label">Your Archetype</div>
+          <div class="rp-arch-name">${arch.replace('The','').trim().toUpperCase()}</div>
+          <div class="rp-arch-style">${arch} · ${sty}</div>
+        </div>
+      </div>
+      <div class="rp-scores-row">
+        <div class="rp-score-box"><div class="rp-score-val" style="color:${fitCol}">${fit}</div><div class="rp-score-lbl">Program Culture Fit</div></div>
+        <div class="rp-score-box"><div class="rp-score-val" style="color:${dC[pD]}">${disc[pD]}</div><div class="rp-score-lbl">Primary Driver (${pD})</div></div>
+        <div class="rp-score-box"><div class="rp-score-val" style="color:${focus.stability>=70?'#5aaa7a':focus.stability>=45?'var(--orange)':'#e05a5a'}">${focus.stability}</div><div class="rp-score-lbl">Stability Score</div></div>
+        <div class="rp-score-box"><div class="rp-score-val" style="color:var(--orange)">${pvFit?.compete||0}</div><div class="rp-score-lbl">Compete Score</div></div>
+      </div>
+    </div>
+
+    <!-- PROGRAM FIT -->
+    <div class="rp-sec-head"><h3>Program Core Values Fit</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">4 VALUES</div></div>
+    <div class="pfit-grid" style="margin-bottom:1.5rem">
+      ${[['Positive Attitude',pvFit?.attitude||0,'🔆'],['Elite Work Ethic',pvFit?.workEthic||0,'⚙️'],['Willing to Sacrifice',pvFit?.sacrifice||0,'🤝'],['Compete in Everything',pvFit?.compete||0,'🔥']].map(([vn,vs,ico])=>{
+        const col=vs>=75?'#5aaa7a':vs>=55?'var(--orange)':'#e05a5a';
+        const tag=vs>=75?'STRONG FIT':vs>=55?'DEVELOPING':'NEEDS WORK';
+        return `<div class="pfit-card"><div class="pfit-score" style="color:${col}">${vs}</div><div class="pfit-name">${ico} ${vn}</div><div class="pfit-bar"><div class="pfit-fill" style="width:${vs}%;background:${col}"></div></div><div class="pfit-tag" style="color:${col}">${tag}</div></div>`;
+      }).join('')}
+    </div>
+
+    <!-- AI DEBRIEF -->
+    <div class="rp-sec-head"><h3>Playbook AI Debrief</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">AI ANALYSIS</div></div>
+    <div class="ai-debrief" style="margin-bottom:1.5rem">
+      <div class="ai-debrief-head"><div class="ai-badge">⚡ PLAYBOOK AI</div><span style="font-size:11px;color:var(--text3)">${Object.keys(state.answers||{}).length || 22} behavioral data points · 🔐 Encrypted & sent to staff</span></div>
+      <p>${d1}</p>
+      <p>${d2}</p>
+    </div>
+
+    <!-- DISC -->
+    <div class="rp-sec-head"><h3>DISC Behavioral Style</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">4 DIMENSIONS</div></div>
+    <div class="disc-grid" style="margin-bottom:1.5rem">
+      ${['D','I','S','C'].map(d => `
+        <div class="disc-card">
+          <div class="disc-card-top"><div class="disc-card-letter" style="color:${dC[d]}">${d}</div><div class="disc-card-score" style="color:${dC[d]}">${disc[d]}<span style="font-size:14px;color:var(--text3)">/100</span></div></div>
+          <div class="disc-card-name" style="color:${dC[d]};font-weight:600;font-size:13px">${dN[d]}</div>
+          <div class="disc-card-bar"><div class="disc-card-fill" style="width:${disc[d]}%;background:${dC[d]}"></div></div>
+          <div class="disc-card-fear">${dF[d]}</div>
+        </div>`).join('')}
+    </div>
+
+    <!-- FOCUS -->
+    <div class="rp-sec-head"><h3>Focus Domains</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">5 DOMAINS</div></div>
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.5rem">
+      <div class="focus-list-full">
+        ${['flexibility','organization','communication','understanding','stability'].map(dom => {
+          const score = focus[dom]||0;
+          const col = score>=70?'#5aaa7a':score>=45?'var(--orange)':'#e05a5a';
+          const tag = score>=70?'STRONG':score>=45?'AVERAGE':'DEVELOP';
+          const descs = {flexibility:'Adapts quickly to new schemes and changes.',organization:'Manages preparation with structure and follow-through.',communication:'Communicates clearly and proactively on and off the field.',understanding:'Attuned to teammates and team dynamics.',stability:'Resilient under pressure — recovers quickly from adversity.'};
+          return `<div class="focus-row">
+            <div class="focus-row-name">${dom.charAt(0).toUpperCase()+dom.slice(1)}</div>
+            <div class="focus-row-bar"><div class="focus-row-fill" style="width:${score}%;background:${col}"></div></div>
+            <div class="focus-row-score" style="color:${col}">${score}</div>
+            <div class="focus-row-tag" style="background:${col}20;color:${col};border:1px solid ${col}40">${tag}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>
+
+    <!-- VALUES -->
+    <div class="rp-sec-head"><h3>Program Values — Your Ranking</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">4 VALUES</div></div>
+    <div class="vals-grid" style="margin-bottom:1.5rem">
+      ${vals.map((v,i) => {
+        const score = Math.round((v.score/10)*100);
+        return `<div class="val-row-full">
+          <div class="val-rank-num">${i+1}</div>
+          <div class="val-icon">${valIcons[v.value]||'🏈'}</div>
+          <div class="val-info">
+            <div class="val-name-full">${v.value}</div>
+            <div class="val-desc-full">${i===0?'Your most strongly expressed program value — this is what drives you most.':i===1?'Second strongest — a significant driver in your daily decisions.':i===2?'Third strongest — present but not dominant.':'Lower expressed — present in the background.'}</div>
+          </div>
+          <div style="width:60px;flex-shrink:0">
+            <div class="val-bar-row"><div class="val-bar-fill" style="width:${score}%"></div></div>
+          </div>
+          ${i<3?`<div class="val-badge-full" style="${i===0?'background:rgba(224,96,32,0.15);color:var(--orange)':i===1?'background:rgba(90,143,224,0.12);color:#5a8fe0':'background:rgba(90,170,122,0.12);color:#5aaa7a'}">${i===0?'HIGHEST':i===1?'HIGH':'ACTIVE'}</div>`:''}
+        </div>`;
+      }).join('')}
+    </div>
+
+    <!-- STAFF FLAGS -->
+    <div class="rp-sec-head"><h3>Staff Flags</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">COACHING NOTES</div></div>
+    <div class="flags-list" style="margin-bottom:1.5rem">
+      ${flags.map(f => `<div class="flag-full ${f.t}"><div class="flag-full-icon">${f.i}</div><div>${f.m}</div></div>`).join('')}
+    </div>
+
+    <!-- BEHAVIORAL TRAITS -->
+    <div class="rp-sec-head"><h3>Behavioral Traits — ${arch}</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">PROFILE</div></div>
+    <div class="traits-grid-full" style="margin-bottom:1.5rem">
+      <div class="trait-col-full str"><h4>Strengths</h4>${tr.str.map(t=>`<div class="trait-item-full">${t}</div>`).join('')}</div>
+      <div class="trait-col-full imp"><h4>Development Areas</h4>${tr.imp.map(t=>`<div class="trait-item-full">${t}</div>`).join('')}</div>
+      <div class="trait-col-full stress"><h4>Under Stress</h4>${tr.stress.map(t=>`<div class="trait-item-full">${t}</div>`).join('')}</div>
+    </div>
+
+    <!-- ACTION PLAN -->
+    <div class="rp-sec-head"><h3>Coaching Action Plan</h3><div class="rp-sec-line"></div><div class="rp-sec-badge">STAFF ONLY</div></div>
+    <div class="action-plan">
+      <div class="action-plan-title">Recommended Coaching Approach</div>
+      <div class="action-item">
+        <div class="action-num-badge">1</div>
+        <div class="action-content">
+          <strong>Communication style</strong>
+          <p>${disc.D>=65?`Use direct, outcome-focused language. ${firstName} respects brevity and clarity — softening criticism reads as weakness or uncertainty.`:disc.I>=65?`Lead with the relationship before the task. ${firstName} processes feedback significantly better when they feel seen and valued first.`:disc.S>=65?`Be consistent, predictable, and patient. ${firstName} responds to steady, trusted relationships — avoid public criticism.`:`Provide structured, evidence-based feedback with technical precision. ${firstName} needs specifics — not emotional appeals or vague encouragement.`}</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num-badge">2</div>
+        <div class="action-content">
+          <strong>Motivation — connect to ${topVal}</strong>
+          <p>${topVal==='Compete in Everything'?`${firstName}'s strongest program value is Compete in Everything. Keep competitive context front and center — head-to-head competition in practice, tracking improvement, and linking individual effort to team outcomes explicitly.`:topVal==='Elite Work Ethic'?`${firstName} self-identifies most strongly with work ethic. Acknowledge preparation quality explicitly and consistently — not just game performance. Recognition of the process matters as much as results.`:topVal==='Positive Attitude'?`${firstName} places Positive Attitude above other values. Use growth and resilience framing when delivering hard feedback — frame adversity as development, not failure.`:`${firstName} identifies most strongly with sacrifice. Acknowledge team-first choices publicly — these athletes need to know that choosing the team over themselves is seen and appreciated.`}</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num-badge">3</div>
+        <div class="action-content">
+          <strong>Pressure & adversity management</strong>
+          <p>${focus.stability<40?`Low Stability (${focus.stability}) — ${firstName} needs a structured mental reset protocol after mistakes, not passive time. Review film together after adversity to provide a technical anchor. Never use "shake it off" language — it lands as dismissal.`:focus.stability<60?`Moderate Stability (${focus.stability}) — monitor during extended high-pressure stretches. A mid-week individual check-in during rivalry weeks or bowl prep is recommended.`:`Strong emotional resilience (${focus.stability}) — ${firstName} is a stabilizing presence under pressure. Consider formal mentorship or on-field leadership responsibility.`}</p>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num-badge">4</div>
+        <div class="action-content">
+          <strong>Program fit & onboarding</strong>
+          <p>Overall program culture fit: <strong>${fit}/100</strong>. ${fit>=75?`Strong alignment across all four values — ${firstName} should integrate into your culture naturally from day one. Assign a leadership role early.`:fit>=55?`Solid foundation. Focus development conversations on ${(pvFit?.sacrifice||0)<55?'sacrifice and team-first behavior':(pvFit?.attitude||0)<55?'positive attitude and adversity response':'work ethic and self-direction'} in the first two weeks.`:`Meaningful culture fit gaps require a structured onboarding plan. Set clear expectations before day one. Assign a veteran culture mentor. Check in weekly for the first month.`}</p>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;padding:2rem 0 1rem">
+      <button class="bo" onclick="closeResultsPage()">← Close Results</button>
+    </div>
+  `;
+
+  document.getElementById('results-page').classList.add('active');
+  document.getElementById('rp-body').scrollTop = 0;
+  window.scrollTo(0, 0);
+}
+
+function renderResults(r) {
+  const {disc,focus,vals,arch,style} = r;
+  const name = state.athleteName, pos = state.athletePos;
+  const initials = name.split(' ').map(n=>n[0]).join('').slice(0,2).toUpperCase();
+  const dC = {D:'#e05a5a',I:'var(--orange)',S:'#5aaa7a',C:'#5a8fe0'};
+  const dN = {D:'Dominance',I:'Influence',S:'Steadiness',C:'Correctness'};
+  const dF = {D:'Being taken advantage of',I:'Not being accepted',S:'Loss of security or change',C:'Being criticized or wrong'};
+  const tv = vals[0]?.value||'Integrity';
+  const pD = Object.entries(disc).sort((a,b)=>b[1]-a[1])[0][0];
+
+  // Flags
+  const flags = [];
+  if(focus.stability<35) flags.push({t:'r',i:'🚨',m:`<strong>Low Stability (${focus.stability})</strong> — High pressure reactivity. Needs structured mental reset protocols and proactive staff support after adversity.`});
+  if(disc.C>=75) flags.push({t:'a',i:'⚠️',m:`<strong>High Correctness (${disc.C})</strong> — Prone to self-criticism after mistakes. Needs precise, evidence-based feedback — not vague reassurance.`});
+  if(focus.communication<35) flags.push({t:'r',i:'🚨',m:`<strong>Low Communication (${focus.communication})</strong> — Will not self-report distress or disagreement. Coaches must proactively structure individual check-ins.`});
+  if(disc.D>=80) flags.push({t:'a',i:'⚡',m:`<strong>High Dominance (${disc.D})</strong> — Strong competitor but may challenge authority under pressure. Channel through a formal leadership role.`});
+  if(focus.flexibility>=75) flags.push({t:'g',i:'✅',m:`<strong>High Flexibility (${focus.flexibility})</strong> — Adapts quickly to new schemes. Low installation risk for complex systems or transfer scenarios.`});
+  if(focus.organization>=75) flags.push({t:'g',i:'✅',m:`<strong>High Organization (${focus.organization})</strong> — Self-directed and structured. Low maintenance in preparation and academic accountability.`});
+  if(focus.understanding>=70) flags.push({t:'g',i:'✅',m:`<strong>High Understanding (${focus.understanding})</strong> — Attuned to teammates. Natural locker room culture contributor. Consider for leadership council.`});
+  flags.push({t:'g',i:'🎯',m:`<strong>Top Value: ${tv}</strong> — Primary motivational driver. Align recognition, role conversations, and development opportunities around this value for maximum engagement.`});
+  if(focus.stability>=70) flags.push({t:'g',i:'✅',m:`<strong>High Stability (${focus.stability})</strong> — Emotionally resilient. Stabilizing presence under pressure — can absorb adversity without affecting performance.`});
+
+  // Traits
+  const traitMap = {
+    'The Assessor':{str:['Precise under pressure','Exceptional film study','Thorough pre-snap reads','High self-accountability'],imp:['Can over-analyze and hesitate','Struggles with ambiguous feedback','May disengage from vocal team culture'],stress:['Goes quiet and withdraws','Replays mistakes repeatedly','Becomes hypercritical of teammates']},
+    'The Driver':{str:['Decisive and fast-reacting','High urgency and intensity','Strong situational leadership','Doesn\'t back down from challenge'],imp:['Can overpower teammates\' voices','Impatient with process-heavy systems','Dislikes being questioned publicly'],stress:['Becomes more forceful','May override play calls','Gets frustrated with slower teammates']},
+    'The Catalyst':{str:['Energizes the room','Natural hype and culture leader','Brings intensity to game days','Connects across personality types'],imp:['Inconsistent when spotlight is off','Can distract during high-focus periods','May prioritize energy over execution'],stress:['Talks more, listens less','Seeks external validation','Energy can become erratic']},
+    'The Anchor':{str:['Consistent and dependable','High loyalty and team-first mindset','Emotionally steady locker room presence','Executes assignments reliably'],imp:['Avoids necessary conflict','May not speak up when they disagree','Resistant to rapid scheme changes'],stress:['Becomes withdrawn','Internalizes frustration','Stops communicating with staff']},
+    'The Strategist':{str:['Big-picture intelligence','Connects scheme concepts quickly','Performs well in complex assignments','Self-sufficient preparation'],imp:['Can overthink real-time decisions','May seem detached emotionally','Not naturally vocal as a leader'],stress:['Retreats into analysis','Impatient with simpler approaches','May shut down verbally']},
+    'The Ambassador':{str:['Bridge between coaches and players','High empathy and team awareness','Strong off-field culture influence','Communicates across personality types'],imp:['Avoids hard accountability conversations','Too relationship-focused in competitive moments','Needs to be liked — can compromise standards'],stress:['Tries to smooth everything over','Avoids confrontation at cost of clarity','Absorbs others\' stress']},
+    'The Builder':{str:['Masters technique through repetition','Extremely reliable in structured systems','High-quality execution in defined roles','Never-miss preparation habits'],imp:['Slow to adapt to scheme changes','Can stagnate without new challenges','Struggles with open-ended assignments'],stress:['Becomes rigid','Double-checks everything compulsively','Frustrated when others aren\'t as methodical']},
+    'The Commander':{str:['Instant presence and credibility','Commands respect from peers','Natural captain energy','Elevates intensity of those around them'],imp:['Needs to be in the conversation — friction if overlooked','May challenge coaching authority','Can dominate where collaboration is needed'],stress:['Becomes louder and more forceful','May challenge decisions publicly','Ego can become a liability']},
+    'The Competitor':{str:['Thrives in rivalry and high stakes','Game-day performance elevates','Hatred of losing drives daily prep','Raises entire position group\'s intensity'],imp:['Can create win-at-all-costs toxicity','Carries individual losses too long','Difficult when benched or rotated'],stress:['Becomes combative','Loses perspective — team vs individual','Doubles down on aggression']},
+    'The Analyst':{str:['Detail-oriented execution','Precise in assignments and alignment','Deep information processing','Reliable in highly technical schemes'],imp:['Slow to trust new coaches or systems','Needs more lead time for scheme changes','May miss social/emotional cues'],stress:['Goes completely quiet','Processes internally for extended periods','Can appear disengaged']},
+    'The Advocate':{str:['Purpose-driven and mission-oriented','Fights for teammates and collective goals','High integrity and cultural leadership','Motivates through meaning, not fear'],imp:['Sensitive to perceived unfairness','Can become a negative voice if disillusioned','May prioritize feelings over performance'],stress:['Becomes vocal about grievances','Loses trust quickly if handled poorly','Can recruit others to their frustration']},
+    'The Adapter':{str:['Highly coachable across styles','Handles positional changes well','Low friction in role transitions','Reads and matches team energy'],imp:['Can lack strong identity in structured systems','Too agreeable — doesn\'t push back when needed','Can lose urgency without external pressure'],stress:['Becomes passive','Defers too heavily to others','Difficulty asserting in critical moments']}
+  };
+  const traits = traitMap[arch] || traitMap['The Adapter'];
+
+  // Playbook AI debrief
+  const d1 = `${name} profiles as <strong>${arch}</strong> — a ${style} DISC pattern with ${dN[pD]} as the dominant behavioral driver. In a Power 4 football context, this means ${name.split(' ')[0]} is most effective when ${pD==='D'?'given authority, clear stakes, and direct feedback. Don\'t soften the message — directness reads as respect for this athlete.':pD==='I'?'the environment is energetic and connected. Isolation, repetitive drills without social context, or impersonal feedback will blunt engagement.':pD==='S'?'expectations are consistent and the environment is stable. Frequent scheme changes or unpredictable coaching behavior increases cognitive load significantly.':'given time to prepare, detailed information, and precision feedback. Vague praise or unclear standards create frustration, not motivation.'}`;
+  const d2 = `With <strong>${tv}</strong> as the primary Core Value, ${name.split(' ')[0]} is most motivated by ${tv==='Advancement'?'visible progress toward bigger goals. Connect daily reps explicitly to draft positioning, depth chart movement, or program legacy.':tv==='Freedom'?'autonomy and ownership. Give them the "why," then let them execute their way within structure. Micromanagement is a retention risk.':tv==='Integrity'?'consistency and doing what\'s right. They watch coach behavior closely — if the standard you hold them to isn\'t the standard you hold yourself to, you lose them.':tv==='Recognition'?'being seen and acknowledged. Public recognition of contributions — not just stat performance — is what drives engagement for this athlete.':tv==='Security'?'clear expectations and role stability. Communicate role decisions early and directly. Ambiguity creates real anxiety.':tv==='Family & Loyalty'?'deep bonds and collective success. Invest in the relationship first — once trust is established, this athlete runs through walls for you.':tv==='Winning'?'outcomes and competitive excellence. Keep everything tied to the scoreboard and championship-level goals.':'growth and self-improvement. A visible development roadmap with milestone acknowledgment drives consistent effort.'}`;
+  const d3 = `Focus domains show ${focus.stability<40?`<strong>Low Stability (${focus.stability})</strong> — ${name.split(' ')[0]} will absorb pressure internally and needs structured reset protocols, not passive recovery time.`:`solid emotional resilience (Stability: ${focus.stability})`}. ${focus.communication<40?`<strong>Low Communication (${focus.communication})</strong> signals this athlete will not self-report issues — proactive individual check-ins from staff are essential.`:focus.communication>=70?`<strong>High Communication (${focus.communication})</strong> is a program asset — this athlete can bridge staff-to-locker-room information gaps.`:''} Overall, ${name.split(' ')[0]} is a ${focus.flexibility>=65?'highly adaptable':'structure-preferring'}, ${disc.D>=65?'results-driven':'team-oriented'} athlete who will respond best to ${disc.C>=65?'precise, data-grounded coaching with technical specificity':disc.I>=65?'enthusiastic, relationship-first coaching with visible energy':disc.S>=65?'consistent, patient development with stable expectations':'direct, outcome-focused coaching with clear performance metrics'}.`;
+
+  document.getElementById('results-inner').innerHTML = `
+    <div class="athlete-header">
+      <div class="athlete-avatar">${initials}</div>
+      <div class="athlete-info">
+        <div class="athlete-name">${name.toUpperCase()}</div>
+        <div class="athlete-meta">${pos} · Gridiron Profile Behavioral Assessment · Confidential</div>
+      </div>
+      <div class="athlete-archetype">
+        <div class="arch-label">Archetype</div>
+        <div class="arch-name">${arch.replace('The','').trim().toUpperCase()}</div>
+        <div class="arch-disc-tag">${arch} · ${style}</div>
+      </div>
+    </div>
+
+    <!-- PROGRAM CORE VALUES FIT -->
+    <div style="background:linear-gradient(135deg,rgba(122,27,46,0.12),rgba(224,96,32,0.05));border:1px solid rgba(184,45,66,0.25);border-radius:var(--r-lg);padding:1.5rem;margin-bottom:1.5rem">
+      <div style="font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--maroon-bright);margin-bottom:1rem">Program Core Values Fit</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem">
+        ${[['Positive Attitude',pvFit.attitude,'🔆'],['Elite Work Ethic',pvFit.workEthic,'⚙️'],['Willing to Sacrifice',pvFit.sacrifice,'🤝'],['Compete in Everything',pvFit.compete,'🔥']].map(([vn,vs,ico])=>{
+          const col=vs>=75?'#5aaa7a':vs>=55?'var(--orange)':'#e05a5a';
+          const tag=vs>=75?'STRONG FIT':vs>=55?'DEVELOPING':'NEEDS WORK';
+          return '<div style="background:rgba(0,0,0,0.3);border-radius:8px;padding:.9rem;text-align:center"><div style="font-size:22px;font-weight:700;color:'+col+'">'+vs+'</div><div style="font-size:11px;color:var(--text3);margin:2px 0 5px;line-height:1.3">'+ico+' '+vn+'</div><div style="height:4px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden;margin-bottom:5px"><div style="height:4px;background:'+col+';width:'+vs+'%"></div></div><div style="font-size:10px;color:'+col+';font-weight:600">'+tag+'</div></div>';
+        }).join('')}
+      </div>
+    </div>
+    <div class="playbook-result">
+      <div class="playbook-result-header">
+        <div class="playbook-ai-badge">⚡ PLAYBOOK AI DEBRIEF</div>
+        <span style="font-size:12px;color:var(--text3);margin-left:8px">${Object.keys(state.answers).length} behavioral data points · Confidential staff report</span>
+      </div>
+      <p>${d1}</p><p>${d2}</p><p>${d3}</p>
+    </div>
+
+    <div class="results-grid">
+      <div class="res-card">
+        <div class="res-card-title">DISC — Behavioral Style</div>
+        <div class="disc-visual">
+          ${['D','I','S','C'].map(d=>`
+            <div class="disc-vis-box">
+              <div class="disc-vis-letter" style="color:${dC[d]}">${d}</div>
+              <div class="disc-vis-name">${dN[d]}</div>
+              <div class="disc-vis-score" style="color:${dC[d]}">${disc[d]}</div>
+              <div class="disc-vis-bar"><div class="disc-vis-fill" style="width:${disc[d]}%;background:${dC[d]}"></div></div>
+              <div class="disc-vis-fear">${dF[d]}</div>
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-card-title">FOCUS — Cognitive Domains</div>
+        ${['flexibility','organization','communication','understanding','stability'].map(dom=>`
+          <div class="focus-domain">
+            <div class="focus-domain-top">
+              <span class="focus-domain-name">${dom.charAt(0).toUpperCase()+dom.slice(1)}</span>
+              <span class="focus-domain-score">${focus[dom]}/100</span>
+            </div>
+            <div class="focus-domain-bar"><div class="focus-domain-fill" style="width:${focus[dom]}%"></div></div>
+          </div>`).join('')}
+      </div>
+    </div>
+
+    <div class="results-grid">
+      <div class="res-card">
+        <div class="res-card-title">CORE VALUES — Ranked Motivators</div>
+        <div class="values-list">
+          ${vals.map((v,i)=>`
+            <div class="value-row">
+              <div class="value-rank">${i+1}</div>
+              <div class="value-info">
+                <div class="value-name">${v.value}</div>
+                <div class="value-desc">${i===0?'Primary driver — highest motivational leverage':i===1?'Strong secondary driver':i<4?'Active motivator':'Background value'}</div>
+              </div>
+              ${i<3?`<div class="value-badge" style="${i===0?'background:var(--gold-dim);color:var(--orange)':i===1?'background:rgba(90,143,224,0.12);color:#5a8fe0':'background:rgba(90,170,122,0.1);color:#5aaa7a'}">${i===0?'PRIMARY':i===1?'KEY':'ACTIVE'}</div>`:''}
+            </div>`).join('')}
+        </div>
+      </div>
+      <div class="res-card">
+        <div class="res-card-title">STAFF FLAGS</div>
+        ${flags.slice(0,6).map(f=>`<div class="flag-row ${f.t}"><div class="flag-icon">${f.i}</div><div>${f.m}</div></div>`).join('')}
+      </div>
+    </div>
+
+    <div class="res-card" style="margin-bottom:1.5rem">
+      <div class="res-card-title">BEHAVIORAL TRAITS — ${arch.toUpperCase()}</div>
+      <div class="traits-grid">
+        <div class="trait-col str"><h4>Strengths</h4>${traits.str.map(t=>`<div class="trait-item">${t}</div>`).join('')}</div>
+        <div class="trait-col imp"><h4>Development Areas</h4>${traits.imp.map(t=>`<div class="trait-item">${t}</div>`).join('')}</div>
+        <div class="trait-col stress"><h4>Under Stress</h4>${traits.stress.map(t=>`<div class="trait-item">${t}</div>`).join('')}</div>
+      </div>
+    </div>
+
+    <div class="staff-actions">
+      <div class="staff-actions-title">COACHING ACTION PLAN</div>
+      <div class="action-row"><div class="action-num">1</div><div class="action-text"><strong>Communication approach:</strong> ${disc.D>=65?`Use direct, outcome-focused feedback. ${name.split(' ')[0]} respects brevity and clarity — softening criticism reads as weakness.`:disc.I>=65?`Lead with relationship before task. ${name.split(' ')[0]} processes feedback significantly better when they feel seen and valued first.`:disc.S>=65?`Be consistent and predictable. ${name.split(' ')[0]} responds to steady, trusted relationships — avoid public criticism at all costs.`:`Provide structured, data-based feedback with specific evidence. ${name.split(' ')[0]} needs technical precision, not emotional appeals.`}</div></div>
+      <div class="action-row"><div class="action-num">2</div><div class="action-text"><strong>Motivation lever:</strong> Connect ${name.split(' ')[0]}'s daily effort to their primary value of <strong>${tv}</strong>. ${tv==='Advancement'?'Explicitly tie reps to draft positioning, depth chart movement, or program legacy conversations.':tv==='Freedom'?'Give ownership where possible — set the standard, then let them determine their approach to meeting it.':tv==='Recognition'?'Acknowledge contributions publicly in team settings and in staff meetings — not just stat performance.':tv==='Integrity'?'Model the standard you hold them to. This athlete watches coach behavior closely and will disengage if they see a double standard.':tv==='Security'?'Communicate role expectations clearly and consistently. No surprise role changes — brief them privately before any public announcements.':tv==='Family & Loyalty'?'Invest time in the relationship outside of football. A trusted coach-athlete bond is what unlocks full effort from this athlete.':tv==='Winning'?'Keep competitive context front and center in every conversation. Tie individual work to team outcomes explicitly.':'Provide a visible development roadmap with acknowledged milestones. Growth recognition drives consistent effort.'}</div></div>
+      <div class="action-row"><div class="action-num">3</div><div class="action-text"><strong>Pressure management:</strong> ${focus.stability<40?`Low Stability (${focus.stability}) — implement a structured pre-game and post-mistake reset protocol. Review film together after adversity to provide a technical anchor. Avoid passive "shake it off" language.`:focus.stability<60?`Moderate Stability (${focus.stability}) — monitor during back-to-back difficult games. Proactive mid-week individual check-in recommended during high-pressure stretches.`:`Strong emotional resilience (Stability: ${focus.stability}) — ${name.split(' ')[0]} is a stabilizing presence under pressure. Consider leveraging this in a formal or informal mentorship role.`}</div></div>
+      <div class="action-row"><div class="action-num">4</div><div class="action-text"><strong>Transfer Portal / Recruiting:</strong> ${focus.flexibility>=65?`Low installation risk — adapts quickly to new schemes and personnel.`:`Moderate adjustment period expected — build extra walkthrough time into first 3 weeks.`} ${disc.S>=60||tv==='Family & Loyalty'?'High retention likelihood if relationship investment is made in first 30 days.':'Performance-first orientation — role clarity conversation is essential within the first two weeks.'} Recommend transparent role expectations discussion at the earliest opportunity.</div></div>
+    </div>
+
+    <div class="results-restart">
+      <button onclick="restartFromResults()">← Take Assessment Again</button>
+    </div>`;
+}
+
+function restartFromResults() { closeResults(); openAssessment(); }
+
+
+// ═══════════════════════════════════════════════════════
+// AES-256-GCM ENCRYPTION (Web Crypto API)
+// ═══════════════════════════════════════════════════════
+let _cryptoKey = null;
+const STORAGE_KEY = 'gp_encrypted_profiles_v1';
+const STAFF_EMAIL = 'mtv83133@gmail.com';
+
+async function deriveKey(password) {
+  const enc = new TextEncoder();
+  const km = await crypto.subtle.importKey('raw', enc.encode(password), 'PBKDF2', false, ['deriveKey']);
+  return crypto.subtle.deriveKey(
+    {name:'PBKDF2', salt:enc.encode('gridiron_salt_v1'), iterations:100000, hash:'SHA-256'},
+    km, {name:'AES-GCM', length:256}, false, ['encrypt','decrypt']
+  );
+}
+
+async function encryptData(data) {
+  if (!_cryptoKey) return null;
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const ct = await crypto.subtle.encrypt({name:'AES-GCM',iv}, _cryptoKey, new TextEncoder().encode(JSON.stringify(data)));
+  const combined = new Uint8Array(12 + ct.byteLength);
+  combined.set(iv,0); combined.set(new Uint8Array(ct),12);
+  return btoa(String.fromCharCode(...combined));
+}
+
+async function decryptData(b64) {
+  if (!_cryptoKey) return null;
+  try {
+    const bytes = Uint8Array.from(atob(b64), c=>c.charCodeAt(0));
+    const pt = await crypto.subtle.decrypt({name:'AES-GCM',iv:bytes.slice(0,12)}, _cryptoKey, bytes.slice(12));
+    return JSON.parse(new TextDecoder().decode(pt));
+  } catch(e) { return null; }
+}
+
+async function saveProfile(profile) {
+  const existing = await loadStoredProfiles();
+  existing.unshift({...profile, savedAt: new Date().toISOString()});
+  const enc = await encryptData(existing);
+  if (enc) localStorage.setItem(STORAGE_KEY, enc);
+}
+
+async function loadStoredProfiles() {
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return [];
+  return (await decryptData(raw)) || [];
+}
+
+// ═══════════════════════════════════════════════════════
+// TOAST NOTIFICATION
+// ═══════════════════════════════════════════════════════
+function showToast(msg, duration=4000) {
+  let t = document.getElementById('toast-msg');
+  if (!t) {
+    t = document.createElement('div');
+    t.id = 'toast-msg';
+    t.style.cssText = 'position:fixed;bottom:calc(24px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%) translateY(80px);background:#201b22;border:1px solid rgba(255,255,255,0.13);border-radius:10px;padding:12px 20px;font-size:14px;color:#f2eeeb;z-index:9999;transition:transform .3s ease;white-space:nowrap;pointer-events:none;max-width:90vw;text-align:center;font-family:DM Sans,sans-serif';
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  setTimeout(()=>{t.style.transform='translateX(-50%) translateY(0)'},50);
+  setTimeout(()=>{t.style.transform='translateX(-50%) translateY(80px)'},duration);
+}
+
+// ═══════════════════════════════════════════════════════
+// EMAIL — mailto fallback (no server needed)
+// ═══════════════════════════════════════════════════════
+function buildEmailSummary(p) {
+  const {athleteName,athletePos,disc,focus,vals,arch,style} = p;
+  return `GRIDIRON PROFILE — CONFIDENTIAL STAFF REPORT
+${'═'.repeat(48)}
+Athlete:   ${athleteName}
+Position:  ${athletePos}
+Archetype: ${arch} (${style})
+Date:      ${new Date().toLocaleString()}
+
+DISC SCORES
+${'─'.repeat(28)}
+Dominance (D):    ${disc.D}/100
+Influence (I):    ${disc.I}/100
+Steadiness (S):   ${disc.S}/100
+Correctness (C):  ${disc.C}/100
+
+FOCUS DOMAINS
+${'─'.repeat(28)}
+Flexibility:    ${focus.flexibility}/100
+Organization:   ${focus.organization}/100
+Communication:  ${focus.communication}/100
+Understanding:  ${focus.understanding}/100
+Stability:      ${focus.stability}/100
+
+CORE VALUES (priority ranked)
+${'─'.repeat(28)}
+${vals.map((v,i)=>`${i+1}. ${v.value}`).join('\n')}
+
+KEY STAFF FLAGS
+${'─'.repeat(28)}
+${focus.stability<35?'🔴 Low Stability — structured reset protocols needed\n':''}${focus.communication<35?'🔴 Low Communication — proactive check-ins essential\n':''}${disc.D>=80?'🟡 High Dominance — channel through leadership role\n':''}${focus.flexibility>=75?'🟢 High Flexibility — low installation risk\n':''}🟢 Top Value: ${vals[0]?.value} — align development accordingly
+
+${'═'.repeat(48)}
+CONFIDENTIAL — Gridiron Profile · Exclusive Program License`;
+}
+
+function sendResultsEmail(profile) {
+  try {
+    const subject = encodeURIComponent(`Gridiron Profile — ${profile.athleteName} (${profile.athletePos}) — ${profile.arch}`);
+    const body = encodeURIComponent(buildEmailSummary(profile));
+    const link = document.createElement('a');
+    link.href = `mailto:${STAFF_EMAIL}?subject=${subject}&body=${body}`;
+    link.style.display='none';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    showToast('📧 Opening email with full results...');
+  } catch(e) {
+    showToast('⚠ Email not sent — check device mail settings');
+  }
+}
+
+// ═══════════════════════════════════════════════════════
+// SAVED PROFILES PANEL
+// ═══════════════════════════════════════════════════════
+async function openSaved() {
+  if (!_staffLoggedIn) { openStaffModal(); return; }
+  _allProfiles = await loadProfs();
+  if (!_allProfiles.length) {
+    _allProfiles = await loadStoredProfiles(); // fallback to old key
+  }
+  _dashExpanded.clear();
+  renderDashboard(_allProfiles);
+  document.getElementById('staff-dashboard').classList.add('active');
+}
+
+function closeDashboard() {
+  document.getElementById('staff-dashboard').classList.remove('active');
+}
+
+let _allProfiles = [];
+let _dashExpanded = new Set();
+let _searchVal = '', _posFilter = '', _sortVal = 'date';
+
+function buildFlags(p) {
+  const flags = [];
+  const focus = p.focus || {}, disc = p.disc || {}, pvFit = p.pvFit || {}, vals = p.vals || [];
+  if ((focus.stability||50) < 35) flags.push({t:'r',i:'🚨',m:`Low Stability (${focus.stability}) — structured reset protocols needed after adversity`});
+  if ((focus.communication||50) < 35) flags.push({t:'r',i:'🚨',m:`Low Communication (${focus.communication}) — proactive staff check-ins essential; won't self-report`});
+  if ((disc.C||0) >= 75) flags.push({t:'a',i:'⚠️',m:`High Correctness (${disc.C}) — self-critical; needs precise evidence-based feedback`});
+  if ((disc.D||0) >= 80) flags.push({t:'a',i:'⚡',m:`High Dominance (${disc.D}) — channel through formal leadership role`});
+  if ((pvFit.sacrifice||50) < 50) flags.push({t:'a',i:'⚠️',m:`Sacrifice Fit: ${pvFit.sacrifice}/100 — discuss team-first expectations early`});
+  if ((pvFit.overall||0) >= 75) flags.push({t:'g',i:'✅',m:`Strong Program Fit (${pvFit.overall}/100) — low culture friction risk`});
+  if ((focus.flexibility||0) >= 70) flags.push({t:'g',i:'✅',m:`High Flexibility (${focus.flexibility}) — low installation risk for complex schemes`});
+  if ((pvFit.compete||0) >= 75) flags.push({t:'g',i:'✅',m:`Compete Score: ${pvFit.compete}/100 — brings genuine competitive intensity daily`});
+  if (vals[0]) flags.push({t:'g',i:'🎯',m:`Top Value: ${vals[0].value} — align motivation and recognition accordingly`});
+  return flags;
+}
+
+function renderDashboard(profiles) {
+  const body = document.getElementById('sd-body');
+  const total = profiles.length;
+  const avgFit = total ? Math.round(profiles.reduce((s,p)=>s+(p.pvFit?.overall||50),0)/total) : 0;
+  const avgStab = total ? Math.round(profiles.reduce((s,p)=>s+(p.focus?.stability||50),0)/total) : 0;
+  const highFit = profiles.filter(p=>(p.pvFit?.overall||0)>=75).length;
+  const fitCol = avgFit>=70?'#5aaa7a':avgFit>=50?'var(--orange)':'#e05a5a';
+
+  let html = `
+    <div style="margin-bottom:1.1rem">
+      <div class="lbl">Program Intelligence Dashboard</div>
+      <h2 style="font-size:clamp(24px,5vw,40px)">ALL ATHLETE PROFILES</h2>
+      <p style="font-size:13px;margin-top:.4rem;color:var(--text3)">Click any card to expand full detail. All data is AES-256 encrypted.</p>
+    </div>
+    <div class="sd-stats">
+      <div class="sd-stat"><div class="sd-stat-val">${total}</div><div class="sd-stat-lbl">Total Profiles</div></div>
+      <div class="sd-stat"><div class="sd-stat-val" style="color:${fitCol}">${avgFit}</div><div class="sd-stat-lbl">Avg Program Fit</div></div>
+      <div class="sd-stat"><div class="sd-stat-val">${avgStab}</div><div class="sd-stat-lbl">Avg Stability</div></div>
+      <div class="sd-stat"><div class="sd-stat-val" style="color:#5aaa7a">${highFit}</div><div class="sd-stat-lbl">Strong Fit (75+)</div></div>
+    </div>
+    <div class="sd-toolbar">
+      <input class="sd-search" placeholder="🔍 Search by name or position..." oninput="filterDash(this.value)"/>
+      <select class="sd-filter" onchange="filterDashPos(this.value)">
+        <option value="">All Positions</option>
+        <option>Quarterback</option><option>Running Back</option><option>Wide Receiver</option>
+        <option>Tight End</option><option>Offensive Lineman</option><option>Defensive Lineman</option>
+        <option>Linebacker</option><option>Cornerback</option><option>Safety</option>
+        <option>Kicker / Punter</option><option>Special Teams</option>
+      </select>
+      <select class="sd-sort" onchange="sortDash(this.value)">
+        <option value="date">Newest First</option>
+        <option value="fit">Program Fit ↓</option>
+        <option value="stability">Stability ↓</option>
+        <option value="name">Name A–Z</option>
+      </select>
+    </div>`;
+
+  if (!profiles.length) {
+    html += `<div class="sd-empty">No profiles saved yet.<br><br>Complete an assessment — every result appears here automatically, fully encrypted.</div>`;
+  } else {
+    profiles.forEach((p,i) => {
+      const isExp = _dashExpanded.has(i);
+      const fit = p.pvFit?.overall||0;
+      const fCol = fit>=75?'#5aaa7a':fit>=55?'var(--orange)':'#e05a5a';
+      const flags = buildFlags(p);
+      html += `<div class="sd-card${isExp?' expanded':''}" id="sdc-${i}">
+        <div class="sd-card-head" onclick="toggleCard(${i})">
+          <div class="sd-ava">${p.initials||'??'}</div>
+          <div class="sd-card-info">
+            <div class="sd-card-name">${(p.athleteName||'Unknown').toUpperCase()}</div>
+            <div class="sd-card-meta">${p.athletePos||'–'} · ${new Date(p.savedAt||Date.now()).toLocaleDateString()} · ${p.arch||'–'}</div>
+          </div>
+          <div class="sd-card-right">
+            <div class="sd-arch-tag" style="display:none" class="hide-mob">${(p.arch||'').replace('The ','')}</div>
+            <div class="sd-fit-score" style="color:${fCol}">${fit}<span style="font-size:11px;color:var(--text3)">/100</span></div>
+            <div class="sd-expand-icon">▼</div>
+          </div>
+        </div>
+        <div class="sd-card-scores">
+          <span class="sd-mini-score">Fit:<strong style="color:${fCol}">${fit}</strong></span>
+          <span class="sd-mini-score">D:<strong>${p.disc?.D??'–'}</strong></span>
+          <span class="sd-mini-score">I:<strong>${p.disc?.I??'–'}</strong></span>
+          <span class="sd-mini-score">S:<strong>${p.disc?.S??'–'}</strong></span>
+          <span class="sd-mini-score">C:<strong>${p.disc?.C??'–'}</strong></span>
+          <span class="sd-mini-score">Stability:<strong>${p.focus?.stability??'–'}</strong></span>
+        </div>
+        <div class="sd-detail">
+          <div class="sd-detail-grid">
+            <div class="sd-detail-section">
+              <div class="sd-detail-title">DISC — Behavioral Style</div>
+              ${['D','I','S','C'].map(d=>{const cols={D:'#e05a5a',I:'var(--orange)',S:'#5aaa7a',C:'#5a8fe0'};const names={D:'Dominance',I:'Influence',S:'Steadiness',C:'Correctness'};const sc=p.disc?.[d]||0;return `<div class="sd-bar-row"><div class="sd-bar-label"><span style="color:${cols[d]};font-weight:600">${d} — ${names[d]}</span><strong>${sc}/100</strong></div><div class="sd-bar"><div class="sd-bar-fill" style="width:${sc}%;background:${cols[d]}"></div></div></div>`;}).join('')}
+            </div>
+            <div class="sd-detail-section">
+              <div class="sd-detail-title">FOCUS — Cognitive Domains</div>
+              ${['flexibility','organization','communication','understanding','stability'].map(dom=>{const sc=p.focus?.[dom]||0;const col=sc>=70?'#5aaa7a':sc>=45?'var(--orange)':'#e05a5a';return `<div class="sd-bar-row"><div class="sd-bar-label"><span>${dom.charAt(0).toUpperCase()+dom.slice(1)}</span><strong style="color:${col}">${sc}/100</strong></div><div class="sd-bar"><div class="sd-bar-fill" style="width:${sc}%;background:${col}"></div></div></div>`;}).join('')}
+            </div>
+            <div class="sd-detail-section">
+              <div class="sd-detail-title">Program Values Fit</div>
+              ${[['Positive Attitude',p.pvFit?.attitude||0,'🔆'],['Elite Work Ethic',p.pvFit?.workEthic||0,'⚙️'],['Sacrifice',p.pvFit?.sacrifice||0,'🤝'],['Compete',p.pvFit?.compete||0,'🔥']].map(([nm,sc,ico])=>{const col=sc>=75?'#5aaa7a':sc>=55?'var(--orange)':'#e05a5a';return `<div class="sd-detail-row"><span>${ico} ${nm}</span><strong style="color:${col}">${sc}/100</strong></div>`;}).join('')}
+              <div style="margin-top:.6rem;padding:.5rem .75rem;background:rgba(0,0,0,.3);border-radius:6px;display:flex;justify-content:space-between">
+                <span style="font-size:13px;font-weight:600;color:var(--text)">Overall Fit</span>
+                <span style="font-family:Bebas Neue,sans-serif;font-size:20px;color:${fCol}">${fit}/100</span>
+              </div>
+            </div>
+            <div class="sd-detail-section">
+              <div class="sd-detail-title">Staff Flags</div>
+              ${flags.slice(0,5).map(f=>`<div class="sd-flag-mini ${f.t}"><span style="font-size:13px;flex-shrink:0">${f.i}</span><span>${f.m}</span></div>`).join('')}
+            </div>
+          </div>
+          <div class="sd-detail-section" style="margin-top:.85rem">
+            <div class="sd-detail-title">Program Values — Ranked</div>
+            <div style="display:flex;gap:.5rem;flex-wrap:wrap">
+              ${(p.vals||[]).map((v,vi)=>{const icons={'Positive Attitude':'🔆','Elite Work Ethic':'⚙️','Willing to Sacrifice':'🤝','Compete in Everything':'🔥'};return `<div style="display:flex;align-items:center;gap:6px;padding:5px 10px;background:rgba(0,0,0,.3);border-radius:6px;font-size:12px"><span style="font-family:Bebas Neue,sans-serif;font-size:16px;color:var(--orange)">${vi+1}</span><span style="color:var(--text2)">${icons[v.value]||''} ${v.value}</span></div>`;}).join('')}
+            </div>
+          </div>
+          <div class="sd-card-actions">
+            <button class="sd-view-btn" onclick="viewFullProfile(${i})">View Full Profile →</button>
+            <button class="sd-del-btn" onclick="deleteDash(${i})">Delete</button>
+          </div>
+        </div>
+      </div>`;
+    });
+  }
+  body.innerHTML = html;
+}
+
+function toggleCard(i) {
+  if (_dashExpanded.has(i)) _dashExpanded.delete(i);
+  else { _dashExpanded.clear(); _dashExpanded.add(i); }
+  renderDashboard(_allProfiles);
+  setTimeout(()=>{ const el=document.getElementById(`sdc-${i}`); if(el)el.scrollIntoView({behavior:'smooth',block:'nearest'}); },120);
+}
+
+function filterDash(v) { _searchVal=v.toLowerCase(); applyFilters(); }
+function filterDashPos(v) { _posFilter=v; applyFilters(); }
+function sortDash(v) { _sortVal=v; applyFilters(); }
+
+function applyFilters() {
+  let ps = [..._allProfiles];
+  if (_searchVal) ps=ps.filter(p=>(p.athleteName||'').toLowerCase().includes(_searchVal)||(p.athletePos||'').toLowerCase().includes(_searchVal));
+  if (_posFilter) ps=ps.filter(p=>p.athletePos===_posFilter);
+  if (_sortVal==='fit') ps.sort((a,b)=>(b.pvFit?.overall||0)-(a.pvFit?.overall||0));
+  else if (_sortVal==='stability') ps.sort((a,b)=>(b.focus?.stability||0)-(a.focus?.stability||0));
+  else if (_sortVal==='name') ps.sort((a,b)=>(a.athleteName||'').localeCompare(b.athleteName||''));
+  else ps.sort((a,b)=>new Date(b.savedAt||0)-new Date(a.savedAt||0));
+  _dashExpanded.clear();
+  renderDashboard(ps);
+}
+
+async function viewFullProfile(i) {
+  const p = _allProfiles[i];
+  if (!p) return;
+  state.athleteName = p.athleteName;
+  state.athletePos = p.athletePos;
+  closeDashboard();
+  _showFullStaffProfile(p);
+}
+
+async function deleteDash(i) {
+  if (!confirm('Delete this profile? Cannot be undone.')) return;
+  const ps = await loadProfs();
+  ps.splice(i,1);
+  const e = await enc(ps);
+  if(e) localStorage.setItem(STORE_KEY,e);
+  else localStorage.removeItem(STORE_KEY);
+  _allProfiles = await loadProfs();
+  _dashExpanded.clear();
+  renderDashboard(_allProfiles);
+}
+
+async function viewSaved(i) {
+  const profiles = await loadStoredProfiles();
+  const p = profiles[i];
+  if (!p) return;
+  state.athleteName = p.athleteName;
+  state.athletePos = p.athletePos;
+  showResultsPage(p);
+}
+
+async function deleteSaved(i) {
+  if (!confirm('Delete this profile? This cannot be undone.')) return;
+  const profiles = await loadStoredProfiles();
+  profiles.splice(i,1);
+  const e2 = await encryptData(profiles);
+  if(e2) localStorage.setItem(STORAGE_KEY,e2);
+  else localStorage.removeItem(STORAGE_KEY);
+  openSaved();
+}
+
+
+</script>
+
+<!-- ═══ FULL RESULTS PAGE ════════════════════════════════════ -->
+<div id="results-page">
+  <div class="rp-nav">
+    <div class="rp-logo">YOUR RESULTS</div>
+    <div class="rp-actions">
+      <span class="enc-badge" style="font-size:10px">🔐 SAVED</span>
+      <button class="close-btn" onclick="closeResultsPage()" style="font-size:16px">✕</button>
+    </div>
+  </div>
+  <div class="rp-body" id="rp-body"></div>
+</div>
+
+<!-- ═══ STAFF DASHBOARD ═══════════════════════════════════════ -->
+<div id="staff-dashboard">
+  <div class="sd-nav">
+    <div class="nlogo">SAVED PROFILES <span class="nexcl">STAFF</span></div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <span class="enc-badge" style="font-size:10px">🔐 AES-256</span>
+      <button class="close-btn" onclick="closeDashboard()" style="font-size:16px">✕</button>
+    </div>
+  </div>
+  <div class="sd-body" id="sd-body"></div>
+</div>
+
+</body>
+</html>
