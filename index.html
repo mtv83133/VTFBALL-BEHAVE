@@ -1145,7 +1145,7 @@ function closeStaffModal() {
 async function checkStaffCode() {
   const val = document.getElementById('staff-code-input').value.trim().toUpperCase();
   if (val === ACCESS_CODE) {
-    _CK = await deriveKey(val);
+    _cryptoKey = await deriveKey(val);
     _staffLoggedIn = true;
     closeStaffModal();
     document.getElementById('staff-nav').style.display = 'flex';
@@ -1971,7 +1971,7 @@ function sendResultsEmail(profile) {
 // ═══════════════════════════════════════════════════════
 async function openSaved() {
   if (!_staffLoggedIn) { openStaffModal(); return; }
-  _allProfiles = await loadProfs();
+  _allProfiles = await loadStoredProfiles();
   if (!_allProfiles.length) {
     _allProfiles = await loadStoredProfiles(); // fallback to old key
   }
@@ -2143,12 +2143,12 @@ async function viewFullProfile(i) {
 
 async function deleteDash(i) {
   if (!confirm('Delete this profile? Cannot be undone.')) return;
-  const ps = await loadProfs();
+  const ps = await loadStoredProfiles();
   ps.splice(i,1);
-  const e = await enc(ps);
-  if(e) localStorage.setItem(STORE_KEY,e);
-  else localStorage.removeItem(STORE_KEY);
-  _allProfiles = await loadProfs();
+  const e = await encryptData(ps);
+  if(e) localStorage.setItem(STORAGE_KEY,e);
+  else localStorage.removeItem(STORAGE_KEY);
+  _allProfiles = await loadStoredProfiles();
   _dashExpanded.clear();
   renderDashboard(_allProfiles);
 }
