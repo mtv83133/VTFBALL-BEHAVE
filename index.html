@@ -1412,7 +1412,8 @@ async function finishAssessment() {
   await saveProfile(profile);
   showToast('🔐 Profile saved');
   // Always refresh dashboard data
-  loadStoredProfiles().then(ps => { _allProfiles = ps; if (_staffLoggedIn && document.getElementById('staff-dashboard').classList.contains('active')) { renderDashboard(_allProfiles); } });
+  // Refresh profile list - sheets fetch happens automatically next time dashboard opens
+  loadStoredProfiles().then(ps => { _allProfiles = ps; });
   showAthleteResults(profile);
 }
 
@@ -1853,6 +1854,7 @@ function restartFromResults() { closeResults(); openAssessment(); }
 // ═══════════════════════════════════════════════════════
 let _cryptoKey = null;
 const STORAGE_KEY = 'gp_encrypted_profiles_v1';
+const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbz6zVN67lzy__2woBCYeNzvtUA3rXqyOufhMOIJdOEhxYxwphCzS5eQZebkd7Jht7hF/exec';
 const STAFF_EMAIL = 'mtv83133@gmail.com';
 
 async function deriveKey(password) {
@@ -1878,13 +1880,38 @@ async function encryptData(data) { return encodeProfiles(data); }
 async function decryptData(b64) { return decodeProfiles(b64); }
 
 async function saveProfile(profile) {
+  const p = {...profile, savedAt: new Date().toISOString()};
+  // Save locally
   const existing = await loadStoredProfiles();
-  existing.unshift({...profile, savedAt: new Date().toISOString()});
+  existing.unshift(p);
   const encoded = encodeProfiles(existing);
   if (encoded) localStorage.setItem(STORAGE_KEY, encoded);
+  // POST to Google Sheets
+  try {
+    fetch(SHEETS_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(p)
+    });
+  } catch(e) { console.log('Sheet sync failed', e); }
 }
 
 async function loadStoredProfiles() {
+  // If staff is logged in, always fetch fresh from Google Sheets
+  if (_staffLoggedIn) {
+    try {
+      const resp = await fetch(SHEETS_URL + '?t=' + Date.now());
+      const data = await resp.json();
+      if (data.profiles && data.profiles.length) {
+        // Also cache locally
+        const encoded = encodeProfiles(data.profiles);
+        if (encoded) localStorage.setItem(STORAGE_KEY, encoded);
+        return data.profiles;
+      }
+    } catch(e) { console.log('Sheets fetch failed, using local cache', e); }
+  }
+  // Fallback to local storage
   const raw = localStorage.getItem(STORAGE_KEY);
   if (!raw) return [];
   return decodeProfiles(raw) || [];
@@ -1978,6 +2005,9 @@ function sendResultsEmail(profile) {
 // ═══════════════════════════════════════════════════════
 async function openSaved() {
   if (!_staffLoggedIn) { openStaffModal(); return; }
+  // Show loading state
+  document.getElementById('staff-dashboard').classList.add('active');
+  document.getElementById('sd-body').innerHTML = '<div style="text-align:center;padding:4rem 1rem;color:#a09890;font-size:15px">Loading profiles from Google Sheets...</div>';
   _allProfiles = await loadStoredProfiles();
   _dashExpanded.clear();
   renderDashboard(_allProfiles);
